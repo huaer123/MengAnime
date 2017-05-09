@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--漫画主界面-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/company_detail"
+            android:layout_width="match_parent"
+            android:background="@color/colorAccent"
+            android:layout_height="40dp" >
+
+            <!-- 全部 -->
+
+            <TextView
+                android:id="@+id/tv_recruitment_all"
+                style="@style/cartoon_main_textview"
+                android:text="精彩推荐" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="27dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical" />
+            <!-- 实习 -->
+
+            <TextView
+                android:id="@+id/tv_recruitment_internship"
+                style="@style/cartoon_main_textview"
+                android:text="热门连载" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="27dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical" />
+            <!-- 兼职 -->
+
+            <TextView
+                android:id="@+id/tv_recruitment_parttime"
+                style="@style/cartoon_main_textview"
+                android:text="原创漫画" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="27dp"
+                android:background="@color/white"
+                android:layout_gravity="center_vertical" />
+            <!-- 校招 -->
+
+            <TextView
+                android:id="@+id/tv_recruitment_schoolrecruit"
+                style="@style/cartoon_main_textview"
+                android:text="最近更新" />
+        </LinearLayout>
+        <!-- 下划线 -->
+
+        <LinearLayout
+            android:id="@+id/companry_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/cursor"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/line_bottom" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@mipmap/line_bottom"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@mipmap/line_bottom"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@mipmap/line_bottom"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_line2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_5" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
+
+</LinearLayout>
