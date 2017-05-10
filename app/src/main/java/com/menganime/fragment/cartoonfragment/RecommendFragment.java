@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.menganime.R;
-import com.menganime.RecommendAdapter;
+import com.menganime.adapter.RecommendAdapter;
 import com.menganime.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -48,9 +48,6 @@ public class RecommendFragment extends BaseFragment {
         adapter=new RecommendAdapter(context,mlist);
         //设置动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //设置分割线
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //设置布局
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
