@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.linked.erfli.library.base.BaseFragmentActivity;
 import com.menganime.R;
-import com.menganime.base.BaseFragmentActivity;
 import com.menganime.fragment.mainfragment.CartoonClassifyFragment;
 import com.menganime.fragment.mainfragment.CartoonMainFragment;
 import com.menganime.fragment.mainfragment.CollectionHistoryFragment;

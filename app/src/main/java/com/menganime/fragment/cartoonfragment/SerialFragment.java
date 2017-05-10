@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.linked.erfli.library.base.BaseFragment;
 import com.menganime.R;
 import com.menganime.adapter.SerialAdapter;
-import com.menganime.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
  * 热门连载
  */
 
-public class SerialFragment extends BaseFragment{
+public class SerialFragment extends BaseFragment {
     private Context context;
     RecyclerView recyclerView;
     List<String> mlist;

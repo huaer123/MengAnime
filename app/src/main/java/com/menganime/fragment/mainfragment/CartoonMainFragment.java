@@ -16,8 +16,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.linked.erfli.library.base.BaseFragment;
 import com.menganime.R;
-import com.menganime.base.BaseFragment;
 import com.menganime.fragment.cartoonfragment.LatelyFragment;
 import com.menganime.fragment.cartoonfragment.OriginalFragment;
 import com.menganime.fragment.cartoonfragment.RecommendFragment;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * 主界面第二个Fragment
  */
 
-public class CartoonMainFragment extends BaseFragment{
+public class CartoonMainFragment extends BaseFragment {
     private Context context;
 
     private ViewPager viewPager;// 页卡内容
@@ -113,7 +113,7 @@ public class CartoonMainFragment extends BaseFragment{
      * 初始化Viewpager页
      */
     private void initViewPager() {
-        fragments = new ArrayList<BaseFragment>();
+        fragments = new ArrayList<>();
         fragments.add(new RecommendFragment());
         fragments.add(new SerialFragment());
         fragments.add(new OriginalFragment());
@@ -247,7 +247,7 @@ public class CartoonMainFragment extends BaseFragment{
     }
 
     /**
-     * 头标点击监听，点击和不点击时的颜色变化
+     * 头标点击监听，点击和不点击时的颜色变化LoginActivity
      */
     private class MyOnClickListener implements View.OnClickListener {
         private int index = 0;

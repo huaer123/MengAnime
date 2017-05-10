@@ -6,15 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.linked.erfli.library.base.BaseFragment;
 import com.menganime.R;
-import com.menganime.base.BaseFragment;
 
 /**
  * Created by Administrator on 2017/5/9.
  * 主界面第三个Fragment
  */
 
-public class CartoonClassifyFragment extends BaseFragment{
+public class CartoonClassifyFragment extends BaseFragment {
     private Context context;
 
     @Override
