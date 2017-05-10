@@ -1,11 +1,15 @@
 package com.menganime.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.menganime.R;
@@ -18,22 +22,21 @@ import java.util.List;
  * 精彩推荐Adapter
  */
 
-public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder>{
+public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder> {
 
     Context mcontext;
     List<String> mlist;
     List<Integer> mheight;
+
     public RecommendAdapter(Context context, List<String> list) {
-        mcontext=context;
-        mlist=list;
+        mcontext = context;
+        mlist = list;
         //随机高度集合
-        mheight=new ArrayList<Integer>();
-        for(int i=0;i<mlist.size();i++){
-            mheight.add((int)(100+Math.random()*300));
+        mheight = new ArrayList<Integer>();
+        for (int i = 0; i < mlist.size(); i++) {
+            mheight.add((int) (100 + Math.random() * 300));
         }
     }
-
-
 
 
     @Override
@@ -44,17 +47,27 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
     //绑定，渲染数据到view中
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int arg1) {
+    public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        ViewGroup.LayoutParams lp=holder.iv_cartoon.getLayoutParams();
-        lp.height=mheight.get(arg1);
-        holder.iv_cartoon.setLayoutParams(lp);
-        holder.tv_cartoon_name.setText(mlist.get(arg1));
+        ViewGroup.LayoutParams lp = holder.iv_cartoon.getLayoutParams();
+        if (position == 0) {
+            StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
+            // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
+            clp.setFullSpan(true);
+            holder.iv_cartoon.setLayoutParams(lp);
+            holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+            holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        }
+        if(position!=0) {
+            lp.height = mheight.get(position);
+            holder.iv_cartoon.setLayoutParams(lp);
+        }
+        holder.tv_cartoon_name.setText(mlist.get(position));
     }
 
     //先执行onCreateViewHolder
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int arg1) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
                 mcontext).inflate(R.layout.item_cartoon_recommend, parent,
@@ -64,13 +77,16 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
 
     //找到布局中空间位置
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout largeLabel;
         TextView tv_cartoon_name;
         ImageView iv_cartoon;
+
         public MyViewHolder(View arg0) {
             super(arg0);
+            largeLabel = (RelativeLayout) arg0.findViewById(R.id.largeLabel);
             iv_cartoon = (ImageView) arg0.findViewById(R.id.iv_cartoon);
-            tv_cartoon_name=(TextView) arg0.findViewById(R.id.tv_cartoon_name);
+            tv_cartoon_name = (TextView) arg0.findViewById(R.id.tv_cartoon_name);
         }
 
     }
@@ -78,11 +94,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     public void add(int pos) {
 
         mlist.add(pos, "insert");
-        mheight.add((int)(100+Math.random()*300));
+        mheight.add((int) (100 + Math.random() * 300));
         notifyItemInserted(pos);
     }
-
-
 
 
     public void del(int pos) {

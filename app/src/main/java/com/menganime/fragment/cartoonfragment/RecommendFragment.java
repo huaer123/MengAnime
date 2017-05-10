@@ -50,6 +50,14 @@ public class RecommendFragment extends BaseFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        /*GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 2 : 1;
+            }
+        });
+        recyclerView.setLayoutManager(layoutManager);*/
 
         recyclerView.setAdapter(adapter);
     }
