@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.linked.erfli.library.base.BaseActivity;
-import com.linked.erfli.library.base.MyTitle;
-import com.linked.erfli.library.utils.SharedUtil;
-import com.linked.erfli.library.utils.ToastUtil;
 import com.menganime.R;
+import com.menganime.base.BaseActivity;
 import com.menganime.interfaces.LoginInterface;
 import com.menganime.utils.MyRequest;
+import com.menganime.utils.SharedUtil;
+import com.menganime.utils.ToastUtil;
 
 
 /**
@@ -41,7 +40,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void setDate(Bundle savedInstanceState) {
         context = this;
-        MyTitle.getInstance().setTitle(this, "登陆", PGApp, false);
     }
 
     @Override
@@ -60,7 +58,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onNetChange(int netMobile) {
         super.onNetChange(netMobile);
-        MyTitle.getInstance().setNetText(this, netMobile);
     }
 
     @Override

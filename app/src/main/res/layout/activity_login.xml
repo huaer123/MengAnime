@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/login_title"
-        layout="@layout/title" />
-
-
     <LinearLayout
         android:id="@+id/login_layout"
         android:layout_width="match_parent"

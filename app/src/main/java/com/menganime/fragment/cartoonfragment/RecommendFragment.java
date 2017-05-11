@@ -3,17 +3,17 @@ package com.menganime.fragment.cartoonfragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.linked.erfli.library.base.BaseFragment;
-import com.linked.erfli.library.utils.ToastUtil;
 import com.menganime.R;
 import com.menganime.adapter.RecommendAdapter;
-import com.menganime.interfaces.ItemClickListener;
+import com.menganime.base.BaseFragment;
+import com.menganime.utils.ToastUtil;
+import com.recyclerviewpull.XpulltorefereshiRecyclerView;
+import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
  * 精彩推荐
  */
 
-public class RecommendFragment extends BaseFragment implements ItemClickListener {
+public class RecommendFragment extends BaseFragment implements OnItemClickListener {
     private Context context;
-    RecyclerView recyclerView;
+    XpulltorefereshiRecyclerView recyclerView;
     List<String> mlist;
     RecommendAdapter adapter;
 
@@ -46,17 +46,37 @@ public class RecommendFragment extends BaseFragment implements ItemClickListener
 
     @Override
     protected void init(View rootView) {
-        recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
-        adapter=new RecommendAdapter(context,mlist,this);
+        recyclerView=(XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
+        adapter=new RecommendAdapter(context,mlist);
+        adapter.setOnItemClickListener(this);
         //设置动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        StaggeredGridLayoutManager mLinearLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingListener(new XpulltorefereshiRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setLoadingMoreEnabled(false);
+            }
+
+            @Override
+            public void onLoadMore() {
+                recyclerView.setLoadingMoreEnabled(false);
+                recyclerView.setLoadingMoreEnabledAnimoto(true);
+            }
+        });
     }
 
     @Override
     public void onItemClick(View view, int position) {
         ToastUtil.showToast(context,position+"");
+    }
+
+    @Override
+    public boolean onItemLongClick(View view, int position) {
+        return false;
     }
 }

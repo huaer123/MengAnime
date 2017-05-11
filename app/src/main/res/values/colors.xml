@@ -50,4 +50,6 @@
     <color name="colorb5b5b5">#b5b5b5</color>
     <!--浅黑色-->
     <color name="colorBBBBBB">#BBBBBB</color>
+    <!--透明-->
+    <color name="transparent">#00000000</color>
 </resources>

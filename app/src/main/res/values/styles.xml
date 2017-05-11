@@ -8,6 +8,22 @@
         <item name="colorAccent">@color/blue</item>
     </style>
 
+    <!--选择性别动画start-->
+    <style name="sex_dialogStyle" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+    <!-- 设置对话框的透明 和点击外面无效果start -->
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!--主界面底部的ImageView属性start-->
     <style name="main_image">
         <item name="android:layout_width">20dp</item>

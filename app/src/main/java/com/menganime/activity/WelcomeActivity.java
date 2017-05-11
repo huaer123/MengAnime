@@ -7,9 +7,9 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.linked.erfli.library.base.BaseActivity;
-import com.linked.erfli.library.utils.StatusBarUtils;
 import com.menganime.R;
+import com.menganime.base.BaseActivity;
+import com.menganime.utils.StatusBarUtils;
 
 /**
  * Created by Administrator on 2017/5/9.

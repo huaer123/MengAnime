@@ -25,5 +25,9 @@ android {
 }
 
 dependencies {
-    compile project(':Library')
+    compile project(':recyclerviewpull')
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    compile 'com.alibaba:fastjson:1.2.31'
+    compile files('libs/systembartint-1.0.4.jar')
 }

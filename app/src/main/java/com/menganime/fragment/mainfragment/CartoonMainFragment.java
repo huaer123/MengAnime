@@ -16,8 +16,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.linked.erfli.library.base.BaseFragment;
 import com.menganime.R;
+import com.menganime.base.BaseFragment;
 import com.menganime.fragment.cartoonfragment.LatelyFragment;
 import com.menganime.fragment.cartoonfragment.OriginalFragment;
 import com.menganime.fragment.cartoonfragment.RecommendFragment;

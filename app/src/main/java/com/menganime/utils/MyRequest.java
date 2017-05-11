@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.util.Log;
 
-import com.linked.erfli.library.config.UrlConfig;
-import com.linked.erfli.library.okhttps.OkHttpUtils;
-import com.linked.erfli.library.okhttps.callback.GenericsCallback;
-import com.linked.erfli.library.okhttps.utils.JsonGenericsSerializator;
-import com.linked.erfli.library.utils.DialogUtils;
-import com.linked.erfli.library.utils.ToastUtil;
+import com.menganime.config.UrlConfig;
 import com.menganime.interfaces.LoginInterface;
+import com.menganime.okhttps.OkHttpUtils;
+import com.menganime.okhttps.callback.GenericsCallback;
+import com.menganime.okhttps.utils.JsonGenericsSerializator;
 
 import java.util.HashMap;
 import java.util.Map;

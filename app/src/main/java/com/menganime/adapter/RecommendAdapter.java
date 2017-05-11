@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.menganime.R;
-import com.menganime.interfaces.ItemClickListener;
+import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
  * 精彩推荐Adapter
  */
 
-public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder>{
+public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder> {
 
     Context mcontext;
     List<String> mlist;
@@ -32,9 +32,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     public static final int VIEW_TYPE_HEADER = 1024;
     public static final int VIEW_TYPE_NORMAL = 1025;
 
-    ItemClickListener itemClickListener;
+    private OnItemClickListener itemClickListener;
 
-    public RecommendAdapter(Context context, List<String> list,ItemClickListener itemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.itemClickListener = onItemClickListener;
+    }
+
+    public RecommendAdapter(Context context, List<String> list) {
         mcontext = context;
         mlist = list;
         //随机高度集合
@@ -42,7 +46,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         for (int i = 0; i < mlist.size(); i++) {
             mheight.add((int) (100 + Math.random() * 300));
         }
-        this.itemClickListener = itemClickListener;
     }
 
 
@@ -54,9 +57,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
     @Override
     public int getItemViewType(int position) {
-        if (mlist!=null&&position == 0)
+        if (mlist != null && position == 0) {
             return VIEW_TYPE_HEADER;
-
+        }
         return VIEW_TYPE_NORMAL;
     }
 
@@ -64,37 +67,34 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     //绑定，渲染数据到view中
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-
-        ViewGroup.LayoutParams lp = holder.iv_cartoon.getLayoutParams();
-        if (getItemViewType(position) == VIEW_TYPE_HEADER) {
-            StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
-            // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
-            clp.setFullSpan(true);
-            //holder.iv_cartoon.setLayoutParams(lp);
-            holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
-            holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        }
-        if(getItemViewType(position)==VIEW_TYPE_NORMAL) {
-            lp.height = mheight.get(position);
-            holder.iv_cartoon.setLayoutParams(lp);
-        }
-        holder.tv_cartoon_name.setText(mlist.get(position));
-        holder.largeLabel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view,position);
+            ViewGroup.LayoutParams lp = holder.iv_cartoon.getLayoutParams();
+            if (getItemViewType(position) == VIEW_TYPE_HEADER) {
+                StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
+                // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
+                clp.setFullSpan(true);
+                //holder.iv_cartoon.setLayoutParams(lp);
+                holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+                holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             }
-        });
+            if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
+                lp.height = mheight.get(position);
+                holder.iv_cartoon.setLayoutParams(lp);
+            }
+            holder.tv_cartoon_name.setText(mlist.get(position));
+            holder.largeLabel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    itemClickListener.onItemClick(view, position);
+                }
+            });
     }
 
     //先执行onCreateViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                mcontext).inflate(R.layout.item_cartoon_recommend, parent,
-                false));
-        return holder;
+            return new MyViewHolder(LayoutInflater.from(
+                    mcontext).inflate(R.layout.item_cartoon_recommend, parent,
+                    false));
     }
 
     //找到布局中空间位置
