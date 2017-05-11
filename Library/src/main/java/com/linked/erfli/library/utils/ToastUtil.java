@@ -9,17 +9,71 @@ import android.widget.Toast;
  * 作    者：stt
  * 时    间：2016.12.30
  * 版    本：V1.0.0
+ * 一个阻止重复吐司并可控制位置的工具类
  */
 
 public class ToastUtil {
-    /**
-     * 方法名：show
-     * 功    能：吐司功能
-     * 参    数：(Context context, String message)
-     * 返回值：无
-     */
-    public static void show(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    private static String oldMsg;
+    protected static Toast toast = null;
+    private static long oneTime = 0;
+    private static long twoTime = 0;
 
+    public static void showToast(Context context, int resId) {
+        showToast(context, context.getString(resId));
+    }
+
+    public static void showToast(Context context, int resId, int gravity) {
+        showToast(context, context.getString(resId), gravity, 0, 0);
+    }
+
+    public static void showToast(Context context, String s, int gravity) {
+        showToast(context, s, gravity, 0, 0);
+    }
+
+    public static void showToast(Context context, int resId, int gravity, int offX, int offY) {
+        showToast(context, context.getString(resId), gravity, offX, offY);
+    }
+
+    public static void showToast(Context context, String s) {
+        if (toast == null) {
+            toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+
+            toast.show();
+            oneTime = System.currentTimeMillis();
+        } else {
+            twoTime = System.currentTimeMillis();
+            if (s.equals(oldMsg)) {
+                if (twoTime - oneTime > Toast.LENGTH_SHORT) {
+                    toast.show();
+                }
+            } else {
+                oldMsg = s;
+                toast.setText(s);
+                toast.show();
+            }
+        }
+        oneTime = twoTime;
+    }
+
+
+    public static void showToast(Context context, String s, int gravity, int offX, int offY) {
+        if (toast == null) {
+            toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+            toast.setGravity(gravity, offX, offY);
+            toast.show();
+            oneTime = System.currentTimeMillis();
+        } else {
+            twoTime = System.currentTimeMillis();
+            if (s.equals(oldMsg)) {
+                if (twoTime - oneTime > Toast.LENGTH_SHORT) {
+                    toast.show();
+                }
+            } else {
+                oldMsg = s;
+                toast.setText(s);
+                toast.show();
+            }
+        }
+        oneTime = twoTime;
     }
 }

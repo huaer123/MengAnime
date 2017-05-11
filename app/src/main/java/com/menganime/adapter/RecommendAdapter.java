@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.menganime.R;
+import com.menganime.interfaces.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,18 @@ import java.util.List;
  * 精彩推荐Adapter
  */
 
-public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder> {
+public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder>{
 
     Context mcontext;
     List<String> mlist;
     List<Integer> mheight;
 
-    public RecommendAdapter(Context context, List<String> list) {
+    public static final int VIEW_TYPE_HEADER = 1024;
+    public static final int VIEW_TYPE_NORMAL = 1025;
+
+    ItemClickListener itemClickListener;
+
+    public RecommendAdapter(Context context, List<String> list,ItemClickListener itemClickListener) {
         mcontext = context;
         mlist = list;
         //随机高度集合
@@ -36,6 +42,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         for (int i = 0; i < mlist.size(); i++) {
             mheight.add((int) (100 + Math.random() * 300));
         }
+        this.itemClickListener = itemClickListener;
     }
 
 
@@ -45,24 +52,39 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         return mlist.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (mlist!=null&&position == 0)
+            return VIEW_TYPE_HEADER;
+
+        return VIEW_TYPE_NORMAL;
+    }
+
+
     //绑定，渲染数据到view中
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         ViewGroup.LayoutParams lp = holder.iv_cartoon.getLayoutParams();
-        if (position == 0) {
+        if (getItemViewType(position) == VIEW_TYPE_HEADER) {
             StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
             // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
             clp.setFullSpan(true);
-            holder.iv_cartoon.setLayoutParams(lp);
+            //holder.iv_cartoon.setLayoutParams(lp);
             holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
             holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
         }
-        if(position!=0) {
+        if(getItemViewType(position)==VIEW_TYPE_NORMAL) {
             lp.height = mheight.get(position);
             holder.iv_cartoon.setLayoutParams(lp);
         }
         holder.tv_cartoon_name.setText(mlist.get(position));
+        holder.largeLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(view,position);
+            }
+        });
     }
 
     //先执行onCreateViewHolder
@@ -74,7 +96,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                 false));
         return holder;
     }
-
 
     //找到布局中空间位置
     class MyViewHolder extends RecyclerView.ViewHolder {

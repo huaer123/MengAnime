@@ -8,7 +8,6 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.linked.erfli.library.base.BaseActivity;
-import com.linked.erfli.library.utils.SharedUtil;
 import com.linked.erfli.library.utils.StatusBarUtils;
 import com.menganime.R;
 
@@ -19,7 +18,7 @@ import com.menganime.R;
 public class WelcomeActivity extends BaseActivity {
     private ImageView splash;//欢迎图片,这里固定设置,可动态设置
     private Context mContext;
-    private boolean isLogin;
+    //private boolean isLogin;
 
     @Override
     protected void setView() {
@@ -33,7 +32,7 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     protected void setDate(Bundle savedInstanceState) {
-        isLogin = SharedUtil.getBoolean(this, "isLogin", false);
+        //isLogin = SharedUtil.getBoolean(this, "isLogin", false);
 
     }
 
@@ -53,7 +52,7 @@ public class WelcomeActivity extends BaseActivity {
     private void initView() {
         ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.1f, 1.0f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setFillAfter(true);
-        scaleAnimation.setDuration(5000);
+        scaleAnimation.setDuration(3000);
         splash.startAnimation(scaleAnimation);
 
         //缩放动画监听
@@ -65,13 +64,13 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (isLogin) {
+                //if (isLogin) {
                     //跳转到主页面
-                    startActivity(new Intent(mContext, LoginActivity.class));
-                } else {
+                  //  startActivity(new Intent(mContext, LoginActivity.class));
+                //} else {
                     //userName为null 跳转到登录页面
-                    startActivity(new Intent(mContext, LoginActivity.class));
-                }
+                    startActivity(new Intent(mContext, MainActivity.class));
+                //}
                 finish();
             }
 

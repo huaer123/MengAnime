@@ -2,18 +2,13 @@ package com.menganime.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
 import com.linked.erfli.library.config.UrlConfig;
 import com.linked.erfli.library.okhttps.OkHttpUtils;
 import com.linked.erfli.library.okhttps.callback.GenericsCallback;
 import com.linked.erfli.library.okhttps.utils.JsonGenericsSerializator;
 import com.linked.erfli.library.utils.DialogUtils;
-import com.linked.erfli.library.utils.SharedUtil;
 import com.linked.erfli.library.utils.ToastUtil;
 import com.menganime.interfaces.LoginInterface;
 
@@ -60,7 +55,7 @@ public class MyRequest {
 
             @Override
             public void onError(Call call, Exception e, int id) {
-                ToastUtil.show(activity, "服务器有错误，请稍候再试");
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
                 //失败之后的处理
                 login.login(username, password);
                 if (progDialog.isShowing()) {

@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.linked.erfli.library.base.BaseFragment;
+import com.linked.erfli.library.utils.ToastUtil;
 import com.menganime.R;
 import com.menganime.adapter.RecommendAdapter;
+import com.menganime.interfaces.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
  * 精彩推荐
  */
 
-public class RecommendFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment implements ItemClickListener {
     private Context context;
     RecyclerView recyclerView;
     List<String> mlist;
@@ -45,20 +47,16 @@ public class RecommendFragment extends BaseFragment {
     @Override
     protected void init(View rootView) {
         recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
-        adapter=new RecommendAdapter(context,mlist);
+        adapter=new RecommendAdapter(context,mlist,this);
         //设置动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        /*GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position == 0 ? 2 : 1;
-            }
-        });
-        recyclerView.setLayoutManager(layoutManager);*/
-
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        ToastUtil.showToast(context,position+"");
     }
 }
