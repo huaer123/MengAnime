@@ -45,7 +45,7 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     protected void setDate() {
-        MyRequest.getRecommendList(this,pageIndex,10);
+        MyRequest.getRecommendList(this,pageIndex,10,1);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
                 recyclerView.setLoadingMoreEnabled(false);
                 recyclerView.setLoadingMoreEnabledAnimoto(true);
                 pageIndex++;
-                MyRequest.getRecommendList(RecommendFragment.this,pageIndex,10);
+                MyRequest.getRecommendList(RecommendFragment.this,pageIndex,10,1);
             }
         });
     }

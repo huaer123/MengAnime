@@ -4,14 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.menganime.R;
 import com.menganime.adapter.SerialAdapter;
 import com.menganime.base.BaseFragment;
+import com.menganime.bean.CartoonInfo;
+import com.menganime.bean.RecommendInfo;
+import com.menganime.interfaces.RecommendInterface;
+import com.menganime.utils.MyRequest;
+import com.recyclerviewpull.XpulltorefereshiRecyclerView;
+import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +27,12 @@ import java.util.List;
  * 热门连载
  */
 
-public class SerialFragment extends BaseFragment {
+public class SerialFragment extends BaseFragment implements OnItemClickListener,RecommendInterface {
     private Context context;
-    RecyclerView recyclerView;
-    List<String> mlist;
+    XpulltorefereshiRecyclerView recyclerView;
+    List<CartoonInfo> mlist = new ArrayList<>();
     SerialAdapter adapter;
+    private int pageIndex = 0;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,16 +43,14 @@ public class SerialFragment extends BaseFragment {
 
     @Override
     protected void setDate() {
-        mlist=new ArrayList<String>();
-        for(int i=0;i<50;i++){
-            mlist.add("number"+i);
-        }
+        MyRequest.getRecommendList(this,pageIndex,10,2);
     }
 
     @Override
     protected void init(View rootView) {
-        recyclerView=(RecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
+        recyclerView=(XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
         adapter=new SerialAdapter(context,mlist);
+        adapter.setOnItemClickListener(this);
         //设置动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
@@ -60,5 +65,55 @@ public class SerialFragment extends BaseFragment {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+
+        recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingListener(new XpulltorefereshiRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setLoadingMoreEnabled(false);
+            }
+
+            @Override
+            public void onLoadMore() {
+                recyclerView.setLoadingMoreEnabled(false);
+                recyclerView.setLoadingMoreEnabledAnimoto(true);
+                pageIndex++;
+                MyRequest.getRecommendList(SerialFragment.this,pageIndex,10,2);
+            }
+        });
+    }
+
+    @Override
+    public void getRecommendList(String json) {
+        if (pageIndex == 0) {// 加载
+            mlist.clear();
+            adapter.clearList();
+        }
+        recyclerView.loadMoreComplete();
+        recyclerView.setLoadingMoreEnabled(true);
+
+        RecommendInfo recommendInfo = JSON.parseObject(json,RecommendInfo.class);
+        if(recommendInfo!=null){
+            int status = Integer.valueOf(recommendInfo.getStatus());
+            if(status==0){
+                List<CartoonInfo> list = recommendInfo.getList();
+                if (list == null || list.size() == 0) {
+                    return;
+                }
+                mlist.addAll(list);
+                adapter.addList(mlist);
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
+    }
+
+    @Override
+    public boolean onItemLongClick(View view, int position) {
+        return false;
     }
 }

@@ -16,7 +16,7 @@ public class UrlConfig {
     /**
      * 获取精彩推荐列表
      */
-    public static final String SelectRecommendList = BaseUrl+"mh/select/SelectMHList?column=1";
+    public static final String SelectRecommendList = BaseUrl+"mh/select/SelectMHList?";
 
     /**
      * 获取热门连载列表

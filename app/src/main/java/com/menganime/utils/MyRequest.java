@@ -70,14 +70,16 @@ public class MyRequest {
      * @param fragment
      * @param page 第几页
      * @param count 每页数量
+     * @param column 精彩推荐标识
      */
-    public static void getRecommendList(final BaseFragment fragment, int page, int count){
+    public static void getRecommendList(final BaseFragment fragment, int page, int count, int column){
         final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
         final RecommendInterface recommend = (RecommendInterface) fragment;
         Map<String, Object> params = new HashMap<>();
         try {
             params.put("page", page);
             params.put("count", count);
+            params.put("column",column);
         } catch (Exception e) {
             e.printStackTrace();
         }
