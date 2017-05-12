@@ -9,5 +9,5 @@ public interface RecommendInterface {
     /**
      * 获取精彩推荐的列表
      */
-    void getRecommendList();
+    void getRecommendList(String json);
 }

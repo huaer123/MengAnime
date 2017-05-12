@@ -11,8 +11,16 @@ package com.menganime.config;
 public class UrlConfig {
     // public static final String BaseUrl = "http://123.56.96.237:8001";// 正式
     //public static final String BaseUrl = "http://192.168.0.90:8001";// 测试
-    public static final String BaseUrl = "http://nwpu-ism.dlax.com.cn";// 正式域名
+    public static final String BaseUrl = "http://mh.cyngame.cn:8083/";// 正式域名
 
+    /**
+     * 获取精彩推荐列表
+     */
+    public static final String SelectRecommendList = BaseUrl+"mh/select/SelectMHList?column=1";
 
+    /**
+     * 获取热门连载列表
+     */
+    public static final String SelectSerialList = BaseUrl+"mh/select/SelectMHList?column=2";
 
 }

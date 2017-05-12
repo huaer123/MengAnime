@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.menganime.R;
 import com.menganime.adapter.RecommendAdapter;
 import com.menganime.base.BaseFragment;
+import com.menganime.bean.CartoonInfo;
+import com.menganime.bean.RecommendInfo;
+import com.menganime.interfaces.RecommendInterface;
+import com.menganime.utils.MyRequest;
 import com.menganime.utils.ToastUtil;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.OnItemClickListener;
@@ -23,11 +28,13 @@ import java.util.List;
  * 精彩推荐
  */
 
-public class RecommendFragment extends BaseFragment implements OnItemClickListener {
+public class RecommendFragment extends BaseFragment implements OnItemClickListener,RecommendInterface {
     private Context context;
     XpulltorefereshiRecyclerView recyclerView;
-    List<String> mlist;
+    List<CartoonInfo> mlist = new ArrayList<>();
     RecommendAdapter adapter;
+
+    private int pageIndex = 0;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,10 +45,7 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     protected void setDate() {
-        mlist=new ArrayList<String>();
-        for(int i=0;i<50;i++){
-            mlist.add("number"+i);
-        }
+        MyRequest.getRecommendList(this,pageIndex,10);
     }
 
     @Override
@@ -66,6 +70,8 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
             public void onLoadMore() {
                 recyclerView.setLoadingMoreEnabled(false);
                 recyclerView.setLoadingMoreEnabledAnimoto(true);
+                pageIndex++;
+                MyRequest.getRecommendList(RecommendFragment.this,pageIndex,10);
             }
         });
     }
@@ -78,5 +84,29 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
     @Override
     public boolean onItemLongClick(View view, int position) {
         return false;
+    }
+
+    @Override
+    public void getRecommendList(String json) {
+        if (pageIndex == 0) {// 加载
+            mlist.clear();
+            adapter.clearList();
+        }
+        recyclerView.loadMoreComplete();
+        recyclerView.setLoadingMoreEnabled(true);
+
+        RecommendInfo recommendInfo = JSON.parseObject(json,RecommendInfo.class);
+        if(recommendInfo!=null){
+            int status = Integer.valueOf(recommendInfo.getStatus());
+            if(status==0){
+               List<CartoonInfo> list = recommendInfo.getList();
+                if (list == null || list.size() == 0) {
+                    return;
+                }
+                mlist.addAll(list);
+                adapter.addList(mlist);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }

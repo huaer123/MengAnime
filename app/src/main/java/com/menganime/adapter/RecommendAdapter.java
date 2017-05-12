@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.menganime.R;
+import com.menganime.bean.CartoonInfo;
 import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyViewHolder> {
 
     Context mcontext;
-    List<String> mlist;
+    List<CartoonInfo> mlist;
     List<Integer> mheight;
 
     public static final int VIEW_TYPE_HEADER = 1024;
@@ -38,7 +40,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
         this.itemClickListener = onItemClickListener;
     }
 
-    public RecommendAdapter(Context context, List<String> list) {
+    public RecommendAdapter(Context context, List<CartoonInfo> list) {
         mcontext = context;
         mlist = list;
         //随机高度集合
@@ -80,7 +82,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                 lp.height = mheight.get(position);
                 holder.iv_cartoon.setLayoutParams(lp);
             }
-            holder.tv_cartoon_name.setText(mlist.get(position));
+            holder.tv_cartoon_name.setText(mlist.get(position).getName());
+            holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count());
+            holder.tv_content.setText(mlist.get(position).getSubtitle());
+            Glide.with(mcontext)
+                .load(mlist.get(position).getColumn_IconURL())
+                .error(R.mipmap.line_bottom) //失败图片
+                .into(holder.iv_cartoon);
+
             holder.largeLabel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -101,6 +110,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     class MyViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout largeLabel;
         TextView tv_cartoon_name;
+        TextView tv_content;
+        TextView tv_cartoon_hua;
         ImageView iv_cartoon;
 
         public MyViewHolder(View arg0) {
@@ -108,11 +119,27 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             largeLabel = (RelativeLayout) arg0.findViewById(R.id.largeLabel);
             iv_cartoon = (ImageView) arg0.findViewById(R.id.iv_cartoon);
             tv_cartoon_name = (TextView) arg0.findViewById(R.id.tv_cartoon_name);
+            tv_content = (TextView) arg0.findViewById(R.id.tv_content);
+            tv_cartoon_hua = (TextView) arg0.findViewById(R.id.tv_cartoon_hua);
         }
 
     }
 
-    public void add(int pos) {
+    public void addList(List<CartoonInfo> list) {
+        // TODO Auto-generated method stub
+        this.mlist = list;
+        for (int i = 0; i < mlist.size(); i++) {
+            mheight.add((int) (100 + Math.random() * 300));
+        }
+    }
+
+    public void clearList() {
+        // TODO Auto-generated method stub
+        this.mlist.clear();
+        mheight.clear();
+    }
+
+    /*public void add(int pos) {
 
         mlist.add(pos, "insert");
         mheight.add((int) (100 + Math.random() * 300));
@@ -124,5 +151,5 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
 
         mlist.remove(pos);
         notifyItemRemoved(pos);
-    }
+    }*/
 }

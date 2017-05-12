@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.util.Log;
 
+import com.menganime.base.BaseFragment;
 import com.menganime.config.UrlConfig;
 import com.menganime.interfaces.LoginInterface;
+import com.menganime.interfaces.RecommendInterface;
 import com.menganime.okhttps.OkHttpUtils;
 import com.menganime.okhttps.callback.GenericsCallback;
 import com.menganime.okhttps.utils.JsonGenericsSerializator;
@@ -63,5 +65,41 @@ public class MyRequest {
         });
     }
 
+    /**
+     *
+     * @param fragment
+     * @param page 第几页
+     * @param count 每页数量
+     */
+    public static void getRecommendList(final BaseFragment fragment, int page, int count){
+        final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
+        final RecommendInterface recommend = (RecommendInterface) fragment;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("page", page);
+            params.put("count", count);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        OkHttpUtils.post().url(UrlConfig.SelectRecommendList).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                recommend.getRecommendList(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
 
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(fragment.getActivity(), "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
 }

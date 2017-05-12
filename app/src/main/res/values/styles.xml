@@ -43,4 +43,14 @@
         <item name="android:textColor">@color/white</item>
     </style>
     <!--漫画主界面TextView属性end-->
+    <!--评分条五星自定义样式start-->
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <!--指向star_rating_bar_full.xml文件 -->
+        <item name="android:progressDrawable">@drawable/star_rating_bar_full</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_width">20dp</item>
+        <!-- 是否不支持用户交互，只应作为指标。 -->
+        <item name="android:isIndicator">true</item>
+    </style>
+    <!--评分条五星自定义样式end-->
 </resources>
