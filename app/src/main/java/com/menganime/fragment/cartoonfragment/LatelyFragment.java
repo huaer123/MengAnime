@@ -7,65 +7,84 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSON;
 import com.menganime.R;
 import com.menganime.base.BaseFragment;
-import com.menganime.bean.CartoonLatelyInfo;
+import com.menganime.bean.CartoonInfo;
+import com.menganime.bean.RecommendInfo;
+import com.menganime.interfaces.RecommendInterface;
+import com.menganime.utils.MyRequest;
+import com.recyclerviewpull.RecycleViewDivider;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
 import com.recyclerviewpull.adapter.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.menganime.utils.StatusBarUtils.mContext;
 
 /**
  * Created by Administrator on 2017/5/9.
  * 最近更新
  */
 
-public class LatelyFragment extends BaseFragment {
+public class LatelyFragment extends BaseFragment implements RecommendInterface {
     private Context context;
 
     private XpulltorefereshiRecyclerView recyclerView;
-    private CommonRCAdapter<CartoonLatelyInfo> adapter;
-    private ArrayList<CartoonLatelyInfo> mList = null;
+    private CommonRCAdapter<CartoonInfo> adapter;
+    private ArrayList<CartoonInfo> mList = new ArrayList<>();
+    private int pageIndex = 0;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = inflater.getContext();
-        View view = inflater.inflate(R.layout.fragment_cartoonclassify, null);
+        View view = inflater.inflate(R.layout.fragment_lately, null);
         return view;
     }
 
     @Override
     protected void setDate() {
-        mList = new ArrayList<>();
-        for(int i=0;i<50;i++){
-            CartoonLatelyInfo info = new CartoonLatelyInfo();
-            info.setCartoonName("啦啦啦"+i);
-            info.setCartoonAuthor("py"+i);
-            info.setCartoonDescribe("ajlkdfaj;"+i);
-            mList.add(info);
-        }
+        MyRequest.getRecommendList(this,pageIndex,10,4);
     }
 
     @Override
     protected void init(View rootView) {
         recyclerView = (XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new CommonRCAdapter<CartoonLatelyInfo>(getActivity(),R.layout.item_cartoon_lately,mList) {
+        adapter = new CommonRCAdapter<CartoonInfo>(getActivity(),R.layout.item_cartoon_lately,mList) {
             @Override
             public void convert(ViewHolder holder, int position) {
                 if (mList != null && mList.size() > 0) {
-                    CartoonLatelyInfo cartoonInfo = mList.get(position);
-                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getCartoonPicture(),R.mipmap.ic_launcher);
-                    holder.setText(R.id.tv_cartoon_name, cartoonInfo.getCartoonName());
-                    holder.setText(R.id.tv_cartoon_author, cartoonInfo.getCartoonAuthor());
-                    holder.setText(R.id.tv_cartoon_Describe, cartoonInfo.getCartoonDescribe());
-                    holder.setRating(R.id.ratingbar_id,3,5);
+                    CartoonInfo cartoonInfo = mList.get(position);
+                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getColumn_IconURL(),R.mipmap.ic_launcher);
+                    holder.setText(R.id.tv_cartoon_name, cartoonInfo.getName());
+                    holder.setText(R.id.tv_cartoon_author, cartoonInfo.getAuthor());
+                    holder.setText(R.id.tv_cartoon_Describe, cartoonInfo.getSubtitle());
+                    holder.setRating(R.id.ratingbar_id,Integer.valueOf(cartoonInfo.getStar()),5);
                 }
             }
         };
         recyclerView.setAdapter(adapter);
+        recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingListener(new XpulltorefereshiRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.setLoadingMoreEnabled(false);
+            }
+
+            @Override
+            public void onLoadMore() {
+                recyclerView.setLoadingMoreEnabled(false);
+                recyclerView.setLoadingMoreEnabledAnimoto(true);
+                pageIndex++;
+                MyRequest.getRecommendList(LatelyFragment.this,pageIndex,10,4);
+            }
+        });
+        recyclerView.addItemDecoration(new RecycleViewDivider(
+                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -77,5 +96,27 @@ public class LatelyFragment extends BaseFragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void getRecommendList(String json) {
+        if (pageIndex == 0) {// 加载
+            mList.removeAll(mList);
+        }
+        recyclerView.loadMoreComplete();
+        recyclerView.setLoadingMoreEnabled(true);
+
+        RecommendInfo recommendInfo = JSON.parseObject(json,RecommendInfo.class);
+        if(recommendInfo!=null){
+            int status = Integer.valueOf(recommendInfo.getStatus());
+            if(status==0){
+                List<CartoonInfo> list = recommendInfo.getList();
+                if (list == null || list.size() == 0) {
+                    return;
+                }
+                mList.addAll(list);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }
