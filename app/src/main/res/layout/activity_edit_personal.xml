@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--编辑个人资料-->
+    <include
+        android:id="@+id/rl_title"
+        layout="@layout/title"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        style="@style/more_relativelayout"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_height="80dp">
+        <TextView
+            android:id="@+id/tv_download_management"
+            android:text="@string/edit_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:gravity="center|left"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/message_circle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_toLeftOf="@+id/arrow"
+            android:background="@mipmap/line_bottom"
+            android:gravity="center"
+            android:text="1"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:id="@id/arrow"
+            style="@style/more_img_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/more_relativelayout"
+        android:layout_height="wrap_content">
+        <!--昵称-->
+        <RelativeLayout
+            android:id="@+id/rl_edit_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_edit_nickname"
+                style="@style/more_tv"
+                android:layout_width="wrap_content"
+                android:text="@string/edit_nickname" />
+
+            <TextView
+                android:layout_toRightOf="@id/tv_edit_nickname"
+                android:layout_toLeftOf="@+id/arrow_nickname"
+                android:text="酷哥"
+                android:textColor="@color/color9B5F64"
+                style="@style/edit_textview" />
+
+            <ImageButton
+                android:id="@id/arrow_nickname"
+                style="@style/more_img_arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/rl_edit_nickname"
+            android:background="@color/gray_3" />
+        <!--性别-->
+        <RelativeLayout
+            android:id="@+id/rl_edit_sex"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_below="@id/view_nickname"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_edit_sex"
+                style="@style/more_tv"
+                android:layout_width="wrap_content"
+                android:text="@string/edit_sex" />
+
+            <TextView
+                android:layout_toRightOf="@id/tv_edit_sex"
+                android:layout_toLeftOf="@+id/arrow_nickname"
+                android:text="男"
+                style="@style/edit_textview" />
+
+            <ImageButton
+                android:id="@id/arrow_nickname"
+                style="@style/more_img_arrow" />
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_sex"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/rl_edit_sex"
+            android:background="@color/gray_3" />
+        <!--来自-->
+        <RelativeLayout
+            android:id="@+id/rl_edit_from"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_below="@id/view_sex"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_edit_from"
+                style="@style/more_tv"
+                android:layout_width="wrap_content"
+                android:text="@string/edit_from" />
+
+            <TextView
+                android:layout_toRightOf="@id/tv_edit_from"
+                android:layout_toLeftOf="@+id/arrow_from"
+                android:text=""
+                style="@style/edit_textview" />
+
+            <ImageButton
+                android:id="@id/arrow_from"
+                style="@style/more_img_arrow" />
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_from"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/rl_edit_from"
+            android:background="@color/gray_3" />
+        <!--生日-->
+        <RelativeLayout
+            android:id="@+id/rl_edit_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_below="@id/view_from"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_edit_birthday"
+                style="@style/more_tv"
+                android:layout_width="wrap_content"
+                android:text="@string/edit_birthday" />
+
+            <TextView
+                android:layout_toRightOf="@id/tv_edit_birthday"
+                android:layout_toLeftOf="@+id/arrow_birthday"
+                android:text=""
+                style="@style/edit_textview" />
+
+            <ImageButton
+                android:id="@id/arrow_birthday"
+                style="@style/more_img_arrow" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <!--签名-->
+    <RelativeLayout
+        android:id="@+id/rl_edit_sign"
+        style="@style/more_relativelayout" >
+
+        <TextView
+            android:id="@+id/tv_edit_sign"
+            style="@style/more_tv"
+            android:text="@string/edit_sign" />
+        <TextView
+            android:layout_toRightOf="@id/tv_edit_sign"
+            android:layout_toLeftOf="@+id/arrow_sign"
+            android:text=""
+            style="@style/edit_textview" />
+        <ImageButton
+            android:id="@id/arrow_sign"
+            style="@style/more_img_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/more_relativelayout"
+        android:layout_height="wrap_content">
+    <!--收藏-->
+    <RelativeLayout
+        android:id="@+id/rl_edit_collection"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_edit_collection"
+            style="@style/more_tv"
+            android:layout_width="wrap_content"
+            android:text="@string/edit_collection" />
+
+        <CheckBox
+            style="@style/edit_checkbox" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_collection"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/rl_edit_collection"
+        android:background="@color/gray_3" />
+    <!--评论-->
+    <RelativeLayout
+        android:id="@+id/rl_edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_below="@id/view_collection"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_edit_comment"
+            style="@style/more_tv"
+            android:layout_width="wrap_content"
+            android:text="@string/edit_comment" />
+
+        <CheckBox
+            style="@style/edit_checkbox" />
+    </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

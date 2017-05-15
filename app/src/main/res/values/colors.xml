@@ -52,4 +52,8 @@
     <color name="colorBBBBBB">#BBBBBB</color>
     <!--透明-->
     <color name="transparent">#00000000</color>
+    <color name="colorFBB989">#FBB989</color>
+    <color name="color7D3138">#7D3138</color>
+    <color name="color9B5F64">#9B5F64</color>
+    <color name="colorB4B4B4">#B4B4B4</color>
 </resources>

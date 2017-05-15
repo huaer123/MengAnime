@@ -32,22 +32,21 @@ public class MyRequest {
      * 参    数：Activity activity final String username, final String password
      * 返回值：无
      */
-    public static void loginRequest(final Activity activity, final String username, final String password) {
+    public static void loginRequest(final Activity activity, final String imei) {
         final Dialog progDialog = DialogUtils.showWaitDialog(activity);
         final LoginInterface login = (LoginInterface) activity;
         Map<String, Object> params = new HashMap<>();
         try {
-            params.put("Name", username);
-            params.put("PassWord", password);
+            params.put("imei", imei);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        OkHttpUtils.post().url(UrlConfig.BaseUrl).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+        OkHttpUtils.post().url(UrlConfig.USERREGIST).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
                 Log.i("loginInfo", response);
                 //成功之后的处理
-                login.login(username, password);//把结果回调给接口，谁用谁去实现接口就行了
+                login.login(response);//把结果回调给接口，谁用谁去实现接口就行了
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }
@@ -57,7 +56,7 @@ public class MyRequest {
             public void onError(Call call, Exception e, int id) {
                 ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
                 //失败之后的处理
-                login.login(username, password);
+                //login.login(response);
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }
@@ -83,7 +82,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        OkHttpUtils.post().url(UrlConfig.SelectRecommendList).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+        OkHttpUtils.post().url(UrlConfig.SELECTRECOMMENDLIST).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
                 LogUtils.d(response);
@@ -98,6 +97,44 @@ public class MyRequest {
             public void onError(Call call, Exception e, int id) {
                 ToastUtil.showToast(fragment.getActivity(), "服务器有错误，请稍候再试");
                 //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 方法名：getUserInfo
+     * 功    能：获取用户信息
+     * 参    数：Activity activity final String mh_info_id
+     * 返回值：无
+     */
+    public static void getUserInfo(final Activity activity, final String mh_info_id) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final LoginInterface login = (LoginInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_info_id", mh_info_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        OkHttpUtils.post().url(UrlConfig.USERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                Log.i("loginInfo", response);
+                //成功之后的处理
+                login.login(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                //login.login(response);
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }

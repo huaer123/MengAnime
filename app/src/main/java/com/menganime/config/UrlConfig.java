@@ -13,14 +13,18 @@ public class UrlConfig {
     //public static final String BaseUrl = "http://192.168.0.90:8001";// 测试
     public static final String BaseUrl = "http://mh.cyngame.cn:8083/";// 正式域名
 
+    public final static String VERSION_ID = "1.3.8";
+    public final static String META_DATA = "pan";
+
     /**
      * 获取精彩推荐列表
      */
-    public static final String SelectRecommendList = BaseUrl+"mh/select/SelectMHList?";
+    public static final String SELECTRECOMMENDLIST = BaseUrl+"mh/select/SelectMHList?";
 
     /**
-     * 获取热门连载列表
+     * 用户注册接口
      */
-    public static final String SelectSerialList = BaseUrl+"mh/select/SelectMHList?column=2";
+    public static final String USERREGIST = BaseUrl+"mh/user/UserRegist?cp_id"+META_DATA+"&app_version="+VERSION_ID+"&param=regist&";
 
+    public static final String USERINFO = BaseUrl+"mh/user/UserRegist?param=selectuserinfo&";
 }

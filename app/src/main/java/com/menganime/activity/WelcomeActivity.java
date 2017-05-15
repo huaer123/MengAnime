@@ -64,13 +64,7 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                //if (isLogin) {
-                    //跳转到主页面
-                  //  startActivity(new Intent(mContext, LoginActivity.class));
-                //} else {
-                    //userName为null 跳转到登录页面
-                    startActivity(new Intent(mContext, MainActivity.class));
-                //}
+                startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             }
 

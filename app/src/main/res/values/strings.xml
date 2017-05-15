@@ -5,10 +5,32 @@
     <string name="cartoon_serial">热门连载</string>
     <string name="cartoon_original">原创漫画</string>
     <string name="cartoon_lately">最近更新</string>
+
     <!--更多-->
     <string name="more_more">更多</string>
     <string name="personal_center">个人中心</string>
     <string name="download_management">下载管理</string>
     <string name="software_settings">软件设置</string>
     <string name="feed_back">意见反馈</string>
+
+    <!--个人中心-->
+    <string name="login">登录</string>
+    <string name="cancellation">注销</string>
+    <string name="login_info">登录后您可以：\n★云备份收藏的漫画\n★多设备间同步阅读进度\n★截图分享到微博</string>
+    <string name="personal_login">一键登录</string>
+    <string name="personal_comment">我的评论</string>
+    <string name="personal_sync">最后同步</string>
+    <string name="personal_edit">编辑资料</string>
+    <string name="personal_recharge">充值</string>
+
+    <!--编辑个人资料-->
+    <string name="edit_personal">编辑个人资料</string>
+    <string name="edit_picture">头像</string>
+    <string name="edit_nickname">昵称：</string>
+    <string name="edit_sex">性别：</string>
+    <string name="edit_from">来自：</string>
+    <string name="edit_birthday">生日:</string>
+    <string name="edit_sign">签名：</string>
+    <string name="edit_collection">向大家展示我的收藏</string>
+    <string name="edit_comment">向大家展示我的评论</string>
 </resources>

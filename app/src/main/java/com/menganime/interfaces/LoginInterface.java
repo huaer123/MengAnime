@@ -10,5 +10,5 @@ package com.menganime.interfaces;
  */
 
 public interface LoginInterface {
-    void login(String name, String password);
+    void login(String json);
 }

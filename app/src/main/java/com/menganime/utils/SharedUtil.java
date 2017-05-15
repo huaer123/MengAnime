@@ -20,29 +20,16 @@ public class SharedUtil {
 
     public static SharedPreferences mPreference;
 
-
-    /**
-     * 是否切换了账户
-     */
-    public static final String IS_SWITCH_ACCOUNTS = "IS_SWITCH_ACCOUNTS";
     /**
      * 是否登录
      */
     public static final String IS_LOGINED = "isLogined";
-    /**
-     * 是否初次登录进入
-     */
-    public static final String IS_FIRST_IN = "isFirstIn";
-    /**
-     * 行程计划是否发布成功
-     */
-    public static final String IS_POST_STROKE = "isPostStroke";
-
 
     /**
-     * 是否同意免责条款
+     * 用户Id
      */
-    public static final String IS_AGREE_STATE = "isAgreeState";
+    public static final String USERINFO_ID = "userInfo_id";
+
 
     public static SharedPreferences getPreference(Context context) {
         if (mPreference == null)
