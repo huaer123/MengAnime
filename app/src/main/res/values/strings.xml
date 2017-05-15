@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MengAnime</string>
+    <!--漫画推荐-->
+    <string name="cartoon_recommend">精彩推荐</string>
+    <string name="cartoon_serial">热门连载</string>
+    <string name="cartoon_original">原创漫画</string>
+    <string name="cartoon_lately">最近更新</string>
+    <!--更多-->
+    <string name="more_more">更多</string>
+    <string name="personal_center">个人中心</string>
+    <string name="download_management">下载管理</string>
+    <string name="software_settings">软件设置</string>
+    <string name="feed_back">意见反馈</string>
 </resources>

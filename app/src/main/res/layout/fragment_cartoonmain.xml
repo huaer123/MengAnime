@@ -14,14 +14,14 @@
             android:id="@+id/company_detail"
             android:layout_width="match_parent"
             android:background="@color/colorAccent"
-            android:layout_height="40dp" >
+            android:layout_height="48dp" >
 
             <!-- 全部 -->
 
             <TextView
                 android:id="@+id/tv_recruitment_all"
                 style="@style/cartoon_main_textview"
-                android:text="精彩推荐" />
+                android:text="@string/cartoon_recommend" />
 
             <View
                 android:layout_width="1px"
@@ -33,7 +33,7 @@
             <TextView
                 android:id="@+id/tv_recruitment_internship"
                 style="@style/cartoon_main_textview"
-                android:text="热门连载" />
+                android:text="@string/cartoon_serial" />
 
             <View
                 android:layout_width="1px"
@@ -45,7 +45,7 @@
             <TextView
                 android:id="@+id/tv_recruitment_parttime"
                 style="@style/cartoon_main_textview"
-                android:text="原创漫画" />
+                android:text="@string/cartoon_original" />
 
             <View
                 android:layout_width="1px"
@@ -57,7 +57,7 @@
             <TextView
                 android:id="@+id/tv_recruitment_schoolrecruit"
                 style="@style/cartoon_main_textview"
-                android:text="最近更新" />
+                android:text="@string/cartoon_lately" />
         </LinearLayout>
         <!-- 下划线 -->
 

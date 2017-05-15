@@ -1,11 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
     <!--漫画更多fragment-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="更多"/>
+    <include
+        android:id="@+id/rl_title"
+        layout="@layout/title" />
+    <!--个人中心-->
+    <RelativeLayout
+        android:id="@+id/rl_more_personal"
+        style="@style/more_relativelayout" >
 
+        <ImageButton
+            android:id="@+id/ib_personal"
+            style="@style/more_img"
+            android:background="@mipmap/main_more" />
+
+        <TextView
+            android:id="@+id/tv_ib_personal"
+            style="@style/more_tv"
+            android:layout_toRightOf="@id/ib_personal"
+            android:text="@string/personal_center" />
+
+        <ImageButton
+            style="@style/more_img_arrow" />
+    </RelativeLayout>
+
+    <!--下载管理-->
+    <RelativeLayout
+        android:id="@+id/rl_download_management"
+        style="@style/more_relativelayout">
+        <ImageButton
+            android:id="@+id/download_management"
+            style="@style/more_img"
+            android:background="@mipmap/main_more" />
+
+        <TextView
+            android:id="@+id/tv_download_management"
+            android:layout_toRightOf="@id/download_management"
+            android:text="@string/download_management"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:gravity="center|left"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/message_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/arrow"
+            android:background="@drawable/more_message_circle"
+            android:gravity="center"
+            android:text="1"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:id="@id/arrow"
+            style="@style/more_img_arrow" />
+    </RelativeLayout>
+
+    <!--软件设置/意见反馈-->
+    <RelativeLayout
+        style="@style/more_relativelayout"
+        android:layout_height="92dp">
+        <!--软件设置-->
+        <RelativeLayout
+            android:id="@+id/rl_software_settings"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:clickable="true">
+
+            <ImageButton
+                android:id="@+id/software_settings"
+                style="@style/more_img"
+                android:background="@mipmap/main_more" />
+
+            <TextView
+                android:id="@+id/tv_software_settings"
+                style="@style/more_tv"
+                android:layout_toRightOf="@id/software_settings"
+                android:text="@string/software_settings" />
+
+            <ImageButton style="@style/more_img_arrow" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/rl_software_settings"
+            android:background="@color/gray_3" />
+        <!--意见反馈-->
+        <RelativeLayout
+            android:id="@+id/rl_feed_back"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/view_view"
+            android:clickable="true">
+
+            <ImageButton
+                android:id="@+id/feed_back"
+                style="@style/more_img"
+                android:background="@mipmap/main_more" />
+
+            <TextView
+                android:id="@+id/tv_feed_back"
+                style="@style/more_tv"
+                android:layout_toRightOf="@id/feed_back"
+                android:text="@string/feed_back" />
+
+            <ImageButton style="@style/more_img_arrow" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

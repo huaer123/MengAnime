@@ -43,6 +43,7 @@
         <item name="android:textColor">@color/white</item>
     </style>
     <!--漫画主界面TextView属性end-->
+
     <!--评分条五星自定义样式start-->
     <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
         <!--指向star_rating_bar_full.xml文件 -->
@@ -53,4 +54,66 @@
         <item name="android:isIndicator">true</item>
     </style>
     <!--评分条五星自定义样式end-->
+
+    <!--通用标题RelativeLayout start-->
+    <style name="title_relativelayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <!--通用标题RelativeLayout start-->
+
+    <!--通用标题栏TextView start-->
+    <style name="title_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!--通用标题栏TextView end-->
+
+    <!--更多RelativeLayout start-->
+    <style name="more_relativelayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:background">@drawable/more_rl_background</item>
+    </style>
+    <!--更多RelativeLayout end-->
+
+    <!-- 更多-ImageView start-->
+    <style name="more_img">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">15dp</item>
+    </style>
+    <!-- 更多-ImageView end-->
+    <!-- 更多-TextView start-->
+    <style name="more_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">12dp</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <!-- 更多-TextView end-->
+    <!-- 更多-箭头Image start-->
+    <style name="more_img_arrow">
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">14dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:background">@mipmap/arrow</item>
+    </style>
+    <!-- 更多-箭头Image end-->
 </resources>

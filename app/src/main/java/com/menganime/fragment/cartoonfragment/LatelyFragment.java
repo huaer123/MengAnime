@@ -69,16 +69,16 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
         };
         recyclerView.setAdapter(adapter);
         recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingMoreEnabled(true);
         recyclerView.setLoadingListener(new XpulltorefereshiRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                recyclerView.setLoadingMoreEnabled(false);
             }
 
             @Override
             public void onLoadMore() {
+
                 recyclerView.setLoadingMoreEnabled(false);
-                recyclerView.setLoadingMoreEnabledAnimoto(true);
                 pageIndex++;
                 MyRequest.getRecommendList(LatelyFragment.this,pageIndex,10,4);
             }
@@ -115,6 +115,8 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
                     return;
                 }
                 mList.addAll(list);
+
+
                 adapter.notifyDataSetChanged();
             }
         }
