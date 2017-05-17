@@ -29,7 +29,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private TextView tv_title;
     private TextView tv_cancellation;
 
-    private Button bt_edit;
+    private Button bt_edit;//编辑资料
+    private Button bt_recharge;//充值
     private ImageView iv_personal;
     private TextView tv_personal_name;
 
@@ -40,6 +41,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void setDate(Bundle savedInstanceState) {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         String userId = SharedUtil.getString(this,SharedUtil.USERINFO_ID);
         if(userId==null||userId.equals("")){
             ToastUtil.showToast(this,"获取用户Id失败");
@@ -63,16 +69,27 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
         bt_edit = (Button) findViewById(R.id.bt_edit);
         bt_edit.setOnClickListener(this);
+        bt_recharge = (Button) findViewById(R.id.bt_recharge);
+        bt_recharge.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_cancellation:
+            case R.id.tv_cancellation://注销
+                SharedUtil.setBoolean(this,SharedUtil.IS_LOGINED,false);
+                SharedUtil.setString(this,SharedUtil.USERINFO_ID,"");
+                startActivity(new Intent(this,LoginActivity.class));
+                finish();
                 break;
-            case R.id.bt_edit:
+            case R.id.bt_edit://编辑资料
                 Intent intent = new Intent(PersonCenterActivity.this,EditPersonActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.bt_recharge://充值
+                startActivity(new Intent(PersonCenterActivity.this,RechargeActivity.class));
+                break;
+            default:
                 break;
         }
     }
@@ -87,11 +104,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                         .load(userinfo.getICONURL())
                         .error(R.mipmap.ic_launcher) //失败图片
                         .into(iv_personal);
-            }
-            if(userinfo.getPetName().equals("")){
-                tv_personal_name.setText("酷哥");
-            }else{
-                tv_personal_name.setText(userinfo.getPetName());
+                tv_personal_name.setText(userinfo.getPetName().equals("")?"酷哥":userinfo.getPetName());
             }
         }
     }

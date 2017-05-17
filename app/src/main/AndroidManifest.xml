@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.menganime">
+    package="com.menganime"
+    android:versionCode="1.0">
     <!--      定位相关权限      -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
@@ -65,6 +66,18 @@
             android:screenOrientation="portrait"/>
         <!--编辑个人资料-->
         <activity android:name=".activity.EditPersonActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+        <!--编辑个人资料-昵称-->
+        <activity android:name=".activity.EditNickNameActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>EditSignActivity
+        <!--编辑个人资料-签名-->
+        <activity android:name=".activity.EditSignActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+        <!--充值-->
+        <activity android:name=".activity.RechargeActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
     </application>

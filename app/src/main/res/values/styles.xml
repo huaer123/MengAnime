@@ -152,4 +152,31 @@
         <item name="android:button">@drawable/selector_checkbox</item>
     </style>
     <!-- 更多-箭头Image end-->
+
+    <!--充值 LinearLayout start-->
+    <style name="recharge_ll">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <!--充值 LinearLayout end-->
+    <!--充值 ImageView start-->
+    <style name="recharge_iv">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+    <!--充值 ImageView end-->
+
+    <!--充值 TextView start-->
+    <style name="recharge_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+    <!--充值 TextView end-->
 </resources>

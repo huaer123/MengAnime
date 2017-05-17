@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <include layout="@layout/title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+        <!--最近更新Item-->
+        <ImageView
+            android:id="@+id/iv_personal"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/more_rl_background"
+            android:scaleType="fitXY"
+            android:src="@mipmap/line_bottom" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_personal_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="酷哥"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textSize="18sp"
+                android:text="@string/recharge_phone"
+                android:textColor="@color/gray_text" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorD1D2D3"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_vip1"
+            style="@style/recharge_ll"
+            >
+            <ImageView
+                android:id="@+id/iv_vip1"
+                style="@style/recharge_iv"
+                android:src="@drawable/recharge_vip1"
+                />
+            <TextView
+                android:id="@+id/tv_vip1"
+                android:text="@string/recharge_vip1"
+                style="@style/recharge_tv"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_vip2"
+            style="@style/recharge_ll"
+            >
+            <ImageView
+                android:id="@+id/iv_vip2"
+                style="@style/recharge_iv"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:src="@drawable/recharge_vip1"
+                />
+            <TextView
+                android:id="@+id/tv_vip2"
+                android:text="@string/recharge_vip2"
+                style="@style/recharge_tv"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_vip3"
+            style="@style/recharge_ll"
+            >
+            <ImageView
+                android:id="@+id/iv_vip3"
+                style="@style/recharge_iv"
+                android:src="@drawable/recharge_vip1"
+                />
+            <TextView
+                android:id="@+id/tv_vip3"
+                android:text="@string/recharge_vip3"
+                style="@style/recharge_tv"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

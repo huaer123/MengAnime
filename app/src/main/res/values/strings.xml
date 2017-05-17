@@ -29,8 +29,20 @@
     <string name="edit_nickname">昵称：</string>
     <string name="edit_sex">性别：</string>
     <string name="edit_from">来自：</string>
-    <string name="edit_birthday">生日:</string>
+    <string name="edit_from_hint">输入你的位置...</string>
+    <string name="edit_birthday">生日：</string>
     <string name="edit_sign">签名：</string>
     <string name="edit_collection">向大家展示我的收藏</string>
     <string name="edit_comment">向大家展示我的评论</string>
+    <string name="edit_finish">完成</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+
+    <!--充值-->
+    <string name="recharge">充值</string>
+    <string name="recharge_phone">客服电话：</string>
+    <string name="recharge_vip1">初级会员</string>
+    <string name="recharge_vip2">中级会员</string>
+    <string name="recharge_vip3">高级会员</string>
+
 </resources>

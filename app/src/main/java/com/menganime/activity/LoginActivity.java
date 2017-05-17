@@ -1,8 +1,6 @@
 package com.menganime.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,8 +72,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             if(userinfo!=null){
                 SharedUtil.setString(this,SharedUtil.USERINFO_ID,userinfo.getMH_UserInfo_ID());
             }
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            finish();
+           /* AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("登录成功");
             dialog.setMessage("保留当前收藏的漫画");
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -94,7 +92,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                             finish();
                         }
                     });
-            dialog.show();
+            dialog.show();*/
         }
     }
 }

@@ -7,6 +7,7 @@
         android:id="@+id/rl_title"
         layout="@layout/title"/>
     <RelativeLayout
+        android:id="@+id/rl_message_circle"
         android:layout_width="match_parent"
         style="@style/more_relativelayout"
         android:layout_gravity="center_vertical"
@@ -57,6 +58,7 @@
                 android:text="@string/edit_nickname" />
 
             <TextView
+                android:id="@+id/tv_nickname"
                 android:layout_toRightOf="@id/tv_edit_nickname"
                 android:layout_toLeftOf="@+id/arrow_nickname"
                 android:text="酷哥"
@@ -89,6 +91,7 @@
                 android:text="@string/edit_sex" />
 
             <TextView
+                android:id="@+id/tv_sex"
                 android:layout_toRightOf="@id/tv_edit_sex"
                 android:layout_toLeftOf="@+id/arrow_nickname"
                 android:text="男"
@@ -119,6 +122,7 @@
                 android:text="@string/edit_from" />
 
             <TextView
+                android:id="@+id/tv_from"
                 android:layout_toRightOf="@id/tv_edit_from"
                 android:layout_toLeftOf="@+id/arrow_from"
                 android:text=""
@@ -149,6 +153,7 @@
                 android:text="@string/edit_birthday" />
 
             <TextView
+                android:id="@+id/tv_birthday"
                 android:layout_toRightOf="@id/tv_edit_birthday"
                 android:layout_toLeftOf="@+id/arrow_birthday"
                 android:text=""
@@ -167,11 +172,13 @@
         <TextView
             android:id="@+id/tv_edit_sign"
             style="@style/more_tv"
+            android:layout_width="wrap_content"
             android:text="@string/edit_sign" />
         <TextView
+            android:id="@+id/tv_sign"
             android:layout_toRightOf="@id/tv_edit_sign"
             android:layout_toLeftOf="@+id/arrow_sign"
-            android:text=""
+            android:text="你好啊"
             style="@style/edit_textview" />
         <ImageButton
             android:id="@id/arrow_sign"

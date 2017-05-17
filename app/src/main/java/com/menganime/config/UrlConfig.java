@@ -13,7 +13,7 @@ public class UrlConfig {
     //public static final String BaseUrl = "http://192.168.0.90:8001";// 测试
     public static final String BaseUrl = "http://mh.cyngame.cn:8083/";// 正式域名
 
-    public final static String VERSION_ID = "1.3.8";
+    public final static String VERSION_ID = "1.0";
     public final static String META_DATA = "pan";
 
     /**
@@ -24,7 +24,20 @@ public class UrlConfig {
     /**
      * 用户注册接口
      */
-    public static final String USERREGIST = BaseUrl+"mh/user/UserRegist?cp_id"+META_DATA+"&app_version="+VERSION_ID+"&param=regist&";
+    public static final String USERREGIST = BaseUrl+"mh/user/UserRegist?cp_id="+META_DATA+"&app_version="+VERSION_ID+"&param=regist&";
 
+    /**
+     * 获取用户信息
+     */
     public static final String USERINFO = BaseUrl+"mh/user/UserRegist?param=selectuserinfo&";
+
+    /**
+     * 更改用户资料
+     */
+    public static final String UPDATEUSERINFO = BaseUrl+"mh/user/UpdateUserInfo?";
+
+    /**
+     * 更改头像
+     */
+    public static final String UPDATEPICTURE= "http://mh.cyngame.cn:8083/mh/upload/UploadPicture";
 }
