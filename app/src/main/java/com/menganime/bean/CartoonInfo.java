@@ -13,6 +13,7 @@ public class CartoonInfo {
     private String Star;//星级
     private String Author;//作者
     private String MaxChapter;//更新到第几页
+    private String MH_Info_ID;//漫画Id
 
     public String getName() {
         return Name;
@@ -68,5 +69,13 @@ public class CartoonInfo {
 
     public void setMaxChapter(String maxChapter) {
         MaxChapter = maxChapter;
+    }
+
+    public String getMH_Info_ID() {
+        return MH_Info_ID;
+    }
+
+    public void setMH_Info_ID(String MH_Info_ID) {
+        this.MH_Info_ID = MH_Info_ID;
     }
 }

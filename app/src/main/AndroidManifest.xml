@@ -80,6 +80,10 @@
         <activity android:name=".activity.RechargeActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
+        <!--漫画详情-->
+        <activity android:name=".activity.CartoonDetailsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -77,7 +77,7 @@ public class XpulltorefereshiRecyclerView extends RecyclerView {
     }
 
     public void setLoadMoreGone() {
-
+        mFooter.setVisibility(GONE);
     }
 
     public void loadMoreComplete() {//上拉加载完成后的   隐藏上拉加载布局

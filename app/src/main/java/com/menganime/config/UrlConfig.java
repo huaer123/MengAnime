@@ -40,4 +40,14 @@ public class UrlConfig {
      * 更改头像
      */
     public static final String UPDATEPICTURE= "http://mh.cyngame.cn:8083/mh/upload/UploadPicture";
+
+    /**
+     * 漫画详情
+     */
+    public static final String SELECTDETAILS = BaseUrl+"mh/select/SelectMHDetail?";
+
+    /**
+     * 获取漫画章节
+     */
+    public static final String SELECTCHAPTER = BaseUrl+"mh/select/SelectMHChapter?";
 }

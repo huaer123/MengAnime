@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp">
+   <!--漫画详情-章节-->
+    <TextView
+        android:id="@+id/tv_chapter_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@drawable/more_rl_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:lines="1"
+        android:maxEms="5"
+        android:ellipsize="end"
+        android:text="你还好么啊aa"/>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.menganime.fragment.cartoonfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.menganime.R;
+import com.menganime.activity.CartoonDetailsActivity;
 import com.menganime.adapter.RecommendAdapter;
 import com.menganime.base.BaseFragment;
 import com.menganime.bean.CartoonInfo;
@@ -78,6 +80,12 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void onItemClick(View view, int position) {
+        Intent intent = new Intent(context, CartoonDetailsActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("name", mlist.get(position).getName());
+        bundle.putString("infoId",mlist.get(position).getMH_Info_ID());
+        intent.putExtras(bundle);
+        startActivity(intent);
         ToastUtil.showToast(context,position+"");
     }
 
