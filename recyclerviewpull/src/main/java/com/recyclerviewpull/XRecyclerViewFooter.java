@@ -68,7 +68,9 @@ public class XRecyclerViewFooter extends LinearLayout {
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-
+    public void removeView(){
+        removeView(mContainer);
+    }
 
 
 
