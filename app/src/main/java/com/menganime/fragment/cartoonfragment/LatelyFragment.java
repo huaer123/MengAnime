@@ -1,6 +1,7 @@
 package com.menganime.fragment.cartoonfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.menganime.R;
+import com.menganime.activity.CartoonDetailsActivity;
 import com.menganime.base.BaseFragment;
 import com.menganime.bean.CartoonInfo;
 import com.menganime.bean.RecommendInfo;
@@ -88,7 +90,12 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(context, CartoonDetailsActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("name", mList.get(position).getName());
+                bundle.putString("infoId",mList.get(position).getMH_Info_ID());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override

@@ -20,7 +20,6 @@ import com.menganime.bean.CollectionHistoryBean;
 import com.menganime.interfaces.CartoonDetailsInterface;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
-import com.menganime.utils.ToastUtil;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
@@ -81,6 +80,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private boolean isCollection = false;
     private boolean isHistory = false;
     private String watchChapterString="";
+    private String watchChapterContent="";
 
     @Override
     protected void setView() {
@@ -95,10 +95,6 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         infoId = bundle.getString("infoId");
 
         userId = SharedUtil.getString(this,SharedUtil.USERINFO_ID);
-        if(userId==null||userId.equals("")){
-            ToastUtil.showToast(this,"获取用户Id失败");
-            return;
-        }
         MyRequest.getCartoonDetails(this,infoId,userId);
     }
 
@@ -147,9 +143,12 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         isHistory = SharedUtil.isHistory(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
         if(isHistory){
             watchChapterString = SharedUtil.selectWatchChapterByCartoonId(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
+            watchChapterContent =SharedUtil.selectWatchChapterContentByCartoonId(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
         }else{
             watchChapterString = "";
+            watchChapterContent = "";
         }
+        showWatchChapter();
     }
 
     private void showCollection(boolean isCollection) {
@@ -164,7 +163,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
 
     private void showWatchChapter() {
         if(!watchChapterString.equals("")){//已经阅读
-            details_continue.setText("续看 第"+watchChapterString+"话");
+            details_continue.setText("续看 第"+watchChapterContent+"话");
         }else{//未阅读
             details_continue.setText(getString(R.string.details_begin_watch));
         }
@@ -291,12 +290,14 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         adapterLZ.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                isHistory=true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
                 watchChapterString = lzList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
+                bean.setWatchChapterContent(lzList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterLZ.notifyDataSetChanged();
             }
@@ -338,12 +339,14 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         adapterDHB.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                isHistory=true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
                 watchChapterString = dxbList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
+                bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterDHB.notifyDataSetChanged();
             }
@@ -385,12 +388,14 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         adapterFWP.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                isHistory=true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
                 watchChapterString = fwpList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(fwpList.get(position).getMH_Chapter_ID());
+                bean.setWatchChapterContent(fwpList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterFWP.notifyDataSetChanged();
             }

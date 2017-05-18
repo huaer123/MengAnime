@@ -263,6 +263,30 @@ public class SharedUtil {
         return watchChapter;
     }
 
+    /**
+     * 查询该漫画章节内容
+     * @param context
+     * @param name
+     * @param cartoonId
+     * @return
+     */
+    public static String selectWatchChapterContentByCartoonId(Context context,String name,String cartoonId){
+        String watchChapterContent = "";
+        List<CollectionHistoryBean> collectionHistoryBeanList =  getCollectionHistoryList(context,name);
+        if(collectionHistoryBeanList!=null&&collectionHistoryBeanList.size()>0){
+            for(int i = 0;i<collectionHistoryBeanList.size();i++){
+                CollectionHistoryBean collectionHistoryBean = collectionHistoryBeanList.get(i);
+                if(cartoonId.equals(collectionHistoryBean.getCartoonId())){
+                    if(collectionHistoryBean.getType().equals("0")||collectionHistoryBean.getType().equals("2")) {
+                        //如果==0|2，说明已观看该漫画
+                        return collectionHistoryBeanList.get(i).getWatchChapterContent();
+                    }
+                }
+            }
+        }
+        return watchChapterContent;
+    }
+
 
     /**
      * 添加历史
@@ -283,6 +307,7 @@ public class SharedUtil {
                         collectionHistoryBeanListNew.get(i).setType("2");
                     }
                     collectionHistoryBeanListNew.get(i).setWatchChapter(bean.getWatchChapter());
+                    collectionHistoryBeanListNew.get(i).setWatchChapterContent(bean.getWatchChapterContent());
                     isExist=true;
                     break;
                 }

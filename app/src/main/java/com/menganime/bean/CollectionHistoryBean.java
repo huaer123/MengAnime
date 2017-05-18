@@ -12,6 +12,7 @@ public class CollectionHistoryBean {
     private String type;//0-历史/1-收藏/2-历史收藏
     private String maxChapter;//更新到多少章
     private String watchChapter;//观看到多少章节
+    private String watchChapterContent;//观看的章节的内容
 
     public String getCartoonId() {
         return cartoonId;
@@ -59,5 +60,13 @@ public class CollectionHistoryBean {
 
     public void setWatchChapter(String watchChapter) {
         this.watchChapter = watchChapter;
+    }
+
+    public String getWatchChapterContent() {
+        return watchChapterContent;
+    }
+
+    public void setWatchChapterContent(String watchChapterContent) {
+        this.watchChapterContent = watchChapterContent;
     }
 }

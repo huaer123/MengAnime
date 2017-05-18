@@ -18,7 +18,6 @@ import com.menganime.bean.CartoonInfo;
 import com.menganime.bean.RecommendInfo;
 import com.menganime.interfaces.RecommendInterface;
 import com.menganime.utils.MyRequest;
-import com.menganime.utils.ToastUtil;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.OnItemClickListener;
 
@@ -86,7 +85,6 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
         bundle.putString("infoId",mlist.get(position).getMH_Info_ID());
         intent.putExtras(bundle);
         startActivity(intent);
-        ToastUtil.showToast(context,position+"");
     }
 
     @Override
