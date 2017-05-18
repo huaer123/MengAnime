@@ -48,6 +48,7 @@
     <!--漫画详情-->
     <string name="details_add_collection">添加收藏</string>
     <string name="details_already_collection">已收藏</string>
+    <string name="details_begin_watch">开始阅读</string>
     <string name="details_lz">连载(话)</string>
     <string name="details_dxb">单行本(卷)</string>
     <string name="details_fwp">番外篇</string>

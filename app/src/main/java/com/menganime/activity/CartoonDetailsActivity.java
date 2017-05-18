@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,6 +16,7 @@ import com.menganime.R;
 import com.menganime.base.BaseActivity;
 import com.menganime.bean.CartoonChapterBean;
 import com.menganime.bean.CartoonDetailsBean;
+import com.menganime.bean.CollectionHistoryBean;
 import com.menganime.interfaces.CartoonDetailsInterface;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
@@ -56,6 +58,9 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private TextView details_source;//来源
     private TextView details_updatetime;//最后更新时间
 
+    private Button details_collection;//收藏
+    private Button details_continue;//续看
+
     private LinearLayout ll_LZ;
     private LinearLayout ll_DXB;
     private LinearLayout ll_FWP;
@@ -63,10 +68,19 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private XpulltorefereshiRecyclerView details_recyclerview_DXB;
     private XpulltorefereshiRecyclerView details_recyclerview_FWP;
 
-    private CartoonChapterBean chapterBean;
+    private CommonRCAdapter<CartoonChapterBean.LZ> adapterLZ;
+    private CommonRCAdapter<CartoonChapterBean.DHB> adapterDHB;
+    private CommonRCAdapter<CartoonChapterBean.FWP> adapterFWP;
 
-    String userId="";
+    private CartoonChapterBean bean;
+    private CartoonDetailsBean detailsBean;
+
+    private String userId="";
     private String infoId;//漫画Id
+
+    private boolean isCollection = false;
+    private boolean isHistory = false;
+    private String watchChapterString="";
 
     @Override
     protected void setView() {
@@ -86,7 +100,6 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
             return;
         }
         MyRequest.getCartoonDetails(this,infoId,userId);
-        MyRequest.getCartoonChapter(this,infoId);
     }
 
     @Override
@@ -109,14 +122,52 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         details_type = (TextView) findViewById(R.id.details_type);//漫画类型
         details_fightpower = (TextView) findViewById(R.id.details_fightpower);//战斗力
         details_source = (TextView) findViewById(R.id.details_source);//来源
-        details_updatetime = (TextView) findViewById(R.id.details_updatetime);
 
+        details_collection = (Button) findViewById(R.id.details_collection);
+        details_collection.setOnClickListener(this);
+        details_continue = (Button) findViewById(R.id.details_continue);
+        details_continue.setOnClickListener(this);
+
+        details_updatetime = (TextView) findViewById(R.id.details_updatetime);
         ll_LZ = (LinearLayout) findViewById(R.id.ll_LZ);
         ll_DXB = (LinearLayout) findViewById(R.id.ll_DXB);
         ll_FWP = (LinearLayout) findViewById(R.id.ll_FWP);
         details_recyclerview_LZ = (XpulltorefereshiRecyclerView) findViewById(R.id.details_recyclerview_LZ);
         details_recyclerview_DXB = (XpulltorefereshiRecyclerView) findViewById(R.id.details_recyclerview_DXB);
         details_recyclerview_FWP = (XpulltorefereshiRecyclerView) findViewById(R.id.details_recyclerview_FWP);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyRequest.getCartoonChapter(this,infoId);
+
+        isCollection = SharedUtil.isCollection(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
+        showCollection(isCollection);
+        isHistory = SharedUtil.isHistory(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
+        if(isHistory){
+            watchChapterString = SharedUtil.selectWatchChapterByCartoonId(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
+        }else{
+            watchChapterString = "";
+        }
+    }
+
+    private void showCollection(boolean isCollection) {
+        if(isCollection){//已经收藏
+            details_collection.setText(getString(R.string.details_already_collection));
+            details_collection.setBackgroundDrawable(getResources().getDrawable(R.drawable.more_rl_background));
+        }else{//未收藏
+            details_collection.setText(getString(R.string.details_add_collection));
+            details_collection.setBackgroundDrawable(getResources().getDrawable(R.drawable.personal_button));
+        }
+    }
+
+    private void showWatchChapter() {
+        if(!watchChapterString.equals("")){//已经阅读
+            details_continue.setText("续看 第"+watchChapterString+"话");
+        }else{//未阅读
+            details_continue.setText(getString(R.string.details_begin_watch));
+        }
     }
 
     @Override
@@ -140,6 +191,23 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                     mState = SPREAD_STATE;
                 }
                 break;
+            case R.id.details_collection:
+                if(isCollection){//已经收藏了
+                    SharedUtil.deleteCollection(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,infoId);
+                    isCollection = false;
+                }else{
+                    CollectionHistoryBean bean = new CollectionHistoryBean();
+                    bean.setType("1");
+                    bean.setCartoonId(infoId);
+                    bean.setCartoonName(detailsBean.getName());
+                    bean.setMaxChapter(detailsBean.getMaxChapter());
+                    SharedUtil.addCollection(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
+                    isCollection = true;
+                }
+                showCollection(isCollection);
+                break;
+            case R.id.details_continue:
+                break;
             default:
                 break;
         }
@@ -147,26 +215,26 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void selectDetails(String json) {
-        CartoonDetailsBean bean = JSON.parseObject(json,CartoonDetailsBean.class);
-        if(bean!=null){
-            if(bean.getStatus().equals("0")){
+        detailsBean = JSON.parseObject(json,CartoonDetailsBean.class);
+        if(detailsBean!=null){
+            if(detailsBean.getStatus().equals("0")){
                 Glide.with(this)
-                        .load(bean.getCover_IconURL())
+                        .load(detailsBean.getCover_IconURL())
                         .error(R.mipmap.ic_launcher) //失败图片
                         .into(details_cartoonPicture);//封面
-                details_name.setText(bean.getName());//漫画名字
-                tv_recovery.setText(bean.getAuthor());//作者
+                details_name.setText(detailsBean.getName());//漫画名字
+                tv_recovery.setText(detailsBean.getAuthor());//作者
                 details_type.setText("免费漫画");//漫画类型
-                details_fightpower.setText("战斗力："+bean.getFightPower());//战斗力
-                details_source.setText("来源："+bean.getSource());//来源
-                mContentText.setText(bean.getIntroduce());//简介
+                details_fightpower.setText("战斗力："+detailsBean.getFightPower());//战斗力
+                details_source.setText("来源："+detailsBean.getSource());//来源
+                mContentText.setText(detailsBean.getIntroduce());//简介
             }
         }
     }
 
     @Override
     public void selectchapter(String json) {
-        CartoonChapterBean bean = JSON.parseObject(json,CartoonChapterBean.class);
+        bean = JSON.parseObject(json,CartoonChapterBean.class);
         if(bean!=null){
             if(bean.getStatus().equals("0")){
                 details_updatetime.setText("最后更新："+bean.getUpdateTime());
@@ -203,20 +271,34 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         details_recyclerview_LZ.setPullRefreshEnabled(false);
         details_recyclerview_LZ.setLoadingMoreEnabled(false);
         details_recyclerview_LZ.setLoadMoreGone();
-        CommonRCAdapter<CartoonChapterBean.LZ> adapter = new CommonRCAdapter<CartoonChapterBean.LZ>(this,R.layout.item_details_chapter,lzList) {
+        adapterLZ = new CommonRCAdapter<CartoonChapterBean.LZ>(this,R.layout.item_details_chapter,lzList) {
             @Override
             public void convert(ViewHolder holder, int position) {
                 if (lzList != null && lzList.size() > 0) {
                     CartoonChapterBean.LZ lz = lzList.get(position);
                     holder.setText(R.id.tv_chapter_name, lz.getWhichChapter());
+                    if (isHistory){
+                        if(lz.getMH_Chapter_ID().equals(watchChapterString)){
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.shape_orange);
+                        }else{
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.more_rl_background);
+                        }
+                    }
                 }
             }
         };
-        details_recyclerview_LZ.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        details_recyclerview_LZ.setAdapter(adapterLZ);
+        adapterLZ.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtil.showToast(CartoonDetailsActivity.this,position+"");
+                CollectionHistoryBean bean = new CollectionHistoryBean();
+                bean.setType("0");
+                bean.setCartoonId(infoId);
+                bean.setCartoonName(detailsBean.getName());
+                watchChapterString = lzList.get(position).getMH_Chapter_ID();
+                bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
+                SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
+                adapterLZ.notifyDataSetChanged();
             }
 
             @Override
@@ -236,20 +318,34 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         details_recyclerview_DXB.setPullRefreshEnabled(false);
         details_recyclerview_DXB.setLoadingMoreEnabled(false);
         details_recyclerview_DXB.setLoadMoreGone();
-        CommonRCAdapter<CartoonChapterBean.DHB> adapter = new CommonRCAdapter<CartoonChapterBean.DHB>(this,R.layout.item_details_chapter,dxbList) {
+        adapterDHB = new CommonRCAdapter<CartoonChapterBean.DHB>(this,R.layout.item_details_chapter,dxbList) {
             @Override
             public void convert(ViewHolder holder, int position) {
                 if (dxbList != null && dxbList.size() > 0) {
                     CartoonChapterBean.DHB dhb = dxbList.get(position);
                     holder.setText(R.id.tv_chapter_name, dhb.getWhichChapter());
+                    if (isHistory){
+                        if(dhb.getMH_Chapter_ID().equals(watchChapterString)){
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.shape_orange);
+                        }else{
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.more_rl_background);
+                        }
+                    }
                 }
             }
         };
-        details_recyclerview_DXB.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        details_recyclerview_DXB.setAdapter(adapterDHB);
+        adapterDHB.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtil.showToast(CartoonDetailsActivity.this,position+"");
+                CollectionHistoryBean bean = new CollectionHistoryBean();
+                bean.setType("0");
+                bean.setCartoonId(infoId);
+                bean.setCartoonName(detailsBean.getName());
+                watchChapterString = dxbList.get(position).getMH_Chapter_ID();
+                bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
+                SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
+                adapterDHB.notifyDataSetChanged();
             }
 
             @Override
@@ -269,20 +365,34 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         details_recyclerview_FWP.setPullRefreshEnabled(false);
         details_recyclerview_FWP.setLoadingMoreEnabled(false);
         details_recyclerview_FWP.setLoadMoreGone();
-        CommonRCAdapter<CartoonChapterBean.FWP> adapter = new CommonRCAdapter<CartoonChapterBean.FWP>(this,R.layout.item_details_chapter,fwpList) {
+        adapterFWP = new CommonRCAdapter<CartoonChapterBean.FWP>(this,R.layout.item_details_chapter,fwpList) {
             @Override
             public void convert(ViewHolder holder, int position) {
                 if (fwpList != null && fwpList.size() > 0) {
                     CartoonChapterBean.FWP fwp = fwpList.get(position);
                     holder.setText(R.id.tv_chapter_name, fwp.getWhichChapter());
+                    if (isHistory){
+                        if(fwp.getMH_Chapter_ID().equals(watchChapterString)){
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.shape_orange);
+                        }else{
+                            holder.setBackgroundRes(R.id.tv_chapter_name,R.drawable.more_rl_background);
+                        }
+                    }
                 }
             }
         };
-        details_recyclerview_FWP.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        details_recyclerview_FWP.setAdapter(adapterFWP);
+        adapterFWP.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtil.showToast(CartoonDetailsActivity.this,position+"");
+                CollectionHistoryBean bean = new CollectionHistoryBean();
+                bean.setType("0");
+                bean.setCartoonId(infoId);
+                bean.setCartoonName(detailsBean.getName());
+                watchChapterString = fwpList.get(position).getMH_Chapter_ID();
+                bean.setWatchChapter(fwpList.get(position).getMH_Chapter_ID());
+                SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
+                adapterFWP.notifyDataSetChanged();
             }
 
             @Override

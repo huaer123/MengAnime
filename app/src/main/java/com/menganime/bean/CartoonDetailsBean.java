@@ -20,6 +20,7 @@ public class CartoonDetailsBean {
     private String ISCollect;
     private String UserVisitLog;
     private String MH_Chapter_ID;
+    private String MaxChapter;//更新到多少章
     private String UserComment_Count;
 
     public String getStatus() {
@@ -132,6 +133,14 @@ public class CartoonDetailsBean {
 
     public void setMH_Chapter_ID(String MH_Chapter_ID) {
         this.MH_Chapter_ID = MH_Chapter_ID;
+    }
+
+    public String getMaxChapter() {
+        return MaxChapter;
+    }
+
+    public void setMaxChapter(String maxChapter) {
+        MaxChapter = maxChapter;
     }
 
     public String getUserComment_Count() {

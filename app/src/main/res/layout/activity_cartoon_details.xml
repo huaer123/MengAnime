@@ -126,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:background="@drawable/more_login_button"
-                            android:text="续看 第1话"
+                            android:text="@string/details_begin_watch"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
                     </LinearLayout>

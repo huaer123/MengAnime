@@ -16,4 +16,5 @@
         android:maxEms="5"
         android:ellipsize="end"
         android:text="你还好么啊aa"/>
+    <!--shape_orange-->
 </LinearLayout>
