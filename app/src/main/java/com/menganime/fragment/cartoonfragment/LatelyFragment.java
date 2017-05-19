@@ -53,6 +53,11 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void init(View rootView) {
         recyclerView = (XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

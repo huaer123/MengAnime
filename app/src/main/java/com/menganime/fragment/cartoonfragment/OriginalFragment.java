@@ -3,7 +3,6 @@ package com.menganime.fragment.cartoonfragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,7 @@ public class OriginalFragment extends BaseFragment implements OnItemClickListene
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = inflater.getContext();
-        View view = inflater.inflate(R.layout.fragment_recommend, null);
+        View view = inflater.inflate(R.layout.fragment_original, null);
         return view;
     }
 
@@ -49,12 +48,17 @@ public class OriginalFragment extends BaseFragment implements OnItemClickListene
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void init(View rootView) {
-        recyclerView=(XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
+        recyclerView=(XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_verticalOriginal);
         adapter=new SerialAdapter(context,mlist);
         adapter.setOnItemClickListener(this);
         //设置动画
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);

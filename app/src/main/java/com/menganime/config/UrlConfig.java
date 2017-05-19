@@ -55,4 +55,6 @@ public class UrlConfig {
      * 开通vip
      */
     public static final String USERVIP = BaseUrl+"mh/vip/UserVip?";
+
+    public static final String SELECTUSERCHAPTER = BaseUrl+"mh/select/SelectUserChapter?";
 }

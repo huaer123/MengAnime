@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private TextView tv_title;
     private Button bt_login;
+    private RelativeLayout rl_back;
 
     @Override
     protected void setView() {
@@ -45,6 +47,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tv_title.setText(getResources().getString(R.string.login));
         bt_login = (Button) findViewById(R.id.bt_login);
         bt_login.setOnClickListener(this);
+        rl_back = (RelativeLayout) findViewById(R.id.rl_back);
+        rl_back.setVisibility(View.VISIBLE);
+        rl_back.setOnClickListener(this);
     }
 
     @Override
@@ -57,6 +62,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         switch (v.getId()){
             case R.id.bt_login:
                 MyRequest.loginRequest(this, PhoneInfoUtils.getPhonIMEI(this));
+                break;
+            case R.id.rl_back:
+                finish();
                 break;
         }
     }

@@ -415,4 +415,40 @@ public class MyRequest {
             }
         });
     }
+    /**
+     * 查询用户看过哪些原创漫画
+     * @param activity
+     * @param mh_userinfo_id
+     */
+    public static void selectUserChapter(final Activity activity,String mh_userinfo_id){
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final CartoonDetailsInterface info = (CartoonDetailsInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_userinfo_id",mh_userinfo_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.d(UrlConfig.SELECTCHAPTER+"&mh_userinfo_id="+mh_userinfo_id);
+        OkHttpUtils.post().url(UrlConfig.SELECTCHAPTER).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                info.selectUserChapter(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
 }

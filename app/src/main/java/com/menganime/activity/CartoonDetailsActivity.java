@@ -1,7 +1,6 @@
 package com.menganime.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -259,11 +258,16 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    @Override
+    public void selectUserChapter(String json) {
+
+    }
+
     /**
      * 设置连载章节
      */
     private void setLZChapter(final List<CartoonChapterBean.LZ> lzList) {
-        details_recyclerview_LZ.setItemAnimator(new DefaultItemAnimator());
+        //details_recyclerview_LZ.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         details_recyclerview_LZ.setLayoutManager(layoutManager);
@@ -312,7 +316,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
      * 设置单行本章节
      */
     private void setDXBChapter(final List<CartoonChapterBean.DHB> dxbList) {
-        details_recyclerview_DXB.setItemAnimator(new DefaultItemAnimator());
+        //details_recyclerview_DXB.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         details_recyclerview_DXB.setLayoutManager(layoutManager);
@@ -361,7 +365,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
      * 设置番外篇章节
      */
     private void setFWPChapter(final List<CartoonChapterBean.FWP> fwpList) {
-        details_recyclerview_FWP.setItemAnimator(new DefaultItemAnimator());
+        //details_recyclerview_FWP.setItemAnimator(new DefaultItemAnimator());
         //设置布局
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         details_recyclerview_FWP.setLayoutManager(layoutManager);

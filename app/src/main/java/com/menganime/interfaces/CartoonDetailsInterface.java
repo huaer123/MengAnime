@@ -12,4 +12,10 @@ public interface CartoonDetailsInterface {
      * 获取漫画集数
      */
     void selectchapter(String json);
+
+    /**
+     * 获取用户查看了哪些原创漫画
+     * @param json
+     */
+    void selectUserChapter(String json);
 }
