@@ -12,7 +12,6 @@
         android:layout_height="80dp"
         android:layout_margin="20dp"
         android:orientation="horizontal">
-        <!--最近更新Item-->
         <ImageView
             android:id="@+id/iv_personal"
             android:layout_width="80dp"
@@ -68,7 +67,7 @@
             <ImageView
                 android:id="@+id/iv_vip1"
                 style="@style/recharge_iv"
-                android:src="@drawable/recharge_vip1"
+                android:background="@drawable/recharge_vip1"
                 />
             <TextView
                 android:id="@+id/tv_vip1"
@@ -84,7 +83,7 @@
                 style="@style/recharge_iv"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:src="@drawable/recharge_vip1"
+                android:background="@drawable/recharge_vip1"
                 />
             <TextView
                 android:id="@+id/tv_vip2"
@@ -98,7 +97,7 @@
             <ImageView
                 android:id="@+id/iv_vip3"
                 style="@style/recharge_iv"
-                android:src="@drawable/recharge_vip1"
+                android:background="@drawable/recharge_vip1"
                 />
             <TextView
                 android:id="@+id/tv_vip3"

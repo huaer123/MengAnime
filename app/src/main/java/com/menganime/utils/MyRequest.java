@@ -9,6 +9,7 @@ import com.menganime.interfaces.CartoonDetailsInterface;
 import com.menganime.interfaces.EditNickNameInterface;
 import com.menganime.interfaces.EditPersonInterface;
 import com.menganime.interfaces.LoginInterface;
+import com.menganime.interfaces.RechargeInterface;
 import com.menganime.interfaces.RecommendInterface;
 import com.menganime.okhttps.OkHttpUtils;
 import com.menganime.okhttps.callback.GenericsCallback;
@@ -360,6 +361,45 @@ public class MyRequest {
                 LogUtils.d(response);
                 //成功之后的处理
                 info.selectchapter(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     *  用户开通VIP
+     * @param activity
+     * @param price
+     */
+    public static void openVip(final Activity activity,String mh_userinfo_id,String price,String viplevel){
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final RechargeInterface info = (RechargeInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_userinfo_id",mh_userinfo_id);
+            params.put("price",price);
+            params.put("viplevel", viplevel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.d(UrlConfig.USERVIP+"&mh_userinfo_id="+mh_userinfo_id+"&price="+price+"&viplevel="+viplevel);
+        OkHttpUtils.post().url(UrlConfig.USERVIP).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                info.openVip(response);
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }

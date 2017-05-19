@@ -50,4 +50,9 @@ public class UrlConfig {
      * 获取漫画章节
      */
     public static final String SELECTCHAPTER = BaseUrl+"mh/select/SelectMHChapter?";
+
+    /**
+     * 开通vip
+     */
+    public static final String USERVIP = BaseUrl+"mh/vip/UserVip?";
 }

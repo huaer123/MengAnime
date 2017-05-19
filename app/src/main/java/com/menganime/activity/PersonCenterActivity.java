@@ -34,6 +34,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private ImageView iv_personal;
     private TextView tv_personal_name;
 
+    private UserInfoAll.UserInfo userinfo;
+
     @Override
     protected void setView() {
         setContentView(R.layout.activity_personcenter);
@@ -87,7 +89,12 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.bt_recharge://充值
-                startActivity(new Intent(PersonCenterActivity.this,RechargeActivity.class));
+                Intent intentReCharge = new Intent(PersonCenterActivity.this,RechargeActivity.class);
+                /*Bundle bundle=new Bundle();
+                bundle.putString("name",userinfo.getPetName());
+                bundle.putString("picture",userinfo.getICONURL());
+                intentReCharge.putExtras(bundle);*/
+                startActivity(intentReCharge);
                 break;
             default:
                 break;
@@ -98,7 +105,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     public void login(String json) {
         UserInfoAll userInfoAll = JSON.parseObject(json,UserInfoAll.class);
         if(userInfoAll.getStatus().equals("0")) {
-            UserInfoAll.UserInfo userinfo = userInfoAll.getUser().get(0);
+            userinfo = userInfoAll.getUser().get(0);
             if(userinfo!=null){
                 Glide.with(this)
                         .load(userinfo.getICONURL())

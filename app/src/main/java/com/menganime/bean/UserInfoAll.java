@@ -10,6 +10,7 @@ import java.util.List;
 public class UserInfoAll {
     private String Status;
     private List<UserInfo> User;
+    private List<VIP> VIP;
 
     public String getStatus() {
         return Status;
@@ -25,6 +26,14 @@ public class UserInfoAll {
 
     public void setUser(List<UserInfo> user) {
         User = user;
+    }
+
+    public List<UserInfoAll.VIP> getVIP() {
+        return VIP;
+    }
+
+    public void setVIP(List<UserInfoAll.VIP> VIP) {
+        this.VIP = VIP;
     }
 
     public class UserInfo {
@@ -99,6 +108,36 @@ public class UserInfoAll {
 
         public void setIntroduce(String introduce) {
             Introduce = introduce;
+        }
+    }
+
+    public class VIP{
+        private String VIP_di;
+        private String VIP_zhong;
+        private String VIP_gao;
+
+        public String getVIP_di() {
+            return VIP_di;
+        }
+
+        public void setVIP_di(String VIP_di) {
+            this.VIP_di = VIP_di;
+        }
+
+        public String getVIP_zhong() {
+            return VIP_zhong;
+        }
+
+        public void setVIP_zhong(String VIP_zhong) {
+            this.VIP_zhong = VIP_zhong;
+        }
+
+        public String getVIP_gao() {
+            return VIP_gao;
+        }
+
+        public void setVIP_gao(String VIP_gao) {
+            this.VIP_gao = VIP_gao;
         }
     }
 }

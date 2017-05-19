@@ -71,7 +71,7 @@
         <!--编辑个人资料-昵称-->
         <activity android:name=".activity.EditNickNameActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="portrait"/>EditSignActivity
+            android:screenOrientation="portrait"/>
         <!--编辑个人资料-签名-->
         <activity android:name=".activity.EditSignActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -82,6 +82,10 @@
             android:screenOrientation="portrait"/>
         <!--漫画详情-->
         <activity android:name=".activity.CartoonDetailsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+        <!--原创漫画详情-->
+        <activity android:name=".activity.OrginalCartoonDetailsActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
     </application>
