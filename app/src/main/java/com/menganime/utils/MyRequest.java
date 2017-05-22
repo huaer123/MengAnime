@@ -489,4 +489,42 @@ public class MyRequest {
             }
         });
     }
+
+    /**
+     * 方法名：getUserInfo
+     * 功    能：获取用户信息
+     * 参    数：Activity activity final String mh_info_id
+     * 返回值：无
+     */
+    public static void getUserInfo(final BaseFragment fragment, final String mh_info_id) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
+        final LoginInterface login = (LoginInterface) fragment;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_userinfo_id", mh_info_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        OkHttpUtils.post().url(UrlConfig.USERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                login.login(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(fragment.getActivity(), "服务器有错误，请稍候再试");
+                //失败之后的处理
+                //login.login(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
 }

@@ -1,12 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--收藏历史Fragment-->
-
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="收藏历史" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="48dp"
+                android:background="@color/colorAccent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/company_detail"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorAccent"
+                    android:layout_height="48dp">
+
+                    <!-- 收藏 -->
+
+                    <TextView
+                        android:id="@+id/tv_collection_all"
+                        style="@style/cartoon_main_textview"
+                        android:text="@string/collection" />
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="27dp"
+                        android:background="@color/white"
+                        android:layout_gravity="center_vertical" />
+                    <!-- 历史 -->
+
+                    <TextView
+                        android:id="@+id/tv_history_all"
+                        style="@style/cartoon_main_textview"
+                        android:text="@string/history" />
+                </LinearLayout>
+                <!-- 下划线 -->
+
+                <LinearLayout
+                    android:id="@+id/companry_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/cursor"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:background="@mipmap/line_bottom" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:src="@mipmap/line_bottom"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="48dp"
+                android:background="@color/white" />
+            <LinearLayout
+                android:id="@+id/ll_userinfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/iv_picture"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/collectionhistory_login"/>
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:text="登录"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_line2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_5" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:flipInterval="30"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
 </LinearLayout>

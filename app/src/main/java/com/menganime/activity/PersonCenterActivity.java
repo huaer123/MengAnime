@@ -81,7 +81,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             case R.id.tv_cancellation://注销
                 SharedUtil.setBoolean(this,SharedUtil.IS_LOGINED,false);
                 SharedUtil.setString(this,SharedUtil.USERINFO_ID,"");
-                startActivity(new Intent(this,LoginActivity.class));
+                //startActivity(new Intent(this,LoginActivity.class));
                 finish();
                 break;
             case R.id.bt_edit://编辑资料
