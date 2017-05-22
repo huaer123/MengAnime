@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_edit_shape"
+    >
+<!--编辑个人资料-头像-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorFFA200">
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择打开"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/dialog_close"
+            android:layout_alignParentRight="true"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/dialog_close"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/dialog_camera"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="摄像头"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/dialog_photos"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="本地照片"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"/>
+</LinearLayout>
