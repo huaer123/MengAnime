@@ -11,6 +11,7 @@ import com.menganime.interfaces.EditPersonInterface;
 import com.menganime.interfaces.LoginInterface;
 import com.menganime.interfaces.RechargeInterface;
 import com.menganime.interfaces.RecommendInterface;
+import com.menganime.interfaces.WatchCartoonInterface;
 import com.menganime.okhttps.OkHttpUtils;
 import com.menganime.okhttps.callback.GenericsCallback;
 import com.menganime.okhttps.utils.JsonGenericsSerializator;
@@ -429,13 +430,50 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        LogUtils.d(UrlConfig.SELECTCHAPTER+"&mh_userinfo_id="+mh_userinfo_id);
-        OkHttpUtils.post().url(UrlConfig.SELECTCHAPTER).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+        LogUtils.d(UrlConfig.SELECTUSERCHAPTER+"&mh_userinfo_id="+mh_userinfo_id);
+        OkHttpUtils.post().url(UrlConfig.SELECTUSERCHAPTER).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
                 LogUtils.d(response);
                 //成功之后的处理
                 info.selectUserChapter(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+    /**
+     * 查询用户看过哪些原创漫画
+     * @param activity
+     * @param mh_userinfo_id
+     */
+    public static void selectChapterContent(final Activity activity,String mh_chapter_id,String mh_userinfo_id){
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final WatchCartoonInterface info = (WatchCartoonInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_chapter_id",mh_chapter_id);
+            params.put("mh_userinfo_id",mh_userinfo_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.d(UrlConfig.SELECTCHAPTERCONTENT+"&mh_chapter_id="+mh_chapter_id+"&mh_userinfo_id="+mh_userinfo_id);
+        OkHttpUtils.post().url(UrlConfig.SELECTCHAPTERCONTENT).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                info.getWatchCartoon(response);
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }

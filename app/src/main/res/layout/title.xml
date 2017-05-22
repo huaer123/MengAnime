@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/rl_title_all"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
-<!--通用标题栏-->
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+    <!--通用标题栏-->
 
-    <RelativeLayout
-        style="@style/title_relativelayout" >
+    <RelativeLayout style="@style/title_relativelayout">
         <!-- 返回-图片 -->
 
         <RelativeLayout
             android:id="@+id/rl_back"
             android:layout_width="50dp"
             android:layout_height="47dp"
-            android:visibility="gone"
-            android:gravity="center" >
+            android:gravity="center"
+            android:visibility="gone">
 
-            <ImageView style="@style/title_img_back"/>
+            <ImageView style="@style/title_img_back" />
         </RelativeLayout>
         <!-- 取消 文字 -->
         <TextView
@@ -35,8 +36,8 @@
             android:id="@+id/tv_title"
             style="@style/title_textview"
             android:layout_centerInParent="true"
-            android:maxEms="10"
-            android:lines="1" />
+            android:lines="1"
+            android:maxEms="10" />
 
         <!-- 注销 文字 -->
 
@@ -49,8 +50,8 @@
             android:paddingRight="15dp"
             android:text="@string/cancellation"
             android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:visibility="gone" />
         <!-- 完成 文字 -->
 
         <TextView
@@ -62,7 +63,7 @@
             android:paddingRight="15dp"
             android:text="@string/edit_finish"
             android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:visibility="gone" />
     </RelativeLayout>
 </RelativeLayout>

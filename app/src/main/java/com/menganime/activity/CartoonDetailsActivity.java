@@ -1,5 +1,6 @@
 package com.menganime.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
@@ -304,6 +305,11 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 bean.setWatchChapterContent(lzList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterLZ.notifyDataSetChanged();
+                Intent intent = new Intent(CartoonDetailsActivity.this,WatchCartoonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mh_chapter_id",lzList.get(position).getMH_Chapter_ID());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override

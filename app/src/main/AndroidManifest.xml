@@ -88,6 +88,10 @@
         <activity android:name=".activity.OrginalCartoonDetailsActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
+        <!--原创漫画详情-->
+        <activity android:name=".activity.WatchCartoonActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

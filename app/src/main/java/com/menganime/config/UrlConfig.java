@@ -56,5 +56,13 @@ public class UrlConfig {
      */
     public static final String USERVIP = BaseUrl+"mh/vip/UserVip?";
 
+    /**
+     * 获取用户看过哪些原创曼胡
+     */
     public static final String SELECTUSERCHAPTER = BaseUrl+"mh/select/SelectUserChapter?";
+
+    /**
+     * 获取具体漫画
+     */
+    public static final String SELECTCHAPTERCONTENT = BaseUrl+"mh/select/SelectMHChapterContent?";
 }

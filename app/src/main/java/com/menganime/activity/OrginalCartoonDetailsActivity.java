@@ -102,6 +102,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
      */
     private UserInfoAll.VIP vip;
 
+
     @Override
     protected void setView() {
         setContentView(R.layout.activity_cartoon_details);
@@ -292,9 +293,13 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             boolean isWatched = IsWatched();
             if (!isWatched) {
                 if (!userWatchNum.equals("all")) {
-                    if (Integer.valueOf(userWatchNum) >= userChapter.size()) {
+                    if (userChapter.size() > Integer.valueOf(userWatchNum)) {
                         promptWatchMoreThan();
+                    } else {
+                        toIntentWatchCartoon();
                     }
+                } else {
+                    toIntentWatchCartoon();
                 }
             }
         } else {
@@ -304,8 +309,33 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
     }
 
     /**
+     * 跳转到观看漫画界面
+     */
+    private void toIntentWatchCartoon() {
+        if (watchChapterString.equals("")) {
+            if (bean != null) {
+                if (bean.getStatus().equals("0")) {
+                    if (bean.getLZ() != null && bean.getLZ().size() > 0) {
+                        watchChapterString = bean.getLZ().get(0).getMH_Chapter_ID();
+                    } else if (bean.getDHB() != null && bean.getDHB().size() > 0) {
+                        watchChapterString = bean.getDHB().get(0).getMH_Chapter_ID();
+                    } else if (bean.getFWP() != null && bean.getFWP().size() > 0) {
+                        watchChapterString = bean.getFWP().get(0).getMH_Chapter_ID();
+                    }
+                }
+            }
+        }
+        Intent intent = new Intent(OrginalCartoonDetailsActivity.this, WatchCartoonActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("mh_chapter_id", watchChapterString);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    /**
      * 提示用户充值
      */
+
     private void promptRecharge() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("温馨提示");
@@ -363,7 +393,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
     private void promptLogin() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("提示");
-        dialog.setMessage("保留当前收藏的漫画");
+        dialog.setMessage("想阅读这本漫画吗,请先登录!");
         dialog.setPositiveButton("登录", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
@@ -527,7 +557,6 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
         adapterDHB.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 manageUserWatchChapter();
                 //去阅读
 
@@ -581,7 +610,6 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
         adapterFWP.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 manageUserWatchChapter();
                 //去阅读
                 isHistory = true;
