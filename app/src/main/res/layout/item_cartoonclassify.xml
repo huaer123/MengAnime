@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!--漫画分类Item-->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_cartoonClassify"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/tv_picture"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/line_bottom" />
+
+        <TextView
+            android:id="@+id/tv_classify"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="啦啦啦啦"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -65,4 +65,19 @@ public class UrlConfig {
      * 获取具体漫画
      */
     public static final String SELECTCHAPTERCONTENT = BaseUrl+"mh/select/SelectMHChapterContent?";
+
+    /**
+     * 获取分类列表
+     */
+    public static final String SELECTCARTOONCLASSIFY = BaseUrl+"mh/select/SelectMH_Type";
+
+    /**
+     * 通过关键字获取漫画名字
+     */
+    public static final String SELECTCARTOONBYKEY = BaseUrl+"mh/select/SelectByKey?";
+
+    /**
+     * 通过漫画分类获取漫画列表
+     */
+    public static final String selectCartoonListByClassify = BaseUrl+"mh/select/SelectMH_TypeDetailList?";
 }

@@ -317,14 +317,26 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 if (bean.getStatus().equals("0")) {
                     if (bean.getLZ() != null && bean.getLZ().size() > 0) {
                         watchChapterString = bean.getLZ().get(0).getMH_Chapter_ID();
+                        watchChapterContent = bean.getLZ().get(0).getWhichChapter();
                     } else if (bean.getDHB() != null && bean.getDHB().size() > 0) {
                         watchChapterString = bean.getDHB().get(0).getMH_Chapter_ID();
+                        watchChapterContent = bean.getDHB().get(0).getWhichChapter();
                     } else if (bean.getFWP() != null && bean.getFWP().size() > 0) {
                         watchChapterString = bean.getFWP().get(0).getMH_Chapter_ID();
+                        watchChapterContent = bean.getFWP().get(0).getWhichChapter();
                     }
+                    isHistory = true;
+                    CollectionHistoryBean bean = new CollectionHistoryBean();
+                    bean.setType("0");
+                    bean.setCartoonId(infoId);
+                    bean.setCartoonName(detailsBean.getName());
+                    bean.setWatchChapter(watchChapterString);
+                    bean.setWatchChapterContent(watchChapterContent);
+                    SharedUtil.updateHistory(OrginalCartoonDetailsActivity.this, SharedUtil.SAVECOLLECTIONHISTORYLIST, bean);
                 }
             }
         }
+
         Intent intent = new Intent(OrginalCartoonDetailsActivity.this, WatchCartoonActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("mh_chapter_id", watchChapterString);
@@ -506,7 +518,6 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             public void onItemClick(View view, int position) {
                 manageUserWatchChapter();
                 //去阅读
-
                 isHistory = true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
@@ -558,8 +569,6 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             @Override
             public void onItemClick(View view, int position) {
                 manageUserWatchChapter();
-                //去阅读
-
                 isHistory = true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
@@ -569,7 +578,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(OrginalCartoonDetailsActivity.this, SharedUtil.SAVECOLLECTIONHISTORYLIST, bean);
-                adapterDHB.notifyDataSetChanged();
+                adapterLZ.notifyDataSetChanged();
             }
 
             @Override
@@ -611,7 +620,6 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             @Override
             public void onItemClick(View view, int position) {
                 manageUserWatchChapter();
-                //去阅读
                 isHistory = true;
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
@@ -621,8 +629,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 bean.setWatchChapter(fwpList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(fwpList.get(position).getWhichChapter());
                 SharedUtil.updateHistory(OrginalCartoonDetailsActivity.this, SharedUtil.SAVECOLLECTIONHISTORYLIST, bean);
-                adapterFWP.notifyDataSetChanged();
-
+                adapterLZ.notifyDataSetChanged();
             }
 
             @Override

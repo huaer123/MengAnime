@@ -206,6 +206,37 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 showCollection(isCollection);
                 break;
             case R.id.details_continue:
+                if (watchChapterString.equals("")) {
+                    if (bean != null) {
+                        if (bean.getStatus().equals("0")) {
+                            if (bean.getLZ() != null && bean.getLZ().size() > 0) {
+                                watchChapterString = bean.getLZ().get(0).getMH_Chapter_ID();
+                                watchChapterContent = bean.getLZ().get(0).getWhichChapter();
+                            } else if (bean.getDHB() != null && bean.getDHB().size() > 0) {
+                                watchChapterString = bean.getDHB().get(0).getMH_Chapter_ID();
+                                watchChapterContent = bean.getDHB().get(0).getWhichChapter();
+                            } else if (bean.getFWP() != null && bean.getFWP().size() > 0) {
+                                watchChapterString = bean.getFWP().get(0).getMH_Chapter_ID();
+                                watchChapterContent = bean.getFWP().get(0).getWhichChapter();
+                            }
+
+                            isHistory = true;
+                            CollectionHistoryBean bean = new CollectionHistoryBean();
+                            bean.setType("0");
+                            bean.setCartoonId(infoId);
+                            bean.setCartoonName(detailsBean.getName());
+                            bean.setWatchChapter(watchChapterString);
+                            bean.setWatchChapterContent(watchChapterContent);
+                            SharedUtil.updateHistory(CartoonDetailsActivity.this, SharedUtil.SAVECOLLECTIONHISTORYLIST, bean);
+                        }
+                    }
+                }
+
+                Intent intent = new Intent(CartoonDetailsActivity.this, WatchCartoonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mh_chapter_id", watchChapterString);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             default:
                 break;

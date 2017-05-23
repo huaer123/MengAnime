@@ -92,6 +92,14 @@
         <activity android:name=".activity.WatchCartoonActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
+        <!--漫画列表for关键字-->
+        <activity android:name=".activity.CartoonListForKeyActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
+        <!--漫画列表for类型-->
+        <activity android:name=".activity.CartoonListForClassifyActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
