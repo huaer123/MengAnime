@@ -303,6 +303,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 watchChapterString = lzList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(lzList.get(position).getWhichChapter());
+                bean.setMaxChapter(detailsBean.getMaxChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterLZ.notifyDataSetChanged();
                 Intent intent = new Intent(CartoonDetailsActivity.this,WatchCartoonActivity.class);
@@ -357,8 +358,14 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 watchChapterString = dxbList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());
+                bean.setMaxChapter(detailsBean.getMaxChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterDHB.notifyDataSetChanged();
+                Intent intent = new Intent(CartoonDetailsActivity.this,WatchCartoonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mh_chapter_id",dxbList.get(position).getMH_Chapter_ID());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
@@ -406,8 +413,14 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 watchChapterString = fwpList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(fwpList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(fwpList.get(position).getWhichChapter());
+                bean.setMaxChapter(detailsBean.getMaxChapter());
                 SharedUtil.updateHistory(CartoonDetailsActivity.this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
                 adapterFWP.notifyDataSetChanged();
+                Intent intent = new Intent(CartoonDetailsActivity.this,WatchCartoonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mh_chapter_id",fwpList.get(position).getMH_Chapter_ID());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override

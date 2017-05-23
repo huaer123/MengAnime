@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_edit_shape"
+    >
+<!--编辑个人资料-头像-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorFFA200">
+        <TextView
+            android:id="@+id/tv_chapter_name"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="漫画名字"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+        <Button
+            android:id="@+id/dialog_close"
+            android:layout_alignParentRight="true"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/dialog_close"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/dialog_delete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="删除"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/dialog_deleteAll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="全部清空"
+        android:textSize="18sp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"/>
+</LinearLayout>
