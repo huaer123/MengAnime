@@ -19,65 +19,70 @@ public class UrlConfig {
     /**
      * 获取精彩推荐列表
      */
-    public static final String SELECTRECOMMENDLIST = BaseUrl+"mh/select/SelectMHList?";
+    public static final String SELECTRECOMMENDLIST = BaseUrl + "mh/select/SelectMHList?";
 
     /**
      * 用户注册接口
      */
-    public static final String USERREGIST = BaseUrl+"mh/user/UserRegist?cp_id="+META_DATA+"&app_version="+VERSION_ID+"&param=regist&";
+    public static final String USERREGIST = BaseUrl + "mh/user/UserRegist?cp_id=" + META_DATA + "&app_version=" + VERSION_ID + "&param=regist&";
 
     /**
      * 获取用户信息
      */
-    public static final String USERINFO = BaseUrl+"mh/user/UserRegist?param=selectuserinfo&";
+    public static final String USERINFO = BaseUrl + "mh/user/UserRegist?param=selectuserinfo&";
 
     /**
      * 更改用户资料
      */
-    public static final String UPDATEUSERINFO = BaseUrl+"mh/user/UpdateUserInfo?";
+    public static final String UPDATEUSERINFO = BaseUrl + "mh/user/UpdateUserInfo?";
 
     /**
      * 更改头像
      */
-    public static final String UPDATEPICTURE= "http://mh.cyngame.cn:8083/mh/upload/UploadPicture";
+    public static final String UPDATEPICTURE = "http://mh.cyngame.cn:8083/mh/upload/UploadPicture";
 
     /**
      * 漫画详情
      */
-    public static final String SELECTDETAILS = BaseUrl+"mh/select/SelectMHDetail?";
+    public static final String SELECTDETAILS = BaseUrl + "mh/select/SelectMHDetail?";
 
     /**
      * 获取漫画章节
      */
-    public static final String SELECTCHAPTER = BaseUrl+"mh/select/SelectMHChapter?";
+    public static final String SELECTCHAPTER = BaseUrl + "mh/select/SelectMHChapter?";
 
     /**
      * 开通vip
      */
-    public static final String USERVIP = BaseUrl+"mh/vip/UserVip?";
+    public static final String USERVIP = BaseUrl + "mh/vip/UserVip?";
 
     /**
      * 获取用户看过哪些原创曼胡
      */
-    public static final String SELECTUSERCHAPTER = BaseUrl+"mh/select/SelectUserChapter?";
+    public static final String SELECTUSERCHAPTER = BaseUrl + "mh/select/SelectUserChapter?";
 
     /**
      * 获取具体漫画
      */
-    public static final String SELECTCHAPTERCONTENT = BaseUrl+"mh/select/SelectMHChapterContent?";
+    public static final String SELECTCHAPTERCONTENT = BaseUrl + "mh/select/SelectMHChapterContent?";
 
     /**
      * 获取分类列表
      */
-    public static final String SELECTCARTOONCLASSIFY = BaseUrl+"mh/select/SelectMH_Type";
+    public static final String SELECTCARTOONCLASSIFY = BaseUrl + "mh/select/SelectMH_Type";
 
     /**
      * 通过关键字获取漫画名字
      */
-    public static final String SELECTCARTOONBYKEY = BaseUrl+"mh/select/SelectByKey?";
+    public static final String SELECTCARTOONBYKEY = BaseUrl + "mh/select/SelectByKey?";
 
     /**
      * 通过漫画分类获取漫画列表
      */
-    public static final String selectCartoonListByClassify = BaseUrl+"mh/select/SelectMH_TypeDetailList?";
+    public static final String SELECTCARTOONLISTBYCLASSIFY = BaseUrl + "mh/select/SelectMH_TypeDetailList?";
+
+    /**
+     * 通过关键字获取漫画列表
+     */
+    public static final String SELECTCARTLISTBYKEY = BaseUrl + "mh/select/SelectMHListByKey?";
 }

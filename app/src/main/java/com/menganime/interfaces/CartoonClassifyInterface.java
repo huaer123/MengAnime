@@ -10,4 +10,10 @@ public interface CartoonClassifyInterface {
      * @param json
      */
     void getCartoonClassify(String json);
+
+    /**
+     * 通过关键字获取漫画名字
+     * @param json
+     */
+    void getCartoonNameForKey(String json);
 }

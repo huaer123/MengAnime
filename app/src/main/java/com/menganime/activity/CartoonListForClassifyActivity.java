@@ -142,4 +142,9 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
             }
         }
     }
+
+    @Override
+    public void getCartoonNameForKey(String json) {
+
+    }
 }

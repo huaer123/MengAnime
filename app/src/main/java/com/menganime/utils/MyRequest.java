@@ -580,7 +580,7 @@ public class MyRequest {
      * 返回值：无
      */
     public static void getCartoonNameForKey(final BaseFragment fragment, String key) {
-        final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
+        //final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
         final CartoonClassifyInterface login = (CartoonClassifyInterface) fragment;
         Map<String, Object> params = new HashMap<>();
         params.put("key", key);
@@ -593,10 +593,10 @@ public class MyRequest {
             public void onResponse(String response, int id) {
                 LogUtils.d(response);
                 //成功之后的处理
-                login.getCartoonClassify(response);
-                if (progDialog.isShowing()) {
+                login.getCartoonNameForKey(response);
+               /* if (progDialog.isShowing()) {
                     progDialog.dismiss();
-                }
+                }*/
             }
 
             @Override
@@ -604,9 +604,9 @@ public class MyRequest {
                 ToastUtil.showToast(fragment.getActivity(), "服务器有错误，请稍候再试");
                 //失败之后的处理
                 //login.login(response);
-                if (progDialog.isShowing()) {
+               /* if (progDialog.isShowing()) {
                     progDialog.dismiss();
-                }
+                }*/
             }
         });
     }
@@ -627,7 +627,46 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        OkHttpUtils.post().url(UrlConfig.selectCartoonListByClassify).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+        OkHttpUtils.post().url(UrlConfig.SELECTCARTOONLISTBYCLASSIFY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                login.getCartoonClassify(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                //login.login(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 方法名：getCartoonForKey
+     * 功    能：获取漫画列表通过漫画类型
+     * 返回值：无
+     */
+    public static void getCartoonListForKey(final BaseActivity activity, int page, int count, String key) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final CartoonClassifyInterface login = (CartoonClassifyInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", page);
+        params.put("count", count);
+        params.put("key", key);
+        try {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        OkHttpUtils.post().url(UrlConfig.SELECTCARTLISTBYKEY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
                 LogUtils.d(response);

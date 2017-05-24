@@ -92,7 +92,7 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
         });
         recyclerView.addItemDecoration(new RecycleViewDivider(
                 mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+            adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, CartoonDetailsActivity.class);
