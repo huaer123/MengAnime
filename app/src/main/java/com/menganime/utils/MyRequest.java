@@ -2,6 +2,7 @@ package com.menganime.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v4.app.Fragment;
 
 import com.menganime.base.BaseActivity;
 import com.menganime.base.BaseFragment;
@@ -13,6 +14,7 @@ import com.menganime.interfaces.EditPersonInterface;
 import com.menganime.interfaces.LoginInterface;
 import com.menganime.interfaces.RechargeInterface;
 import com.menganime.interfaces.RecommendInterface;
+import com.menganime.interfaces.UserInfoInterface;
 import com.menganime.interfaces.WatchCartoonInterface;
 import com.menganime.okhttps.OkHttpUtils;
 import com.menganime.okhttps.callback.GenericsCallback;
@@ -62,6 +64,45 @@ public class MyRequest {
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                //login.login(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 方法名：loginRequest
+     * 功    能：登陆
+     * 参    数：Activity activity final String username, final String password
+     * 返回值：无
+     */
+    public static void loginRequestForFragment(final Fragment fragment, final String imei) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
+        final LoginInterface login = (LoginInterface) fragment;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("imei", imei);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.e(UrlConfig.USERREGIST + "imei=" + imei);
+        OkHttpUtils.post().url(UrlConfig.USERREGIST).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                login.login(response);//把结果回调给接口，谁用谁去实现接口就行了
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(fragment.getActivity(), "服务器有错误，请稍候再试");
                 //失败之后的处理
                 //login.login(response);
                 if (progDialog.isShowing()) {
@@ -508,7 +549,7 @@ public class MyRequest {
      */
     public static void getUserInfo(final BaseFragment fragment, final String mh_info_id) {
         final Dialog progDialog = DialogUtils.showWaitDialog(fragment.getActivity());
-        final LoginInterface login = (LoginInterface) fragment;
+        final UserInfoInterface login = (UserInfoInterface) fragment;
         Map<String, Object> params = new HashMap<>();
         try {
             params.put("mh_userinfo_id", mh_info_id);
@@ -520,7 +561,7 @@ public class MyRequest {
             public void onResponse(String response, int id) {
                 LogUtils.d(response);
                 //成功之后的处理
-                login.login(response);
+                login.getUserInfo(response);
                 if (progDialog.isShowing()) {
                     progDialog.dismiss();
                 }

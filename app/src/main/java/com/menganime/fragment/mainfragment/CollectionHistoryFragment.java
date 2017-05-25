@@ -27,7 +27,7 @@ import com.menganime.base.BaseFragment;
 import com.menganime.bean.UserInfoAll;
 import com.menganime.fragment.collectionhistoryfragment.CollectionFragment;
 import com.menganime.fragment.collectionhistoryfragment.HistoryFragment;
-import com.menganime.interfaces.LoginInterface;
+import com.menganime.interfaces.UserInfoInterface;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
 
@@ -38,7 +38,7 @@ import java.util.ArrayList;
  * 主界面第一个Fragment
  */
 
-public class CollectionHistoryFragment extends BaseFragment implements LoginInterface{
+public class CollectionHistoryFragment extends BaseFragment implements UserInfoInterface {
     private Context context;
 
     private ViewPager viewPager;// 页卡内容
@@ -48,7 +48,9 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
     private int currIndex = 0;// 当前页卡编号
     private int bmpW;// 动画图片宽度
     private int selectedColor, unSelectedColor;// 显示和不显示时的颜色变化
-    /** 页卡总数 **/
+    /**
+     * 页卡总数
+     **/
     private static final int pageSize = 2;
     private int tag = 0;
 
@@ -116,7 +118,8 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
 
         setOperation();
     }
-    public void setOperation(){
+
+    public void setOperation() {
         selectedColor = getResources().getColor(R.color.black);// 点击时变成白色
         unSelectedColor = getResources().getColor(R.color.white);// 不点击时是灰色
         initImageView(); // 初始化页卡动画
@@ -128,9 +131,9 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
             public void onClick(View v) {
                 String userId = SharedUtil.getString(context, SharedUtil.USERINFO_ID);
                 if (userId.equals("")) {
-                    startActivity(new Intent(getActivity(),LoginActivity.class));
-                }else{
-                    startActivity(new Intent(getActivity(),PersonCenterActivity.class));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                } else {
+                    startActivity(new Intent(getActivity(), PersonCenterActivity.class));
                 }
             }
         });
@@ -142,7 +145,7 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
         if (userId.equals("")) {
             iv_picture.setImageDrawable(getResources().getDrawable(R.mipmap.collectionhistory_login));
             tv_username.setText("登录");
-        }else{
+        } else {
             Glide.with(context)
                     .load(picture)
                     .error(R.mipmap.collectionhistory_login) //失败图片
@@ -159,22 +162,22 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
         if (userId.equals("")) {
             iv_picture.setImageDrawable(getResources().getDrawable(R.mipmap.collectionhistory_login));
             tv_username.setText("登录");
-        }else{
-            MyRequest.getUserInfo(this,userId);
+        } else {
+            MyRequest.getUserInfo(this, userId);
         }
     }
 
     @Override
-    public void login(String json) {
-        UserInfoAll userInfoAll = JSON.parseObject(json,UserInfoAll.class);
-        if(userInfoAll.getStatus().equals("0")) {
+    public void getUserInfo(String json) {
+        UserInfoAll userInfoAll = JSON.parseObject(json, UserInfoAll.class);
+        if (userInfoAll.getStatus().equals("0")) {
             UserInfoAll.UserInfo userinfo = userInfoAll.getUser().get(0);
-            if(userinfo!=null){
+            if (userinfo != null) {
                 Glide.with(this)
                         .load(userinfo.getICONURL())
                         .error(R.mipmap.ic_launcher) //失败图片
                         .into(iv_picture);
-                tv_username.setText(userinfo.getPetName().equals("")?"酷哥":userinfo.getPetName());
+                tv_username.setText(userinfo.getPetName().equals("") ? "酷哥" : userinfo.getPetName());
             }
         }
     }
@@ -191,7 +194,7 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
         iFragmnet = (HistoryFragment) fragments.get(1);
 
         fragmentPagerAdapter = new FragmentPagerAdapter(
-                getChildFragmentManager ()) {
+                getChildFragmentManager()) {
 
             @Override
             public int getCount() {
@@ -212,7 +215,6 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
 
     /**
      * 初始化头标
-     *
      */
     private void initTextView() {
         initTabSelected();
@@ -229,6 +231,7 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
         tv_collection_all.setOnClickListener(new MyOnClickListener(0));
         tv_history_all.setOnClickListener(new MyOnClickListener(1));
     }
+
     /**
      * 初始化选中值
      */
@@ -247,7 +250,7 @@ public class CollectionHistoryFragment extends BaseFragment implements LoginInte
                 R.mipmap.line_bottom).getWidth();// 获取图片宽度
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int screenW = dip2px(context,150);//dm.widthPixels;// 获取分辨率宽度
+        int screenW = dip2px(context, 150);//dm.widthPixels;// 获取分辨率宽度
         offset = (screenW / pageSize - bmpW) / 2;// 计算偏移量--(屏幕宽度/页卡总数-图片实际宽度)/2
         // = 偏移量
         Matrix matrix = new Matrix();

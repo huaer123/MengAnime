@@ -19,9 +19,6 @@ import com.menganime.utils.SharedUtil;
 
 /**
  * 描    述：注册类
- * 作    者：stt
- * 时    间：2017.01.04
- * 版    本：V1.0.0
  */
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginInterface {
