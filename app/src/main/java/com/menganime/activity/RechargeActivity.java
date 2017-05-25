@@ -1,22 +1,32 @@
 package com.menganime.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
 import com.menganime.R;
 import com.menganime.base.BaseActivity;
+import com.menganime.bean.PayResult;
 import com.menganime.bean.UserInfoAll;
 import com.menganime.interfaces.LoginInterface;
 import com.menganime.interfaces.RechargeInterface;
+import com.menganime.utils.LogUtils;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
 import com.menganime.utils.ToastUtil;
+
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/17.
@@ -37,11 +47,14 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     private ImageView iv_personal;
     private TextView tv_personal_name;
 
-    /* private String name;
-     private String picture;*/
     private UserInfoAll.UserInfo userinfo;
     private UserInfoAll.VIP vip;
     private String vipType;
+
+    /**
+     * 支付宝支付标识
+     */
+    private static final int SDK_PAY_FLAG = 100;
 
     @Override
     protected void setView() {
@@ -151,4 +164,64 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         iv_vip2.setBackgroundDrawable(vip.getVIP_zhong().equals("zhong") ? getResources().getDrawable(R.mipmap.vip1_selected) : getResources().getDrawable(R.mipmap.vip1_unselected));
         iv_vip3.setBackgroundDrawable(vip.getVIP_gao().equals("gao") ? getResources().getDrawable(R.mipmap.vip1_selected) : getResources().getDrawable(R.mipmap.vip1_unselected));
     }
+
+    /**
+     * 支付宝支付操作
+     *
+     * @param orderInfo
+     */
+    private void toAlipay(final String orderInfo) {
+        Runnable payRunnable = new Runnable() {
+
+            @Override
+            public void run() {
+                PayTask alipay = new PayTask(RechargeActivity.this);
+                Map<String, String> result = alipay.payV2(orderInfo, true);
+                Log.i("msp", result.toString());
+
+                Message msg = new Message();
+                msg.what = SDK_PAY_FLAG;
+                msg.obj = result;
+                handler.sendMessage(msg);
+            }
+        };
+
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            int what = msg.what;
+            switch (what) {
+                case SDK_PAY_FLAG://支付宝支付标识
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        Toast.makeText(RechargeActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                        LogUtils.e("支付成功");
+                        //成功之后的一些处理
+                        alipaySuccess();
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Toast.makeText(RechargeActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                        LogUtils.e("支付失败");
+                    }
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 支付宝支付成功后的一些操作
+     */
+    private void alipaySuccess() {
+    }
+
 }

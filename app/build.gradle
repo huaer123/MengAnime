@@ -20,7 +20,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -58,4 +58,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.31'
     compile files('libs/systembartint-1.0.4.jar')
     compile 'com.soundcloud.android.crop:lib_crop:1.0.0'
+    compile files('libs/alipaySdk-20161222.jar')
 }
