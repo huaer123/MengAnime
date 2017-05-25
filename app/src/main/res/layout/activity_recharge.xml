@@ -18,7 +18,7 @@
             android:layout_height="80dp"
             android:background="@drawable/more_rl_background"
             android:scaleType="fitXY"
-            android:src="@mipmap/line_bottom" />
+            android:src="@mipmap/icon_default" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 style="@style/recharge_iv"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:background="@drawable/recharge_vip1"
+                android:background="@drawable/recharge_vip2"
                 />
             <TextView
                 android:id="@+id/tv_vip2"
@@ -97,7 +97,7 @@
             <ImageView
                 android:id="@+id/iv_vip3"
                 style="@style/recharge_iv"
-                android:background="@drawable/recharge_vip1"
+                android:background="@drawable/recharge_vip3"
                 />
             <TextView
                 android:id="@+id/tv_vip3"

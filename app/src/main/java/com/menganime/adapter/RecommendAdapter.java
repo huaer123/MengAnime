@@ -87,7 +87,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
             holder.tv_content.setText(mlist.get(position).getSubtitle());
             Glide.with(mcontext)
                 .load(mlist.get(position).getColumn_IconURL())
-                .error(R.mipmap.line_bottom) //失败图片
+                .error(R.mipmap.icon_default) //失败图片
                 .into(holder.iv_cartoon);
 
             holder.largeLabel.setOnClickListener(new View.OnClickListener() {

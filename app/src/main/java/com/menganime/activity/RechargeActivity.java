@@ -161,8 +161,8 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
     private void updateVip() {
         iv_vip1.setBackgroundDrawable(vip.getVIP_di().equals("di") ? getResources().getDrawable(R.mipmap.vip1_selected) : getResources().getDrawable(R.mipmap.vip1_unselected));
-        iv_vip2.setBackgroundDrawable(vip.getVIP_zhong().equals("zhong") ? getResources().getDrawable(R.mipmap.vip1_selected) : getResources().getDrawable(R.mipmap.vip1_unselected));
-        iv_vip3.setBackgroundDrawable(vip.getVIP_gao().equals("gao") ? getResources().getDrawable(R.mipmap.vip1_selected) : getResources().getDrawable(R.mipmap.vip1_unselected));
+        iv_vip2.setBackgroundDrawable(vip.getVIP_zhong().equals("zhong") ? getResources().getDrawable(R.mipmap.vip2_selected) : getResources().getDrawable(R.mipmap.vip2_unselected));
+        iv_vip3.setBackgroundDrawable(vip.getVIP_gao().equals("gao") ? getResources().getDrawable(R.mipmap.vip3_selected) : getResources().getDrawable(R.mipmap.vip3_unselected));
     }
 
     /**

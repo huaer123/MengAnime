@@ -13,6 +13,7 @@
         android:id="@+id/ll_loginAll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <Button
@@ -20,10 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_title"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/more_login_button"
+            android:background="@mipmap/button_backgroud"
             android:text="@string/personal_login"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -42,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             style="@style/more_relativelayout"
@@ -59,7 +60,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/more_rl_background"
                 android:scaleType="fitXY"
-                android:src="@mipmap/line_bottom" />
+                android:src="@mipmap/icon_default" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:lines="1"
+                    android:layout_marginLeft="10dp"
                     android:text="酷哥"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -91,10 +93,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_title"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/personal_button"
+            android:background="@mipmap/button_backgroud"
             android:text="@string/personal_edit"
             android:textColor="@color/color7D3138"
             android:textSize="16sp" />
@@ -104,10 +106,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rl_title"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@mipmap/button_backgroud"
             android:layout_marginTop="10dp"
-            android:background="@drawable/personal_button"
             android:text="@string/personal_recharge"
             android:textColor="@color/color7D3138"
             android:textSize="16sp" />

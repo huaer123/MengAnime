@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">#434C5D</color>
     <!--蓝色-->
     <color name="blue">#079EFE</color>
     <color name="blue2">#5FBFFC</color>

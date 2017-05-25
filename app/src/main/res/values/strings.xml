@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MengAnime</string>
+    <string name="app_name">萌动漫</string>
     <!--漫画推荐-->
     <string name="cartoon_recommend">精彩推荐</string>
     <string name="cartoon_serial">热门连载</string>
