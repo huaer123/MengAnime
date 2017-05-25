@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
     <!--收藏历史Fragment-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +25,8 @@
                 <LinearLayout
                     android:id="@+id/company_detail"
                     android:layout_width="match_parent"
-                    android:background="@color/colorAccent"
-                    android:layout_height="48dp">
+                    android:layout_height="48dp"
+                    android:background="@color/colorAccent">
 
                     <!-- 收藏 -->
 
@@ -37,8 +38,8 @@
                     <View
                         android:layout_width="1px"
                         android:layout_height="27dp"
-                        android:background="@color/white"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white" />
                     <!-- 历史 -->
 
                     <TextView
@@ -75,28 +76,31 @@
                 android:layout_width="1dp"
                 android:layout_height="48dp"
                 android:background="@color/white" />
+
             <LinearLayout
                 android:id="@+id/ll_userinfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/iv_picture"
-                    android:layout_marginLeft="20dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:scaleType="fitXY"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/collectionhistory_login"/>
+                    android:layout_marginLeft="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/collectionhistory_login" />
+
                 <TextView
                     android:id="@+id/tv_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
+                    android:text="登录"
                     android:textColor="@color/white"
-                    android:text="登录"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>

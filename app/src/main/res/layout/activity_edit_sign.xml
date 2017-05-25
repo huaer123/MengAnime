@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
     <!--编辑资料-更改签名-->
     <include
         android:id="@+id/rl_title"
-        layout="@layout/title"/>
+        layout="@layout/title" />
 
     <EditText
         android:id="@+id/et_sign"
@@ -13,9 +15,9 @@
         android:layout_height="200dp"
         android:layout_margin="10dp"
         android:background="@drawable/more_rl_background"
+        android:gravity="left|top"
         android:maxLength="200"
         android:paddingLeft="10dp"
-        android:gravity="left|top"
         android:text=""
         android:textSize="16sp" />
 </LinearLayout>

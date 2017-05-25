@@ -2,29 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
+
     <include
         android:id="@+id/rl_title"
-        layout="@layout/title"/>
+        layout="@layout/title" />
+
     <Button
         android:id="@+id/bt_login"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/personal_login"
+        android:layout_below="@id/rl_title"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="16sp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/more_login_button"
+        android:text="@string/personal_login"
         android:textColor="@color/white"
-        android:background="@drawable/more_login_button"/>
+        android:textSize="16sp" />
 
     <TextView
-        android:layout_below="@id/bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/bt_login"
         android:layout_marginLeft="20dp"
-        android:text="@string/login_info"
-        />
+        android:layout_marginTop="30dp"
+        android:text="@string/login_info" />
 </RelativeLayout>

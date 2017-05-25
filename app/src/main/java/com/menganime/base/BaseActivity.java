@@ -9,10 +9,14 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.menganime.R;
 import com.menganime.okhttps.OkHttpUtils;
 import com.menganime.service.NetBroadcastReceiver;
 import com.menganime.utils.NetWorkUtils;
 import com.menganime.utils.PGActivityUtil;
+import com.menganime.utils.StatusBarUtils;
+
+import static com.menganime.utils.StatusBarUtils.mContext;
 
 
 /**
@@ -47,6 +51,7 @@ public abstract class BaseActivity extends Activity implements NetBroadcastRecei
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         setOnCreate(savedInstanceState);
 //        StatusBarUtils.ff(this);
+        StatusBarUtils.ff(mContext, R.color.transparent);
     }
 
     /**

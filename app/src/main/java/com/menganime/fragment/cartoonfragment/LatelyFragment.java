@@ -90,8 +90,8 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
                 MyRequest.getRecommendList(LatelyFragment.this,pageIndex,10,4);
             }
         });
-        recyclerView.addItemDecoration(new RecycleViewDivider(
-                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));
+       /* recyclerView.addItemDecoration(new RecycleViewDivider(
+                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));*/
             adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

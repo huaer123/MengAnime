@@ -1,12 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorAccent">@color/blue</item>
-    </style>
+    </style>-->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light"></style>
+    <style name="AppTheme" parent="AppBaseTheme"></style>
 
     <!--选择性别动画start-->
     <style name="sex_dialogStyle" parent="android:Animation">

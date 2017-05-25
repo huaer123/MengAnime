@@ -95,8 +95,8 @@ public class CartoonListForKeyActivity extends BaseActivity implements View.OnCl
                 MyRequest.getCartoonListForKey(CartoonListForKeyActivity.this,pageIndex,10,key);
             }
         });
-        recyclerView.addItemDecoration(new RecycleViewDivider(
-                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));
+        /*recyclerView.addItemDecoration(new RecycleViewDivider(
+                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));*/
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

@@ -260,10 +260,10 @@ public class EditPersonActivity extends TakePhotoActivity implements View.OnClic
        final CheckBox checkbox_woman = (CheckBox) view.findViewById(R.id.checkbox_woman);
         if(sex.equals("男")){
             checkbox_man.setChecked(true);
-            checkbox_woman.setClickable(false);
+            checkbox_woman.setChecked(false);
         }
         if(sex.equals("女")){
-            checkbox_woman.setClickable(true);
+            checkbox_woman.setChecked(true);
             checkbox_man.setChecked(false);
         }
 
@@ -273,7 +273,7 @@ public class EditPersonActivity extends TakePhotoActivity implements View.OnClic
             public void onClick(View v) {
                 toupdatesex(1);
                 checkbox_man.setChecked(true);
-                checkbox_woman.setClickable(false);
+                checkbox_woman.setChecked(false);
                 tv_sex.setText("男");
                 sex = tv_sex.getText().toString();
 
@@ -285,7 +285,7 @@ public class EditPersonActivity extends TakePhotoActivity implements View.OnClic
             @Override
             public void onClick(View v) {
                 toupdatesex(2);
-                checkbox_woman.setClickable(true);
+                checkbox_woman.setChecked(true);
                 checkbox_man.setChecked(false);
                 tv_sex.setText("女");
                 sex = tv_sex.getText().toString();

@@ -14,7 +14,6 @@ import com.menganime.bean.CartoonInfo;
 import com.menganime.bean.RecommendInfo;
 import com.menganime.interfaces.CartoonClassifyInterface;
 import com.menganime.utils.MyRequest;
-import com.recyclerviewpull.RecycleViewDivider;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
@@ -22,8 +21,6 @@ import com.recyclerviewpull.adapter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.menganime.utils.StatusBarUtils.mContext;
 
 /**
  * Created by Administrator on 2017/5/23.
@@ -99,8 +96,8 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
                 MyRequest.getCartoonListForClassify(CartoonListForClassifyActivity.this,pageIndex,10,mh_type_id);
             }
         });
-        recyclerView.addItemDecoration(new RecycleViewDivider(
-                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));
+        /*recyclerView.addItemDecoration(new RecycleViewDivider(
+                mContext, LinearLayoutManager.VERTICAL, R.drawable.recyclerview_divider));*/
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
