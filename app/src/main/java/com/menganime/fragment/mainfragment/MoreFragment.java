@@ -155,7 +155,7 @@ public class MoreFragment extends BaseFragment implements View.OnClickListener, 
             if(userinfo!=null){
                 Glide.with(this)
                         .load(userinfo.getICONURL())
-                        .error(R.mipmap.ic_launcher) //失败图片
+                        .error(R.mipmap.picture_default) //失败图片
                         .into(iv_personal);
                 tv_personal_name.setText(userinfo.getPetName().equals("")?"酷哥":userinfo.getPetName());
             }

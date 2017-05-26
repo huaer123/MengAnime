@@ -106,15 +106,18 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.iv_vip1:
                 vipType = "1";
-                MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP1, "di");
+                //MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP1, "di");
+                MyRequest.alipayVip(this,SharedUtil.getString(this,SharedUtil.USERINFO_ID),PRICEVIP1);
                 break;
             case R.id.iv_vip2:
-                vipType = "";
-                MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP2, "zhong");
+                vipType = "2";
+                //MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP2, "zhong");
+                MyRequest.alipayVip(this,SharedUtil.getString(this,SharedUtil.USERINFO_ID),PRICEVIP2);
                 break;
             case R.id.iv_vip3:
-                vipType = "";
-                MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP3, "gao");
+                vipType = "3";
+                //MyRequest.openVip(this, SharedUtil.getString(this, SharedUtil.USERINFO_ID), PRICEVIP3, "gao");
+                MyRequest.alipayVip(this,SharedUtil.getString(this,SharedUtil.USERINFO_ID),PRICEVIP3);
                 break;
             default:
                 break;
@@ -143,6 +146,18 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
+    public void alipay(String json) {
+        if(!TextUtils.isEmpty(json)) {
+            toAlipay(json);
+        }
+    }
+
+    @Override
+    public void alipayStatus(String json) {
+
+    }
+
+    @Override
     public void login(String json) {
         UserInfoAll userInfoAll = JSON.parseObject(json, UserInfoAll.class);
         if (userInfoAll.getStatus().equals("0")) {
@@ -150,7 +165,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
             if (userinfo != null) {
                 Glide.with(this)
                         .load(userinfo.getICONURL())
-                        .error(R.mipmap.ic_launcher) //失败图片
+                        .error(R.mipmap.picture_default) //失败图片
                         .into(iv_personal);
                 tv_personal_name.setText(userinfo.getPetName().equals("") ? "酷哥" : userinfo.getPetName());
             }
@@ -206,13 +221,15 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Toast.makeText(RechargeActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                         LogUtils.e("支付成功");
-                        //成功之后的一些处理
-                        alipaySuccess();
+                        updateVip();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         Toast.makeText(RechargeActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
                         LogUtils.e("支付失败");
                     }
+
+                    //支付之后做一些处理
+                    alipaySuccess(resultInfo,resultStatus) ;
                     break;
             }
         }
@@ -221,7 +238,11 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     /**
      * 支付宝支付成功后的一些操作
      */
-    private void alipaySuccess() {
+    private void alipaySuccess(String resultInfo,String resultStatus) {
+        JSONObject result = JSONObject.parseObject(resultInfo);
+        String out_trade_no = result.getString("out_trade_no");//订单号
+        String paystatus = TextUtils.equals(resultStatus, "9000")?"SUCCESS":"FAIL";
+        MyRequest.alipayStatus(this,out_trade_no,paystatus);
     }
 
 }

@@ -53,6 +53,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="center_vertical"
         android:layout_weight="1"
+        android:lines="1"
         android:textSize="12sp"
         android:text="时间啊弗" />
 </RelativeLayout>

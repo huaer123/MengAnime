@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
     android:orientation="horizontal">
     <!--收藏界面Item-->
     <ImageView

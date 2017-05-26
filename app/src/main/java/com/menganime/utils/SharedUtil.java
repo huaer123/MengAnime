@@ -240,7 +240,6 @@ public class SharedUtil {
                 if (collectionHistoryBean.getType().equals("2")) {//如果是2,2->0
                     collectionHistoryBeanListNew.get(i).setType("0");
                 }
-                break;
             }
             String json = JSONArray.toJSONString(collectionHistoryBeanListNew);
             getPreference(context).edit().putString(name, json).commit();
@@ -383,6 +382,7 @@ public class SharedUtil {
                     if (collectionHistoryBean.getType().equals("2")) {//如果是2,2->1
                         collectionHistoryBeanListNew.get(i).setType("1");
                         collectionHistoryBeanListNew.get(i).setWatchChapter("");
+                        collectionHistoryBeanListNew.get(i).setWatchChapterContent("");
                     }
                     break;
                 }
@@ -412,8 +412,8 @@ public class SharedUtil {
                     if (collectionHistoryBean.getType().equals("2")) {//如果是2,2->1
                         collectionHistoryBeanListNew.get(i).setType("1");
                         collectionHistoryBeanListNew.get(i).setWatchChapter("");
+                        collectionHistoryBeanListNew.get(i).setWatchChapterContent("");
                     }
-                    break;
             }
             String json = JSONArray.toJSONString(collectionHistoryBeanListNew);
             getPreference(context).edit().putString(name, json).commit();

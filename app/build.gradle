@@ -16,15 +16,15 @@ android {
         versionCode 1
         versionName "1.0"
 
-        multiDexEnabled true
+        multiDexEnabled false
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,7 +38,7 @@ android {
         anzhi {}
         wandoujia {}
         //自己的渠道
-        zhong {}
+        pan {}
         //机锋
         jifeng {}
         vivo {}

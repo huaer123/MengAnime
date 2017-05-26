@@ -24,7 +24,7 @@
             android:background="@drawable/more_rl_background"
             android:scaleType="fitXY"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/icon_default" />
+            android:src="@mipmap/picture_default" />
 
         <LinearLayout
             android:layout_width="match_parent"

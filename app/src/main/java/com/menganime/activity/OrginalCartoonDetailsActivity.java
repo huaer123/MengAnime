@@ -194,7 +194,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
      */
     private void showWatchChapter() {
         if (!watchChapterString.equals("")) {//已经阅读
-            details_continue.setText("续看 第" + watchChapterContent + "话");
+            details_continue.setText("续看 " + watchChapterContent);
         } else {//未阅读
             details_continue.setText(getString(R.string.details_begin_watch));
         }
@@ -433,7 +433,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             if (detailsBean.getStatus().equals("0")) {
                 Glide.with(this)
                         .load(detailsBean.getCover_IconURL())
-                        .error(R.mipmap.ic_launcher) //失败图片
+                        .error(R.mipmap.icon_default) //失败图片
                         .into(details_cartoonPicture);//封面
                 details_name.setText(detailsBean.getName());//漫画名字
                 tv_recovery.setText(detailsBean.getAuthor());//作者

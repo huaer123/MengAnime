@@ -125,6 +125,8 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:background="@drawable/more_login_button"
                             android:text="@string/details_begin_watch"
                             android:textColor="@color/white"
@@ -154,10 +156,10 @@
                 <!--展开-->
                 <ImageView
                     android:id="@+id/spread"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/dialog_close" />
+                    android:background="@mipmap/xia" />
 
                 <!--收起-->
                 <ImageView
@@ -165,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/arrow"
+                    android:background="@mipmap/shang"
                     android:visibility="gone" />
             </RelativeLayout>
 
@@ -214,7 +216,6 @@
                 </RelativeLayout>
 
                 <com.recyclerviewpull.XpulltorefereshiRecyclerView
-                    android:layout_marginTop="10dp"
                     android:id="@+id/details_recyclerview_LZ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -227,7 +228,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -252,7 +252,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView

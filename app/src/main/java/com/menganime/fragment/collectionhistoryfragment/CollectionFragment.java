@@ -62,8 +62,8 @@ public class CollectionFragment extends BaseFragment {
                     CollectionHistoryBean  cartoonInfo = mList.get(position);
                     holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getCartoonPicture(),R.mipmap.ic_launcher);
                     holder.setText(R.id.tv_cartoon_name, cartoonInfo.getCartoonName());
-                    holder.setText(R.id.tv_watch_chapter, cartoonInfo.getWatchChapter()==null||cartoonInfo.getWatchChapter().equals("")?"未看":"看到第"+cartoonInfo.getWatchChapter()+"话");
-                    holder.setText(R.id.tv_update_chapter, "更新到第"+cartoonInfo.getMaxChapter()+"话");
+                    holder.setText(R.id.tv_watch_chapter, cartoonInfo.getWatchChapterContent()==null||cartoonInfo.getWatchChapterContent().equals("")?"未看":"看到"+cartoonInfo.getWatchChapterContent());
+                    holder.setText(R.id.tv_update_chapter, "更新到"+cartoonInfo.getMaxChapter());
                     //holder.setImageDrawable(R.id.iv_collection_menu,getResources().getDrawable(R.mipmap.collection_menu));
                     holder.setOnClickListener(R.id.iv_collection_menu, new View.OnClickListener() {
                         @Override

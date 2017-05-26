@@ -62,7 +62,7 @@ public class HistoryFragment extends BaseFragment {
                     CollectionHistoryBean cartoonInfo = mList.get(position);
                     holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getCartoonPicture(),R.mipmap.ic_launcher);
                     holder.setText(R.id.tv_cartoon_name, cartoonInfo.getCartoonName());
-                    holder.setText(R.id.tv_watch_chapter, cartoonInfo.getWatchChapter().equals("")?"未看":"看到第"+cartoonInfo.getWatchChapter()+"话");
+                    holder.setText(R.id.tv_watch_chapter, cartoonInfo.getWatchChapterContent().equals("")?"未看":"看到"+cartoonInfo.getWatchChapterContent());
                     //holder.setText(R.id.tv_update_chapter, cartoonInfo.getMaxChapter());
                     holder.setVisible(R.id.tv_update_chapter,false);
                     //holder.setImageDrawable(R.id.iv_collection_menu,getResources().getDrawable(R.mipmap.collection_menu));
@@ -76,6 +76,8 @@ public class HistoryFragment extends BaseFragment {
             }
         };
         recyclerView.setAdapter(adapter);
+        recyclerView.setPullRefreshEnabled(false);
+        recyclerView.setLoadingMoreEnabled(false);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

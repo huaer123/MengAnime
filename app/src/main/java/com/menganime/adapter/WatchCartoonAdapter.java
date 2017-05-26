@@ -32,7 +32,7 @@ public class WatchCartoonAdapter extends PagerAdapter {
             ImageView iv_watch_cartoon = (ImageView) view.findViewById(R.id.iv_watch_cartoon);
             Glide.with(context)
                     .load(picture.getChapterURL())
-                    .error(R.mipmap.ic_launcher) //失败图片
+                    .error(R.mipmap.icon_default) //失败图片
                     .into(iv_watch_cartoon);//封面
             viewContainter.add(view);
         }
@@ -56,6 +56,7 @@ public class WatchCartoonAdapter extends PagerAdapter {
         ((ViewPager) container).addView(viewContainter.get(position));
         return viewContainter.get(position);
     }
+
 
     @Override
     public boolean isViewFromObject(View arg0, Object arg1) {

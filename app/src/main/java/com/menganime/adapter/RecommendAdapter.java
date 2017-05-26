@@ -83,7 +83,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                 holder.iv_cartoon.setLayoutParams(lp);
             }
             holder.tv_cartoon_name.setText(mlist.get(position).getName());
-            holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count()+"话");
+            holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count());
             holder.tv_content.setText(mlist.get(position).getSubtitle());
             Glide.with(mcontext)
                 .load(mlist.get(position).getColumn_IconURL())

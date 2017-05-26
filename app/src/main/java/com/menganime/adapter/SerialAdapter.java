@@ -1,7 +1,10 @@
 package com.menganime.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import com.menganime.bean.CartoonInfo;
 import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.List;
+
+import static com.menganime.adapter.RecommendAdapter.VIEW_TYPE_HEADER;
 
 /**
  * Created by Administrator on 2017/5/9.
@@ -45,23 +50,19 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.MyViewHold
 
     //绑定，渲染数据到view中
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int arg1) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        ViewGroup.LayoutParams lp = holder.iv_cartoon.getLayoutParams();
+        if (getItemViewType(position) == VIEW_TYPE_HEADER) {
+            StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
+            // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
+            clp.setFullSpan(true);
+            //holder.iv_cartoon.setLayoutParams(lp);
+            holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        }
 
-        /*ViewGroup.LayoutParams lp=holder.iv_cartoon.getLayoutParams();
-        lp.height=mheight.get(arg1);
-        holder.iv_cartoon.setLayoutParams(lp);*/
-        holder.tv_cartoon_name.setText(mlist.get(arg1).getName());
-    }
-
-    //先执行onCreateViewHolder
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, final int position) {
-
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                mcontext).inflate(R.layout.item_cartoon_recommend, parent,
-                false));
         holder.tv_cartoon_name.setText(mlist.get(position).getName());
-        holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count()+"话");
+        holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count());
         holder.tv_content.setText(mlist.get(position).getSubtitle());
         Glide.with(mcontext)
                 .load(mlist.get(position).getColumn_IconURL())
@@ -74,7 +75,14 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.MyViewHold
                 itemClickListener.onItemClick(view, position);
             }
         });
-        return holder;
+    }
+
+    //先执行onCreateViewHolder
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, final int position) {
+        return new MyViewHolder(LayoutInflater.from(
+                mcontext).inflate(R.layout.item_cartoon_recommend, parent,
+                false));
     }
 
 
@@ -94,7 +102,10 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.MyViewHold
             tv_content = (TextView) arg0.findViewById(R.id.tv_content);
             tv_cartoon_hua = (TextView) arg0.findViewById(R.id.tv_cartoon_hua);
         }
+
     }
+
+
 
     public void addList(List<CartoonInfo> list) {
         // TODO Auto-generated method stub

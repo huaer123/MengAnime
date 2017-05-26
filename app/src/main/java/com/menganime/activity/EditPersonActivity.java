@@ -174,7 +174,7 @@ public class EditPersonActivity extends TakePhotoActivity implements View.OnClic
             if(userinfo!=null){
                 Glide.with(this)
                         .load(userinfo.getICONURL())
-                        .error(R.mipmap.ic_launcher) //失败图片
+                        .error(R.mipmap.picture_default) //失败图片
                         .into(message_circle);
 
                 tv_nickname.setText(userinfo.getPetName().equals("")?"酷哥":userinfo.getPetName());

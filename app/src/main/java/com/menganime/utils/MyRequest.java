@@ -465,6 +465,84 @@ public class MyRequest {
     }
 
     /**
+     * 用户开通VIP-支付宝支付
+     *
+     * @param activity
+     * @param price
+     */
+    public static void alipayVip(final Activity activity, String mh_userinfo_id, String price) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final RechargeInterface info = (RechargeInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("mh_userinfo_id", mh_userinfo_id);
+            params.put("price", price);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.d(UrlConfig.ALIPAY + "&mh_userinfo_id=" + mh_userinfo_id + "&price=" + price);
+        OkHttpUtils.post().url(UrlConfig.ALIPAY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                info.alipay(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
+     * 用户开通VIP-支付宝支付
+     *
+     * @param activity
+     * @param paystatus
+     */
+    public static void alipayStatus(final Activity activity, String out_trade_no, String paystatus) {
+        final Dialog progDialog = DialogUtils.showWaitDialog(activity);
+        final RechargeInterface info = (RechargeInterface) activity;
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("out_trade_no", out_trade_no);
+            params.put("paystatus", paystatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        LogUtils.d(UrlConfig.ALIPAYSTATUS + "&out_trade_no=" + out_trade_no + "&paystatus=" + paystatus);
+        OkHttpUtils.post().url(UrlConfig.ALIPAYSTATUS).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
+            @Override
+            public void onResponse(String response, int id) {
+                LogUtils.d(response);
+                //成功之后的处理
+                info.alipayStatus(response);
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                ToastUtil.showToast(activity, "服务器有错误，请稍候再试");
+                //失败之后的处理
+                if (progDialog.isShowing()) {
+                    progDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    /**
      * 查询用户看过哪些原创漫画
      *
      * @param activity

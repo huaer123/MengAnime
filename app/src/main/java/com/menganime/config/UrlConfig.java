@@ -57,6 +57,16 @@ public class UrlConfig {
     public static final String USERVIP = BaseUrl + "mh/vip/UserVip?";
 
     /**
+     * 支付宝开通VIP
+     */
+    public static final String ALIPAY = BaseUrl+"mh/pay/Alipay?";
+
+    /**
+     * 提交支付状态
+     */
+    public static final String ALIPAYSTATUS = BaseUrl +"mh/pay/PayStatus?";
+
+    /**
      * 获取用户看过哪些原创曼胡
      */
     public static final String SELECTUSERCHAPTER = BaseUrl + "mh/select/SelectUserChapter?";

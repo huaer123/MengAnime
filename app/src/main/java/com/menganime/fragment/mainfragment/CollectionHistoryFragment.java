@@ -175,7 +175,7 @@ public class CollectionHistoryFragment extends BaseFragment implements UserInfoI
             if (userinfo != null) {
                 Glide.with(this)
                         .load(userinfo.getICONURL())
-                        .error(R.mipmap.ic_launcher) //失败图片
+                        .error(R.mipmap.picture_default) //失败图片
                         .into(iv_picture);
                 tv_username.setText(userinfo.getPetName().equals("") ? "酷哥" : userinfo.getPetName());
             }
