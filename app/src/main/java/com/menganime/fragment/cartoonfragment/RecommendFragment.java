@@ -34,7 +34,7 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
     List<CartoonInfo> mlist = new ArrayList<>();
     RecommendAdapter adapter;
 
-    private int pageIndex = 0;
+    private int pageIndex = 1;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,7 +97,7 @@ public class RecommendFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void getRecommendList(String json) {
-        if (pageIndex == 0) {// 加载
+        if (pageIndex == 1) {// 加载
             mlist.clear();
             adapter.clearList();
         }

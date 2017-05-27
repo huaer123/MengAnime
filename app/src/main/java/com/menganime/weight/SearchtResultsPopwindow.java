@@ -25,6 +25,10 @@ import static com.menganime.utils.StatusBarUtils.mContext;
 
 /**
  * Created by Administrator on 2017/5/24.
+ * 实例化自定义的PopupWindow
+ * SearchtResultsPopwindow view = new SearchtResultsPopwindow(context, getActivity().getLayoutInflater(), cartoonClassfiyList, edit_search.getWidth());
+ * 制定自定义PopupWindow显示的位置
+ * view.showAsDropDown(edit_search, 0, -5);
  */
 
 public class SearchtResultsPopwindow extends PopupWindow {
@@ -74,7 +78,7 @@ public class SearchtResultsPopwindow extends PopupWindow {
         });
 
         this.setContentView(contentView);  //设置悬浮窗体内显示的内容View
-        this.setWidth(width-5);   //设置悬浮窗体的宽度
+        this.setWidth(width - 5);   //设置悬浮窗体的宽度
         //this.setWidth(LayoutParams.WRAP_CONTENT);
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);   //设置悬浮窗体的高度
         this.setBackgroundDrawable(new ColorDrawable(0x00000000)); // 设置悬浮窗体背景

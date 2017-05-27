@@ -36,7 +36,7 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
     private XpulltorefereshiRecyclerView recyclerView;
     private CommonRCAdapter<CartoonInfo> adapter;
     private ArrayList<CartoonInfo> mList = new ArrayList<>();
-    private int pageIndex = 0;
+    private int pageIndex = 1;
 
     @Override
     protected void setView() {
@@ -72,7 +72,7 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
             public void convert(ViewHolder holder, int position) {
                 if (mList != null && mList.size() > 0) {
                     CartoonInfo cartoonInfo = mList.get(position);
-                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getColumn_IconURL(),R.mipmap.ic_launcher);
+                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getColumn_IconURL(),R.mipmap.icon_default);
                     holder.setText(R.id.tv_cartoon_name, cartoonInfo.getName());
                     holder.setText(R.id.tv_cartoon_author, cartoonInfo.getAuthor());
                     holder.setText(R.id.tv_cartoon_Describe, cartoonInfo.getSubtitle());
@@ -118,7 +118,7 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
 
     @Override
     public void getCartoonClassify(String json) {
-        if (pageIndex == 0) {// 加载
+        if (pageIndex == 1) {// 加载
             mList.removeAll(mList);
         }
         recyclerView.loadMoreComplete();

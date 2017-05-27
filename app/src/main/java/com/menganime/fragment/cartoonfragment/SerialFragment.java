@@ -33,7 +33,7 @@ public class SerialFragment extends BaseFragment implements OnItemClickListener,
     XpulltorefereshiRecyclerView recyclerView;
     List<CartoonInfo> mlist = new ArrayList<>();
     SerialAdapter adapter;
-    private int pageIndex = 0;
+    private int pageIndex = 1;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,8 +55,6 @@ public class SerialFragment extends BaseFragment implements OnItemClickListener,
     @Override
     protected void init(View rootView) {
         recyclerView=(XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_verticalSerical);
-        adapter=new SerialAdapter(context,mlist);
-        adapter.setOnItemClickListener(this);
         //设置动画
         //recyclerView.setItemAnimator(new DefaultItemAnimator());
         //设置布局
@@ -70,6 +68,8 @@ public class SerialFragment extends BaseFragment implements OnItemClickListener,
         });
         recyclerView.setLayoutManager(layoutManager);
 
+        adapter=new SerialAdapter(context,mlist);
+        adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
         recyclerView.setPullRefreshEnabled(false);
@@ -91,7 +91,7 @@ public class SerialFragment extends BaseFragment implements OnItemClickListener,
 
     @Override
     public void getRecommendList(String json) {
-        if (pageIndex == 0) {// 加载
+        if (pageIndex == 1) {// 加载
             mlist.clear();
             adapter.clearList();
         }

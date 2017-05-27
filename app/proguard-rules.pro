@@ -229,6 +229,11 @@
 -keep class com.readystatesoftware.systembartint.** {*;}
 -dontwarn com.readystatesoftware.systembartint.**
 
+#glide
+-keepnames class com.mypackage.MyGlideModule
+# or more generally:
+#-keep public class * implements com.bumptech.glide.module.GlideModule
+
 # 支付宝支付
 -keep class com.alipay.android.app.IAlixPay{*;}
 -keep class com.alipay.android.app.IAlixPay$Stub{*;}

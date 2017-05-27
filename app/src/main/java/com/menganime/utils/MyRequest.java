@@ -129,6 +129,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.e(UrlConfig.SELECTRECOMMENDLIST + "page=" + page + "&count=" + count + "&column=" + column);
         OkHttpUtils.post().url(UrlConfig.SELECTRECOMMENDLIST).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -166,6 +167,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.e(UrlConfig.USERINFO + "mh_userinfo_id=" + mh_info_id);
         OkHttpUtils.post().url(UrlConfig.USERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -204,6 +206,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.e(UrlConfig.USERINFO + "mh_userinfo_id=" + mh_info_id);
         OkHttpUtils.post().url(UrlConfig.USERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -281,6 +284,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.e(UrlConfig.UPDATEUSERINFO + "mh_userinfo_id=" + mh_info_id + "&introduce=" + introduce);
         OkHttpUtils.post().url(UrlConfig.UPDATEUSERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -323,6 +327,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.e(UrlConfig.UPDATEUSERINFO + "mh_userinfo_id=" + mh_info_id + "&petname" + petname + "&sex=" + sex + "&source=" + source + "&birthday=" + birthday + "&introduce=" + introduce);
         OkHttpUtils.post().url(UrlConfig.UPDATEUSERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -634,6 +639,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.d(UrlConfig.USERINFO + "mh_userinfo_id=" + mh_info_id);
         OkHttpUtils.post().url(UrlConfig.USERINFO).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -670,6 +676,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.d(UrlConfig.SELECTCARTOONCLASSIFY);
         OkHttpUtils.post().url(UrlConfig.SELECTCARTOONCLASSIFY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -707,6 +714,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.d(UrlConfig.SELECTCARTOONBYKEY + "key=" + key);
         OkHttpUtils.post().url(UrlConfig.SELECTCARTOONBYKEY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -746,6 +754,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.d(UrlConfig.SELECTCARTOONLISTBYCLASSIFY + "page=" + page+"&count="+count+"&mh_type_id="+mh_type_id);
         OkHttpUtils.post().url(UrlConfig.SELECTCARTOONLISTBYCLASSIFY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {
@@ -785,6 +794,7 @@ public class MyRequest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogUtils.d(UrlConfig.SELECTCARTLISTBYKEY + "page=" + page+"&count="+count+"&key="+key);
         OkHttpUtils.post().url(UrlConfig.SELECTCARTLISTBYKEY).params(params).build().execute(new GenericsCallback<String>(new JsonGenericsSerializator()) {
             @Override
             public void onResponse(String response, int id) {

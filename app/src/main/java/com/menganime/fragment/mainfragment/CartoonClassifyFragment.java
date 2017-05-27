@@ -12,13 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.menganime.R;
 import com.menganime.activity.CartoonListForClassifyActivity;
 import com.menganime.activity.CartoonListForKeyActivity;
+import com.menganime.adapter.EditTextPromptAdapter;
 import com.menganime.base.BaseFragment;
 import com.menganime.bean.CartoonClassifyBean;
 import com.menganime.bean.CartoonNameByKey;
@@ -26,7 +28,6 @@ import com.menganime.interfaces.CartoonClassifyInterface;
 import com.menganime.utils.LogUtils;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.ToastUtil;
-import com.menganime.weight.SearchtResultsPopwindow;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
@@ -42,12 +43,14 @@ import java.util.List;
 
 public class CartoonClassifyFragment extends BaseFragment implements CartoonClassifyInterface {
     private Context context;
-    XpulltorefereshiRecyclerView recyclerView;
+    private XpulltorefereshiRecyclerView recyclerView;
     private CommonRCAdapter<CartoonClassifyBean.CartoonClassfiy> adapter;
+    private EditTextPromptAdapter adapterEditText;
 
-    private EditText edit_search;
+    private AutoCompleteTextView edit_search;
 
     private List<CartoonClassifyBean.CartoonClassfiy> mList = new ArrayList<CartoonClassifyBean.CartoonClassfiy>();
+    List<CartoonNameByKey.CartoonName> list_EditText = new ArrayList<>();
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
 
     @Override
     protected void init(View rootView) {
-        edit_search = (EditText) rootView.findViewById(R.id.edit_search);
+        edit_search = (AutoCompleteTextView) rootView.findViewById(R.id.edit_search);
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
@@ -91,6 +94,20 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
                 return false;
             }
         });
+        edit_search.setThreshold(1);//它默认输入两个字母才出发提示，添加这行代码修改为一个字母出发，输入一个字母就可以有提示了
+        adapterEditText = new EditTextPromptAdapter(context, list_EditText);
+        edit_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(context, CartoonListForKeyActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("key", list_EditText.get(position).getName());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+                edit_search.setText(list_EditText.get(position).getName());
+            }
+        });
+        edit_search.setAdapter(adapterEditText);
 
         recyclerView = (XpulltorefereshiRecyclerView) rootView.findViewById(R.id.recyclerview_vertical);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
@@ -100,7 +117,7 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
             public void convert(ViewHolder holder, int position) {
                 if (mList != null && mList.size() > 0) {
                     CartoonClassifyBean.CartoonClassfiy cartoonInfo = mList.get(position);
-                    holder.loadImageFromNet(R.id.tv_picture, cartoonInfo.getMH_Type_ICONURL(), R.mipmap.ic_launcher);
+                    holder.loadImageFromNet(R.id.tv_picture, cartoonInfo.getMH_Type_ICONURL(), R.mipmap.icon_default);
                     holder.setText(R.id.tv_classify, cartoonInfo.getMH_Type_Name());
                 }
             }
@@ -134,7 +151,7 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
             public void afterTextChanged(Editable arg0) {
                 try {
                     String key = edit_search.getText().toString();
-                    if(key.length()>0) {
+                    if (key.length() > 0) {
                         MyRequest.getCartoonNameForKey(CartoonClassifyFragment.this, key);
                         LogUtils.d("popwindow-----EditText");
                     }
@@ -174,14 +191,9 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
     public void getCartoonNameForKey(String json) {
         CartoonNameByKey bean = JSONObject.parseObject(json, CartoonNameByKey.class);
         if (bean.getStatus().equals("0")) {
-            List<CartoonNameByKey.CartoonName> cartoonClassfiyList = bean.getMH_InfoList();
-            if(cartoonClassfiyList!=null&&cartoonClassfiyList.size()>0) {
-                //实例化自定义的PopupWindow
-                SearchtResultsPopwindow view = new SearchtResultsPopwindow(context, getActivity().getLayoutInflater(), cartoonClassfiyList, edit_search.getWidth());
-                //制定自定义PopupWindow显示的位置
-                view.showAsDropDown(edit_search, 0, -5);
-                LogUtils.d("popwindow-----view.showAsDropDown(edit_search, 0, -5);");
-            }
+            list_EditText = bean.getMH_InfoList();
+            adapterEditText.setList(list_EditText);
+            adapterEditText.notifyDataSetChanged();
         }
     }
 }

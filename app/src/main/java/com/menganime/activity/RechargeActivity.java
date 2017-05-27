@@ -85,17 +85,18 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         iv_vip2.setOnClickListener(this);
         iv_vip3 = (ImageView) findViewById(R.id.iv_vip3);
         iv_vip3.setOnClickListener(this);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         String userId = SharedUtil.getString(this, SharedUtil.USERINFO_ID);
         if (userId == null || userId.equals("")) {
             ToastUtil.showToast(this, "获取用户Id失败");
             return;
         }
         MyRequest.getUserInfo(this, userId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

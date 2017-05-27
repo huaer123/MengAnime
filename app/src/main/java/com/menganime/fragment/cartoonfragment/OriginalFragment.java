@@ -33,7 +33,7 @@ public class OriginalFragment extends BaseFragment implements OnItemClickListene
     XpulltorefereshiRecyclerView recyclerView;
     List<CartoonInfo> mlist = new ArrayList<>();
     SerialAdapter adapter;
-    private int pageIndex = 0;
+    private int pageIndex = 1;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class OriginalFragment extends BaseFragment implements OnItemClickListene
 
     @Override
     public void getRecommendList(String json) {
-        if (pageIndex == 0) {// 加载
+        if (pageIndex == 1) {// 加载
             mlist.clear();
             adapter.clearList();
         }

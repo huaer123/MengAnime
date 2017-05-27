@@ -16,7 +16,6 @@ import com.menganime.bean.CartoonInfo;
 import com.menganime.bean.RecommendInfo;
 import com.menganime.interfaces.RecommendInterface;
 import com.menganime.utils.MyRequest;
-import com.recyclerviewpull.RecycleViewDivider;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
@@ -24,8 +23,6 @@ import com.recyclerviewpull.adapter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.menganime.utils.StatusBarUtils.mContext;
 
 /**
  * Created by Administrator on 2017/5/9.
@@ -38,7 +35,7 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
     private XpulltorefereshiRecyclerView recyclerView;
     private CommonRCAdapter<CartoonInfo> adapter;
     private ArrayList<CartoonInfo> mList = new ArrayList<>();
-    private int pageIndex = 0;
+    private int pageIndex = 1;
 
     @Override
     protected View setView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,7 +63,7 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
             public void convert(ViewHolder holder, int position) {
                 if (mList != null && mList.size() > 0) {
                     CartoonInfo cartoonInfo = mList.get(position);
-                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getColumn_IconURL(),R.mipmap.ic_launcher);
+                    holder.loadImageFromNet(R.id.iv_cartoon_picture, cartoonInfo.getColumn_IconURL(),R.mipmap.icon_default);
                     holder.setText(R.id.tv_cartoon_name, cartoonInfo.getName());
                     holder.setText(R.id.tv_cartoon_author, cartoonInfo.getAuthor());
                     holder.setText(R.id.tv_cartoon_Describe, cartoonInfo.getSubtitle());
@@ -112,7 +109,7 @@ public class LatelyFragment extends BaseFragment implements RecommendInterface {
 
     @Override
     public void getRecommendList(String json) {
-        if (pageIndex == 0) {// 加载
+        if (pageIndex == 1) {// 加载
             mList.removeAll(mList);
         }
         recyclerView.loadMoreComplete();

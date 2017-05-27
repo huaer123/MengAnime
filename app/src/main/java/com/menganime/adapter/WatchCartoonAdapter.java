@@ -32,6 +32,9 @@ public class WatchCartoonAdapter extends PagerAdapter {
             ImageView iv_watch_cartoon = (ImageView) view.findViewById(R.id.iv_watch_cartoon);
             Glide.with(context)
                     .load(picture.getChapterURL())
+                    //.crossFade()//加载动画
+                    //.diskCacheStrategy(DiskCacheStrategy.ALL)//硬盘缓存
+                    .placeholder(R.mipmap.loading_waiting)//默认加载图片
                     .error(R.mipmap.icon_default) //失败图片
                     .into(iv_watch_cartoon);//封面
             viewContainter.add(view);

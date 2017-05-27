@@ -2,7 +2,6 @@ package com.menganime.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,11 +19,13 @@ import com.menganime.bean.CollectionHistoryBean;
 import com.menganime.interfaces.CartoonDetailsInterface;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
+import com.menganime.weight.MyLayoutManager;
 import com.recyclerviewpull.XpulltorefereshiRecyclerView;
 import com.recyclerviewpull.adapter.CommonRCAdapter;
 import com.recyclerviewpull.adapter.OnItemClickListener;
 import com.recyclerviewpull.adapter.ViewHolder;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -163,7 +164,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
 
     private void showWatchChapter() {
         if(!watchChapterString.equals("")){//已经阅读
-            details_continue.setText("续看 "+watchChapterContent);
+            details_continue.setText("续看 第"+watchChapterContent+"话");
         }else{//未阅读
             details_continue.setText(getString(R.string.details_begin_watch));
         }
@@ -198,6 +199,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                     CollectionHistoryBean bean = new CollectionHistoryBean();
                     bean.setType("1");
                     bean.setCartoonId(infoId);
+                    bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
                     bean.setCartoonName(detailsBean.getName());
                     bean.setMaxChapter(detailsBean.getMaxChapter());
                     SharedUtil.addCollection(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
@@ -224,6 +226,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                             CollectionHistoryBean bean = new CollectionHistoryBean();
                             bean.setType("0");
                             bean.setCartoonId(infoId);
+                            bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
                             bean.setCartoonName(detailsBean.getName());
                             bean.setWatchChapter(watchChapterString);
                             bean.setWatchChapterContent(watchChapterContent);
@@ -270,18 +273,21 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 details_updatetime.setText("最后更新："+bean.getUpdateTime());
                 if(bean.getLZ()!=null&&bean.getLZ().size()>0){
                     ll_LZ.setVisibility(View.VISIBLE);
+                    Collections.reverse(bean.getLZ());
                     setLZChapter(bean.getLZ());
                 }else{
                     ll_LZ.setVisibility(View.GONE);
                 }
                 if(bean.getDHB()!=null&&bean.getDHB().size()>0){
                     ll_DXB.setVisibility(View.VISIBLE);
+                    Collections.reverse(bean.getDHB());
                     setDXBChapter(bean.getDHB());
                 }else{
                     ll_DXB.setVisibility(View.GONE);
                 }
                 if(bean.getFWP()!=null&&bean.getFWP().size()>0){
                     ll_FWP.setVisibility(View.VISIBLE);
+                    Collections.reverse(bean.getFWP());
                     setFWPChapter(bean.getFWP());
                 }else{
                     ll_FWP.setVisibility(View.GONE);
@@ -301,7 +307,8 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private void setLZChapter(final List<CartoonChapterBean.LZ> lzList) {
         //details_recyclerview_LZ.setItemAnimator(new DefaultItemAnimator());
         //设置布局
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+        MyLayoutManager layoutManager = new MyLayoutManager(this, 4);
+        layoutManager.setScrollEnabled(false);
         details_recyclerview_LZ.setLayoutManager(layoutManager);
         details_recyclerview_LZ.setPullRefreshEnabled(false);
         details_recyclerview_LZ.setLoadingMoreEnabled(false);
@@ -330,6 +337,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
                 bean.setCartoonId(infoId);
+                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
                 bean.setCartoonName(detailsBean.getName());
                 watchChapterString = lzList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
@@ -356,7 +364,8 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private void setDXBChapter(final List<CartoonChapterBean.DHB> dxbList) {
         //details_recyclerview_DXB.setItemAnimator(new DefaultItemAnimator());
         //设置布局
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+        MyLayoutManager layoutManager = new MyLayoutManager(this, 4);
+        layoutManager.setScrollEnabled(false);
         details_recyclerview_DXB.setLayoutManager(layoutManager);
         details_recyclerview_DXB.setPullRefreshEnabled(false);
         details_recyclerview_DXB.setLoadingMoreEnabled(false);
@@ -386,6 +395,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
+                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
                 watchChapterString = dxbList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());
@@ -411,7 +421,8 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
     private void setFWPChapter(final List<CartoonChapterBean.FWP> fwpList) {
         //details_recyclerview_FWP.setItemAnimator(new DefaultItemAnimator());
         //设置布局
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
+        MyLayoutManager layoutManager = new MyLayoutManager(this, 4);
+        layoutManager.setScrollEnabled(false);
         details_recyclerview_FWP.setLayoutManager(layoutManager);
         details_recyclerview_FWP.setPullRefreshEnabled(false);
         details_recyclerview_FWP.setLoadingMoreEnabled(false);
