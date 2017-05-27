@@ -199,7 +199,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                     CollectionHistoryBean bean = new CollectionHistoryBean();
                     bean.setType("1");
                     bean.setCartoonId(infoId);
-                    bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
+                    bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
                     bean.setCartoonName(detailsBean.getName());
                     bean.setMaxChapter(detailsBean.getMaxChapter());
                     SharedUtil.addCollection(this,SharedUtil.SAVECOLLECTIONHISTORYLIST,bean);
@@ -226,7 +226,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                             CollectionHistoryBean bean = new CollectionHistoryBean();
                             bean.setType("0");
                             bean.setCartoonId(infoId);
-                            bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
+                            bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
                             bean.setCartoonName(detailsBean.getName());
                             bean.setWatchChapter(watchChapterString);
                             bean.setWatchChapterContent(watchChapterContent);
@@ -337,7 +337,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 CollectionHistoryBean bean = new CollectionHistoryBean();
                 bean.setType("0");
                 bean.setCartoonId(infoId);
-                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
+                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
                 bean.setCartoonName(detailsBean.getName());
                 watchChapterString = lzList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
@@ -395,7 +395,7 @@ public class CartoonDetailsActivity extends BaseActivity implements View.OnClick
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
-                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?detailsBean.getCover_IconURL():"");
+                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
                 watchChapterString = dxbList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());

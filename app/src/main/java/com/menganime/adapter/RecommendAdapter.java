@@ -31,8 +31,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
     List<CartoonInfo> mlist;
     List<Integer> mheight;
 
-    public static final int VIEW_TYPE_HEADER = 1024;
-    public static final int VIEW_TYPE_NORMAL = 1025;
+    public final int VIEW_TYPE_HEADER = 1024;
+    public final int VIEW_TYPE_NORMAL = 1025;
 
     private OnItemClickListener itemClickListener;
 

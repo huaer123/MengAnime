@@ -24,7 +24,7 @@ public class MainActivity extends BaseFragmentActivity {
     private Context context;
     private ViewPager viewPager;
     private FragmentPagerAdapter fragmentPagerAdapter;
-    private static List<Fragment> fragmentList = new ArrayList<Fragment>();
+    private List<Fragment> fragmentList = new ArrayList<Fragment>();
 
     private ImageView collectionhistoryImage, cartoonmainImage, cartoonclassifyImage, moreImage;
     private LinearLayout layout_collectionhistory, layout_cartoonmain, layout_cartoonclassify, layout_more;

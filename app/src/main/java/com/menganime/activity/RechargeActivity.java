@@ -34,9 +34,9 @@ import java.util.Map;
  */
 
 public class RechargeActivity extends BaseActivity implements View.OnClickListener, RechargeInterface, LoginInterface {
-    private static final String PRICEVIP1 = "0.1";//vip1->价格
-    private static final String PRICEVIP2 = "10";//vip2->价格
-    private static final String PRICEVIP3 = "20";//vip3->价格
+    private final String PRICEVIP1 = "0.1";//vip1->价格
+    private final String PRICEVIP2 = "10";//vip2->价格
+    private final String PRICEVIP3 = "20";//vip3->价格
 
     private RelativeLayout rl_back;
     private TextView tv_title;
@@ -54,7 +54,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
     /**
      * 支付宝支付标识
      */
-    private static final int SDK_PAY_FLAG = 100;
+    private final int SDK_PAY_FLAG = 100;
 
     @Override
     protected void setView() {

@@ -230,7 +230,8 @@ public class SharedUtil {
      */
     public static void deleteAllCollection(Context context, String name) {
         List<CollectionHistoryBean> collectionHistoryBeanList = getCollectionHistoryList(context, name);
-        List<CollectionHistoryBean> collectionHistoryBeanListNew = collectionHistoryBeanList;
+        List<CollectionHistoryBean> collectionHistoryBeanListNew = new ArrayList<>();
+        collectionHistoryBeanListNew= collectionHistoryBeanList;
         if (collectionHistoryBeanList != null && collectionHistoryBeanList.size() > 0) {
             for (int i = 0; i < collectionHistoryBeanList.size(); i++) {
                 CollectionHistoryBean collectionHistoryBean = collectionHistoryBeanList.get(i);
@@ -402,7 +403,8 @@ public class SharedUtil {
      */
     public static void deleteAllHistory(Context context, String name) {
         List<CollectionHistoryBean> collectionHistoryBeanList = getCollectionHistoryList(context, name);
-        List<CollectionHistoryBean> collectionHistoryBeanListNew = collectionHistoryBeanList;
+        List<CollectionHistoryBean> collectionHistoryBeanListNew = new ArrayList<>();
+        collectionHistoryBeanListNew= collectionHistoryBeanList;
         if (collectionHistoryBeanList != null && collectionHistoryBeanList.size() > 0) {
             for (int i = 0; i < collectionHistoryBeanList.size(); i++) {
                 CollectionHistoryBean collectionHistoryBean = collectionHistoryBeanList.get(i);

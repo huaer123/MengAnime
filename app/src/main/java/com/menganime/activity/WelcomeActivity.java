@@ -52,7 +52,7 @@ public class WelcomeActivity extends BaseActivity {
     private void initView() {
         ScaleAnimation scaleAnimation = new ScaleAnimation(1.0f, 1.1f, 1.0f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setFillAfter(true);
-        scaleAnimation.setDuration(3000);
+        scaleAnimation.setDuration(2000);
         splash.startAnimation(scaleAnimation);
 
         //缩放动画监听
