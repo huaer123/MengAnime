@@ -94,6 +94,34 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
                 return false;
             }
         });
+        edit_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                try {
+                    String key = edit_search.getText().toString();
+                    if (key.length() > 0) {
+                        MyRequest.getCartoonNameForKey(CartoonClassifyFragment.this, key);
+                        LogUtils.d("popwindow-----EditText");
+                    }
+                } catch (Exception e) {
+                    if (e != null && e.getMessage() != null) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int
+                    arg3) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int
+                    arg3) {
+
+            }
+        });
         edit_search.setThreshold(1);//它默认输入两个字母才出发提示，添加这行代码修改为一个字母出发，输入一个字母就可以有提示了
         adapterEditText = new EditTextPromptAdapter(context, list_EditText);
         edit_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,34 +174,6 @@ public class CartoonClassifyFragment extends BaseFragment implements CartoonClas
     @Override
     public void onResume() {
         super.onResume();
-        edit_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                try {
-                    String key = edit_search.getText().toString();
-                    if (key.length() > 0) {
-                        MyRequest.getCartoonNameForKey(CartoonClassifyFragment.this, key);
-                        LogUtils.d("popwindow-----EditText");
-                    }
-                } catch (Exception e) {
-                    if (e != null && e.getMessage() != null) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int
-                    arg3) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int
-                    arg3) {
-
-            }
-        });
     }
 
     @Override
