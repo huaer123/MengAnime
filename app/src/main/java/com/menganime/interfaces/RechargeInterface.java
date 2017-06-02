@@ -15,27 +15,11 @@ public interface RechargeInterface {
      * 支付宝开通vip
      * @param json
      */
-    //void alipay(String json);
+    void alipay(String json);
 
     /**
      * 提交支付状态
      * @param json
      */
-    //void alipayStatus(String json);
-
-    /**
-     * 充值成功
-     */
-    void toSuccess(int type);
-
-    /**
-     * 充值失败
-     */
-    void toFail(int type);
-
-    /**
-     * 退订
-     */
-    void toUnsubscribe(String json);
-
+    void alipayStatus(String json);
 }
