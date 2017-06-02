@@ -15,6 +15,7 @@ import com.menganime.interfaces.WatchCartoonInterface;
 import com.menganime.utils.MyRequest;
 import com.menganime.utils.SharedUtil;
 import com.menganime.utils.ToastUtil;
+import com.menganime.weight.HackyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.List;
 public class WatchCartoonActivity extends BaseActivity implements WatchCartoonInterface{
     String mh_chapter_id = "";
 
-    private ViewPager viewpager;
+    private HackyViewPager viewpager;
     private WatchCartoonAdapter cartoonAdapter;
     private int currentViewID,pager_num;
     private int lastValue = -1;
@@ -66,7 +67,7 @@ public class WatchCartoonActivity extends BaseActivity implements WatchCartoonIn
             }
         });
 
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        viewpager = (HackyViewPager) findViewById(R.id.viewpager);
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

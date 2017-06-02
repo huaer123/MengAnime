@@ -95,4 +95,6 @@ public class UrlConfig {
      * 通过关键字获取漫画列表
      */
     public static final String SELECTCARTLISTBYKEY = BaseUrl + "mh/select/SelectMHListByKey?";
+
+    public static final String DELETEVIP = BaseUrl+"mh/vip/DeleteVIP?";
 }

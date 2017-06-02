@@ -1,7 +1,9 @@
 package com.menganime.application;
 
 import android.app.Application;
+import android.os.Environment;
 
+import java.io.File;
 
 
 /**
@@ -16,5 +18,27 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        deleteAllFiles(new File(Environment.getExternalStorageDirectory()+"/MengAnime/WatchCartoon/"));
+    }
+    private void deleteAllFiles(File root) {
+        File files[] = root.listFiles();
+        if (files != null)
+            for (File f : files) {
+                if (f.isDirectory()) { // 判断是否为文件夹
+                    deleteAllFiles(f);
+                    try {
+                        f.delete();
+                    } catch (Exception e) {
+                    }
+                } else {
+                    if (f.exists()) { // 判断是否存在
+                        deleteAllFiles(f);
+                        try {
+                            f.delete();
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+            }
     }
 }

@@ -36,6 +36,10 @@
     <!--日历权限-->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <!--发送短信的权限-->
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <!--接收短信的权限-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
 
     <application
         android:name=".application.MyApplication"

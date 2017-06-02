@@ -42,8 +42,11 @@
     <string name="recharge">充值</string>
     <string name="recharge_phone">客服电话：4006008066</string>
     <string name="recharge_vip1">初级会员</string>
-    <string name="recharge_vip2">中级会员</string>
-    <string name="recharge_vip3">高级会员</string>
+    <string name="recharge_vip2">萌动漫普通会员\n  （10元/月）</string>
+    <string name="recharge_vip3">萌动漫高级会员\n  （20元/月）</string>
+    <string name="recharge_vip2_prompt">尊敬的用户，您将购买“萌动漫普通会员”信息费10元/月（不含通信费），购买后即可每月可免费观看10本漫画。是否购买？取消不扣费</string>
+    <string name="recharge_vip3_prompt">尊敬的用户，您将购买“萌动漫高级会员”信息费20元/月（不含通信费），购买后即可每月可免费观看所有漫画。是否购买？取消不扣费</string>
+    <string name="recharge_unsubscribe">确定退订包月服务吗？（点击退订将发送一条退订短信）</string>
 
     <!--漫画详情-->
     <string name="details_add_collection">添加收藏</string>

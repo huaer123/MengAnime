@@ -97,7 +97,7 @@ public class CartoonListForKeyActivity extends BaseActivity implements View.OnCl
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(CartoonListForKeyActivity.this, CartoonDetailsActivity.class);
+                Intent intent = new Intent(CartoonListForKeyActivity.this, OrginalCartoonDetailsActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("name", mList.get(position).getName());
                 bundle.putString("infoId",mList.get(position).getMH_Info_ID());

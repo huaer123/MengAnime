@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.recyclerviewpull.adapter.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.menganime.utils.StatusBarUtils.mContext;
 
 /**
  * Created by Administrator on 2017/5/9.
@@ -74,13 +77,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                 StaggeredGridLayoutManager.LayoutParams clp = (StaggeredGridLayoutManager.LayoutParams) holder.largeLabel.getLayoutParams();
                 // 最最关键一步，设置当前view占满列数，这样就可以占据两列实现头部了
                 clp.setFullSpan(true);
-                //holder.iv_cartoon.setLayoutParams(lp);
+                lp.height = dp2px(200);
+                holder.iv_cartoon.setLayoutParams(lp);
                 holder.tv_cartoon_name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 holder.tv_cartoon_name.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             }
             if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
-                lp.height = mheight.get(position);
-                holder.iv_cartoon.setLayoutParams(lp);
+                //lp.height = mheight.get(position);
+                //holder.iv_cartoon.setLayoutParams(lp);
             }
             holder.tv_cartoon_name.setText(mlist.get(position).getName());
             holder.tv_cartoon_hua.setText(mlist.get(position).getChapter_Count()+"话");
@@ -96,6 +100,12 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.MyVi
                     itemClickListener.onItemClick(view, position);
                 }
             });
+    }
+
+    private int dp2px(int dp){
+        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
     }
 
     //先执行onCreateViewHolder

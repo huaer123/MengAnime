@@ -1,17 +1,19 @@
 package com.menganime.adapter;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.menganime.R;
 import com.menganime.bean.WatchCartoonBean;
+import com.menganime.weight.PhotoView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +26,12 @@ public class WatchCartoonAdapter extends PagerAdapter {
     private List<WatchCartoonBean.Picturelist> list = new ArrayList<>();
     private Context context;
 
-    public WatchCartoonAdapter(Context context, List<WatchCartoonBean.Picturelist> list){
+    public WatchCartoonAdapter(Context context, List<WatchCartoonBean.Picturelist> list) {
         this.context = context;
-        for (int i = 0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             WatchCartoonBean.Picturelist picture = list.get(i);
             final View view = LayoutInflater.from(context).inflate(R.layout.item_watch_cartoon, null);
-            ImageView iv_watch_cartoon = (ImageView) view.findViewById(R.id.iv_watch_cartoon);
+            PhotoView iv_watch_cartoon = (PhotoView) view.findViewById(R.id.iv_watch_cartoon);
             Glide.with(context)
                     .load(picture.getChapterURL())
                     //.crossFade()//加载动画
@@ -37,8 +39,36 @@ public class WatchCartoonAdapter extends PagerAdapter {
                     .placeholder(R.mipmap.loading_waiting)//默认加载图片
                     .error(R.mipmap.icon_default) //失败图片
                     .into(iv_watch_cartoon);//封面
+            /*Bitmap bitmap = null;
+            if (picture.getChapterURL() != null && !picture.getChapterURL().equals("")) {
+                String imagePath = getImagePath(picture.getChapterURL());
+                bitmap = BitmapFactory.decodeFile(imagePath);
+            }
+            if (bitmap == null) {
+                bitmap = BitmapFactory.decodeResource(context.getResources(),
+                        R.mipmap.loading_waiting);
+            }
+            iv_watch_cartoon.setImageBitmap(bitmap);*/
             viewContainter.add(view);
         }
+    }
+
+    /**
+     * 获取图片的本地存储路径。
+     *
+     * @param imageUrl
+     *            图片的URL地址。
+     * @return 图片的本地存储路径。
+     */
+    private String getImagePath(String imageUrl) {
+        String imageDir = Environment.getExternalStorageDirectory().getPath()
+                + "/MengAnime/WatchCartoon/";
+        File file = new File(imageDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String imagePath = imageDir +System.currentTimeMillis() + ".jpg";
+        return imagePath;
     }
 
     //viewpager中的组件数量
@@ -53,6 +83,7 @@ public class WatchCartoonAdapter extends PagerAdapter {
                             Object object) {
         ((ViewPager) container).removeView(viewContainter.get(position));
     }
+
     //每次滑动的时候生成的组件
     @Override
     public Object instantiateItem(ViewGroup container, int position) {

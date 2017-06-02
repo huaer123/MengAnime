@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.menganime.R;
-import com.menganime.activity.CartoonDetailsActivity;
+import com.menganime.activity.OrginalCartoonDetailsActivity;
 import com.menganime.base.BaseFragment;
 import com.menganime.bean.CollectionHistoryBean;
 import com.menganime.utils.SharedUtil;
@@ -80,7 +80,7 @@ public class CollectionFragment extends BaseFragment {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(context, CartoonDetailsActivity.class);
+                Intent intent = new Intent(context, OrginalCartoonDetailsActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("name", mList.get(position).getCartoonName());
                 bundle.putString("infoId",mList.get(position).getCartoonId());

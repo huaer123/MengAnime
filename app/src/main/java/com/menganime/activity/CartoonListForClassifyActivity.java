@@ -101,7 +101,7 @@ public class CartoonListForClassifyActivity extends BaseActivity implements Cart
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(CartoonListForClassifyActivity.this, CartoonDetailsActivity.class);
+                Intent intent = new Intent(CartoonListForClassifyActivity.this, OrginalCartoonDetailsActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putString("name", mList.get(position).getName());
                 bundle.putString("infoId",mList.get(position).getMH_Info_ID());

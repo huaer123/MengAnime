@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.menganime.R;
-import com.menganime.activity.CartoonDetailsActivity;
+import com.menganime.activity.OrginalCartoonDetailsActivity;
 import com.menganime.adapter.SerialAdapter;
 import com.menganime.base.BaseFragment;
 import com.menganime.bean.CartoonInfo;
@@ -115,7 +115,7 @@ public class SerialFragment extends BaseFragment implements OnItemClickListener,
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent intent = new Intent(context, CartoonDetailsActivity.class);
+        Intent intent = new Intent(context, OrginalCartoonDetailsActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString("name", mlist.get(position).getName());
         bundle.putString("infoId",mlist.get(position).getMH_Info_ID());

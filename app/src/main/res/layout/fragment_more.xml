@@ -13,7 +13,7 @@
         android:id="@+id/ll_loginAll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
         <Button
@@ -29,13 +29,14 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/bt_login"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:text="@string/login_info" />
+        -->
     </LinearLayout>
     <!--个人中心界面-->
     <LinearLayout
@@ -43,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             style="@style/more_relativelayout"
