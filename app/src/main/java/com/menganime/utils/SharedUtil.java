@@ -231,12 +231,12 @@ public class SharedUtil {
     public static void deleteAllCollection(Context context, String name) {
         List<CollectionHistoryBean> collectionHistoryBeanList = getCollectionHistoryList(context, name);
         List<CollectionHistoryBean> collectionHistoryBeanListNew = new ArrayList<>();
-        collectionHistoryBeanListNew= collectionHistoryBeanList;
+        collectionHistoryBeanListNew.addAll(collectionHistoryBeanList);
         if (collectionHistoryBeanList != null && collectionHistoryBeanList.size() > 0) {
             for (int i = 0; i < collectionHistoryBeanList.size(); i++) {
                 CollectionHistoryBean collectionHistoryBean = collectionHistoryBeanList.get(i);
                 if (collectionHistoryBean.getType().equals("1")) {//如果是收藏，将其删掉
-                    collectionHistoryBeanListNew.remove(i);
+                    collectionHistoryBeanListNew.remove(collectionHistoryBean);
                 }
                 if (collectionHistoryBean.getType().equals("2")) {//如果是2,2->0
                     collectionHistoryBeanListNew.get(i).setType("0");
@@ -404,12 +404,12 @@ public class SharedUtil {
     public static void deleteAllHistory(Context context, String name) {
         List<CollectionHistoryBean> collectionHistoryBeanList = getCollectionHistoryList(context, name);
         List<CollectionHistoryBean> collectionHistoryBeanListNew = new ArrayList<>();
-        collectionHistoryBeanListNew= collectionHistoryBeanList;
+        collectionHistoryBeanListNew.addAll(collectionHistoryBeanList);
         if (collectionHistoryBeanList != null && collectionHistoryBeanList.size() > 0) {
             for (int i = 0; i < collectionHistoryBeanList.size(); i++) {
                 CollectionHistoryBean collectionHistoryBean = collectionHistoryBeanList.get(i);
                     if (collectionHistoryBean.getType().equals("0")) {//如果是观看，将其删掉
-                        collectionHistoryBeanListNew.remove(i);
+                        collectionHistoryBeanListNew.remove(collectionHistoryBean);
                     }
                     if (collectionHistoryBean.getType().equals("2")) {//如果是2,2->1
                         collectionHistoryBeanListNew.get(i).setType("1");
