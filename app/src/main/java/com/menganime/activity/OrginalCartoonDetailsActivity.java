@@ -195,7 +195,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
      */
     private void showWatchChapter() {
         if (!watchChapterString.equals("")) {//已经阅读
-            details_continue.setText("续看 第" + watchChapterContent+"话");
+            details_continue.setText("续看 第" + watchChapterContent + "话");
         } else {//未阅读
             details_continue.setText(getString(R.string.details_begin_watch));
         }
@@ -230,7 +230,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                     CollectionHistoryBean bean = new CollectionHistoryBean();
                     bean.setType("1");
                     bean.setCartoonId(infoId);
-                    bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
+                    bean.setCartoonPicture(detailsBean.getCover_IconURL() == null ? "" : detailsBean.getCover_IconURL());
                     bean.setCartoonName(detailsBean.getName());
                     bean.setMaxChapter(detailsBean.getMaxChapter());
                     SharedUtil.addCollection(this, SharedUtil.SAVECOLLECTIONHISTORYLIST, bean);
@@ -263,8 +263,10 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
     private boolean IsWatched() {
         boolean isWatched = false;
         for (int i = 0; i < userChapter.size(); i++) {
-            if (userChapter.get(i).equals(infoId)) {
+            String eachinfoId = Integer.toString(userChapter.get(i));
+            if (eachinfoId.equals(infoId)) {
                 isWatched = true;
+                break;
             }
         }
         return isWatched;
@@ -295,7 +297,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
             boolean isWatched = IsWatched();
             if (!isWatched) {
                 if (!userWatchNum.equals("all")) {
-                    if (userChapter.size() > Integer.valueOf(userWatchNum)) {
+                    if (userChapter.size() >= Integer.valueOf(userWatchNum)) {
                         promptWatchMoreThan();
                     } else {
                         toIntentWatchCartoon();
@@ -303,6 +305,8 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 } else {
                     toIntentWatchCartoon();
                 }
+            } else {
+                toIntentWatchCartoon();
             }
         } else {
             promptRecharge();
@@ -331,7 +335,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                     CollectionHistoryBean bean = new CollectionHistoryBean();
                     bean.setType("0");
                     bean.setCartoonId(infoId);
-                    bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
+                    bean.setCartoonPicture(detailsBean.getCover_IconURL() == null ? "" : detailsBean.getCover_IconURL());
                     bean.setCartoonName(detailsBean.getName());
                     bean.setWatchChapter(watchChapterString);
                     bean.setWatchChapterContent(watchChapterContent);
@@ -530,7 +534,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
-                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
+                bean.setCartoonPicture(detailsBean.getCover_IconURL() == null ? "" : detailsBean.getCover_IconURL());
                 watchChapterString = lzList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(lzList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(lzList.get(position).getWhichChapter());
@@ -583,7 +587,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
-                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
+                bean.setCartoonPicture(detailsBean.getCover_IconURL() == null ? "" : detailsBean.getCover_IconURL());
                 watchChapterString = dxbList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(dxbList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(dxbList.get(position).getWhichChapter());
@@ -636,7 +640,7 @@ public class OrginalCartoonDetailsActivity extends BaseActivity implements View.
                 bean.setType("0");
                 bean.setCartoonId(infoId);
                 bean.setCartoonName(detailsBean.getName());
-                bean.setCartoonPicture(detailsBean.getCover_IconURL()==null?"":detailsBean.getCover_IconURL());
+                bean.setCartoonPicture(detailsBean.getCover_IconURL() == null ? "" : detailsBean.getCover_IconURL());
                 watchChapterString = fwpList.get(position).getMH_Chapter_ID();
                 bean.setWatchChapter(fwpList.get(position).getMH_Chapter_ID());
                 bean.setWatchChapterContent(fwpList.get(position).getWhichChapter());
